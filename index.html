@@ -1,0 +1,1090 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Twine Project FAQ</title>
+<meta name="description" content="Answers to the questions that keep coming up in the Twine final project for Views on Games and Play.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbfaf7; --panel:#ffffff; --side:#f3f1ec; --text:#1d1d1b; --muted:#5f5d57; --line:#e2dfd7;
+  --accent:#3b5bdb; --accent-soft:#e7ecff; --code-bg:#f4f2ee; --code-text:#2b2b2b;
+  --tip:#2f9e44; --tip-bg:#ebf8ee; --warn:#d9480f; --warn-bg:#fff1e8; --info:#1971c2; --info-bg:#e8f2fc;
+  --tok-macro:#9c36b5; --tok-var:#1864ab; --tok-str:#2b8a3e; --tok-link:#c2255c; --tok-tag:#7d6608; --tok-com:#868e96;
+  --shadow:0 1px 2px rgba(0,0,0,.05),0 4px 16px rgba(0,0,0,.05);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#16171a; --panel:#1d1f23; --side:#1a1b1f; --text:#e9e7e2; --muted:#a3a19b; --line:#2e3036;
+    --accent:#8ea4ff; --accent-soft:#252c47; --code-bg:#24262b; --code-text:#e6e4df;
+    --tip:#69db7c; --tip-bg:#1b2b1f; --warn:#ffa94d; --warn-bg:#33231a; --info:#74c0fc; --info-bg:#182634;
+    --tok-macro:#da77f2; --tok-var:#74c0fc; --tok-str:#8ce99a; --tok-link:#f783ac; --tok-tag:#ffd43b; --tok-com:#868e96;
+    --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#16171a; --panel:#1d1f23; --side:#1a1b1f; --text:#e9e7e2; --muted:#a3a19b; --line:#2e3036;
+  --accent:#8ea4ff; --accent-soft:#252c47; --code-bg:#24262b; --code-text:#e6e4df;
+  --tip:#69db7c; --tip-bg:#1b2b1f; --warn:#ffa94d; --warn-bg:#33231a; --info:#74c0fc; --info-bg:#182634;
+  --tok-macro:#da77f2; --tok-var:#74c0fc; --tok-str:#8ce99a; --tok-link:#f783ac; --tok-tag:#ffd43b; --tok-com:#868e96;
+  --shadow:none;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+code,pre,kbd{font-family:"JetBrains Mono",ui-monospace,Consolas,monospace}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;height:58px;padding:0 18px;background:var(--panel);border-bottom:1px solid var(--line)}
+.top .brand{font-weight:700;font-size:16px;white-space:nowrap}
+.top .brand span{color:var(--muted);font-weight:500}
+.search{flex:1;max-width:420px;margin-left:auto;position:relative}
+.search input{width:100%;padding:8px 12px 8px 34px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--text);font:inherit;font-size:14px}
+.search input:focus{outline:2px solid var(--accent);outline-offset:-1px}
+.search svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);opacity:.55}
+.iconbtn{border:1px solid var(--line);background:var(--bg);color:var(--text);border-radius:8px;height:36px;min-width:36px;padding:0 9px;cursor:pointer;font:inherit;font-size:14px}
+#menuBtn{display:none}
+
+/* layout */
+.layout{display:grid;grid-template-columns:280px minmax(0,1fr);min-height:calc(100vh - 58px)}
+nav.side{position:sticky;top:58px;height:calc(100vh - 58px);overflow:auto;background:var(--side);border-right:1px solid var(--line);padding:18px 14px 40px}
+nav.side .grp{margin-bottom:2px}
+nav.side .gh{display:flex;align-items:center;gap:10px;width:100%;border:0;background:none;color:var(--text);font:600 14.5px Inter,sans-serif;padding:8px 8px;border-radius:7px;cursor:pointer;text-align:left}
+nav.side .gh:hover{background:var(--accent-soft)}
+nav.side .gh .ic{width:22px;text-align:center;font-size:15px}
+nav.side .gh .n{margin-left:auto;font-size:11.5px;font-weight:600;color:var(--muted);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:0 7px}
+nav.side .gh .chev{font-size:10px;color:var(--muted);transition:transform .15s;width:10px}
+nav.side .grp.open .gh .chev{transform:rotate(90deg)}
+nav.side .items{display:none;margin:2px 0 8px 19px;padding-left:12px;border-left:2px solid var(--line)}
+nav.side .grp.open .items{display:block}
+nav.side .items a{display:block;padding:4px 8px;border-radius:6px;color:var(--muted);text-decoration:none;font-size:13.5px;line-height:1.35}
+nav.side .items a:hover{color:var(--text);background:var(--accent-soft)}
+nav.side .items a.active{color:var(--accent);font-weight:600;background:var(--accent-soft)}
+nav.side a.hidden,nav.side .grp.hidden{display:none}
+main{padding:34px clamp(16px,4vw,56px) 120px;max-width:900px;overflow-wrap:break-word;min-width:0}
+
+/* content */
+h1{font-size:34px;line-height:1.2;margin:0 0 8px;letter-spacing:-.01em}
+.lede{color:var(--muted);font-size:17px;margin:0 0 26px}
+section.group{margin-top:56px}
+section.group>h2{font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin:0 0 6px;border-bottom:1px solid var(--line);padding-bottom:8px}
+article.q{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:22px 26px;margin:18px 0;box-shadow:var(--shadow)}
+article.q.hidden{display:none}
+article.q h3{margin:0 0 10px;font-size:20px;line-height:1.3}
+article.q h3 a.anchor{color:var(--muted);text-decoration:none;opacity:0;margin-left:6px;font-weight:400}
+article.q h3:hover a.anchor{opacity:1}
+article.q p{margin:10px 0}
+article.q ul,article.q ol{padding-left:22px;margin:10px 0}
+article.q li{margin:5px 0}
+.short{font-weight:600}
+p code,li code,td code{background:var(--code-bg);padding:1px 6px;border-radius:5px;font-size:.88em}
+kbd{background:var(--code-bg);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:0 6px;font-size:.85em}
+
+/* code blocks */
+.codewrap{position:relative;margin:14px 0}
+.codewrap .label{font-size:12px;color:var(--muted);margin-bottom:4px;font-weight:600}
+pre{margin:0;background:var(--code-bg);color:var(--code-text);border:1px solid var(--line);border-radius:9px;padding:14px 16px;overflow:auto;font-size:14px;line-height:1.6;white-space:pre-wrap;word-break:break-word}
+.codewrap pre{padding-bottom:38px}
+.copy{position:absolute;right:8px;bottom:8px;font:600 12px Inter,sans-serif;border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:6px;padding:3px 9px;cursor:pointer}
+.copy:hover{color:var(--accent)}
+.t-m{color:var(--tok-macro);font-weight:600}.t-v{color:var(--tok-var)}.t-s{color:var(--tok-str)}.t-l{color:var(--tok-link)}.t-h{color:var(--tok-tag)}.t-c{color:var(--tok-com);font-style:italic}
+
+/* good/bad examples */
+.codewrap.bad .label{color:var(--warn)} .codewrap.good .label{color:var(--tip)}
+.codewrap.bad pre{border-left:4px solid var(--warn)} .codewrap.good pre{border-left:4px solid var(--tip)}
+/* home + paging */
+.top a.brand{color:var(--text);text-decoration:none}
+nav.side a.homelink{display:block;padding:8px;border-radius:7px;color:var(--text);text-decoration:none;font-weight:600;font-size:14.5px;margin-bottom:6px}
+nav.side a.homelink:hover{background:var(--accent-soft)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-top:8px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;box-shadow:var(--shadow)}
+.card h3{margin:0 0 8px;font-size:16px;display:flex;gap:8px;align-items:center}
+.card.trouble{border-color:var(--warn)}
+.card ul{list-style:none;margin:0;padding:0}
+.card li{margin:4px 0;font-size:14px;line-height:1.4}
+.card a{text-decoration:none}.card a:hover{text-decoration:underline}
+.crumb{font-size:13.5px;color:var(--muted);margin-bottom:6px;display:none}
+.crumb a{color:var(--muted)}
+.pager{display:flex;justify-content:space-between;gap:12px;margin-top:24px;padding-top:16px;border-top:1px solid var(--line)}
+.pager a{flex:1;border:1px solid var(--line);border-radius:10px;padding:10px 14px;text-decoration:none;background:var(--bg);font-size:14px}
+.pager a:hover{border-color:var(--accent)}
+.pager a small{display:block;color:var(--muted);font-size:12px}
+.pager a.next{text-align:right}
+.pager span{flex:1}
+.results{display:none}
+.results a.res{display:block;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:10px 0;text-decoration:none;color:var(--text);font-weight:600}
+.results a.res small{display:block;color:var(--muted);font-size:12.5px;font-weight:400}
+.results a.res:hover{border-color:var(--accent)}
+section.group>h2{display:none}
+section.group{margin-top:0}
+article.q{display:none;margin-top:0}
+article.q.show{display:block}
+.steps-h{font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin:28px 0 4px}
+.badge{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;font-size:12px;font-weight:700;flex:none}
+.card .badge{width:26px;height:26px;font-size:13px}
+.card.trouble{border:2px solid var(--warn);margin-top:6px}
+.card.trouble h3{color:var(--warn)}
+.card.trouble ul{columns:2;column-gap:24px}
+@media (max-width:600px){.card.trouble ul{columns:1}}
+nav.side .sep{height:1px;background:var(--line);margin:10px 6px}
+.linkbtn{border:1px solid var(--line);background:var(--bg);color:var(--muted);border-radius:6px;padding:2px 9px;font:500 12.5px Inter,sans-serif;cursor:pointer;margin:-2px 0 8px}
+.linkbtn:hover{color:var(--accent);border-color:var(--accent)}
+.picker{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:8px 0 6px}
+.picker a{display:flex;align-items:center;gap:12px;background:var(--panel);border:2px solid var(--line);border-radius:12px;padding:14px;text-decoration:none;color:var(--text);font-weight:600;font-size:15px;line-height:1.3}
+.picker a:hover{border-color:var(--warn)}
+.picker .pi{font-size:28px;line-height:1;flex:none}
+.warn-h{color:var(--warn)!important}
+.stuck{margin-top:22px;padding:10px 14px;background:var(--side);border-radius:8px;font-size:14px;color:var(--muted)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+a:focus-visible,button:focus-visible,input:focus-visible,h3:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:4px}
+h3[tabindex]:focus,h3[tabindex]:focus-visible{outline:none}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
+/* callouts */
+.call{border-left:4px solid var(--info);background:var(--info-bg);border-radius:0 8px 8px 0;padding:10px 14px;margin:14px 0}
+.call.tip{border-color:var(--tip);background:var(--tip-bg)}
+.call.warn{border-color:var(--warn);background:var(--warn-bg)}
+.call b.k{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:2px}
+.call.tip b.k{color:var(--tip)}.call.warn b.k{color:var(--warn)}.call b.k{color:var(--info)}
+.call p{margin:4px 0}
+
+/* figures */
+figure{margin:16px 0}
+figure img{display:block;max-width:100%;height:auto;border:1px solid var(--line);border-radius:9px;cursor:zoom-in;background:#fff}
+ol.steps figure img{max-width:min(100%,560px)}
+figcaption{font-size:13.5px;color:var(--muted);margin-top:6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+/* steps */
+ol.steps{counter-reset:s;list-style:none;padding-left:0}
+ol.steps>li{counter-increment:s;position:relative;padding-left:40px;margin:14px 0}
+ol.steps>li::before{content:counter(s);position:absolute;left:0;top:0;width:27px;height:27px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+
+/* tables */
+table{border-collapse:collapse;width:100%;font-size:14.5px;margin:12px 0}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--side)}
+.tablewrap{overflow-x:auto}
+
+/* itch diagram */
+.mock{border:1px dashed var(--line);border-radius:10px;padding:14px;background:var(--side);font-size:14px;margin:14px 0}
+.mock .cap{font-size:12px;color:var(--muted);margin-bottom:8px}
+.mock .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
+.mock .lbl{font-weight:600;min-width:150px}
+.mock .opt{border:1px solid var(--line);background:var(--panel);border-radius:6px;padding:3px 10px}
+.mock .opt.on{border:2px solid var(--tip);font-weight:600}
+.mock .opt.off{opacity:.5;text-decoration:line-through}
+.mock .chk::before{content:"\2610  "}.mock .chk.on::before{content:"\2611  "}
+
+/* file tree */
+.tree{font-family:"JetBrains Mono",monospace;font-size:14px;background:var(--code-bg);border:1px solid var(--line);border-radius:9px;padding:12px 16px;line-height:1.75}
+.tree .ok{color:var(--tip)}.tree .bad{color:var(--warn)}
+
+/* checklist */
+.check li{list-style:none;margin-left:-22px}
+.check input{margin-right:8px;transform:scale(1.15)}
+
+.noresults{display:none;color:var(--muted);padding:30px 0}
+
+/* lightbox */
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.82);display:none;align-items:center;justify-content:center;z-index:50;cursor:zoom-out;padding:20px}
+#lb img{max-width:100%;max-height:100%;border-radius:8px;background:#fff}
+
+.foot{margin-top:70px;color:var(--muted);font-size:13.5px;border-top:1px solid var(--line);padding-top:16px}
+
+@media (max-width:860px){
+  .layout{grid-template-columns:minmax(0,1fr)}
+  nav.side{position:fixed;top:58px;left:0;width:290px;z-index:30;transform:translateX(-100%);transition:transform .2s;box-shadow:var(--shadow)}
+  nav.side.open{transform:none}
+  #menuBtn{display:inline-block}
+  .top .brand span{display:none}
+  .two{grid-template-columns:1fr}
+  article.q{padding:18px 16px}
+  main{padding-top:24px}
+}
+@media (max-width:520px){ .top .brand{font-size:14px} .search{max-width:none} }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="#">Twine Project FAQ <span>&middot; Views on Games and Play</span></a>
+  <label class="search">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input id="q" type="search" placeholder="Search: images, itch, variables, zip..." autocomplete="off">
+  </label>
+  <button class="iconbtn" id="themeBtn" aria-label="Toggle dark mode"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</header>
+
+<div class="layout">
+<nav class="side" id="side"></nav>
+
+<main id="main">
+<div id="home">
+<h1>Twine Project FAQ</h1>
+<p class="lede"><b>Something broken?</b> Click your problem below.<br><b>Learning Twine?</b> Go step by step: start at Step 1, then click <b>Next</b> at the bottom of each page.<br><b>Still stuck?</b> Send me a Mio.</p>
+<h2 class="steps-h warn-h">What's wrong?</h2>
+<div class="picker">
+  <a href="#itch-broken"><span class="pi">🔗</span>My itch link doesn't work</a>
+  <a href="#images-why"><span class="pi">🖼️</span>My pictures don't show</a>
+  <a href="#smart-quotes"><span class="pi">📋</span>Code I pasted doesn't work</a>
+  <a href="#test-zero"><span class="pi">0️⃣</span>My variables all say 0</a>
+  <a href="#text-not-updating"><span class="pi">🔄</span>Variable changed, text didn't</a>
+  <a href="#music-silent"><span class="pi">🔇</span>My music doesn't play</a>
+  <a href="#itch-cramped"><span class="pi">📐</span>Game looks squished on itch</a>
+  <a href="#saving"><span class="pi">💾</span>I lost my work</a>
+  <a href="#mistakes"><span class="pi">⚠️</span>What does everyone get wrong?</a>
+</div>
+<h2 class="steps-h">Step by step</h2>
+<div id="cards" class="cards"></div>
+</div>
+<div id="crumb" class="crumb"></div>
+<div id="results" class="results"></div>
+<div id="live" class="sr" aria-live="polite"></div>
+
+<!-- ============================ PLANNING ============================ -->
+<section class="group" id="g-plan" data-icon="📝" data-title="Plan your game" data-step="1">
+<h2>Planning &amp; ideas</h2>
+
+<article class="q" id="essay-test" data-short="What counts as an argument">
+<h3>What counts as a game that "makes an argument"?</h3>
+<p class="short">If your game could be rewritten as a short essay and lose nothing, the game isn't doing the work.</p>
+<p>The argument has to live in the <b>systems</b>: win/loss conditions, numbers going up and down, choices that get locked out, things that get punished or rewarded. This is procedural rhetoric. Gamification (scores, streaks, and rewards creeping into non-game parts of life) is a natural target, but any course topic works if the mechanics carry the point.</p>
+<p>A good check: can you say your argument in one sentence, and point to the variable that makes it?</p>
+</article>
+
+<article class="q" id="shapes" data-short="Idea starters">
+<h3>I have no idea what to make. Where do I start?</h3>
+<p>Here are some shapes that tend to work in Twine and connect to the course. Use one, combine two, or ignore them all.</p>
+<div class="tablewrap"><table>
+<tr><th>Shape</th><th>The idea</th></tr>
+<tr><td><b>Gamification</b><br><small>(a good place to start)</small></td><td>Scores, streaks, ratings, and rewards creeping into non-game parts of life. It's what the second half of the course is about, and it's easy to build systems around. Most of the shapes below can be pointed at it.</td></tr>
+<tr><td><b>Score-world</b></td><td>Your prospects (jobs, housing, relationships, freedom) depend on a score in an app. Nosedive and social credit are reference points; credit scores, Uber ratings, and GPAs are the everyday versions.</td></tr>
+<tr><td><b>The optimizer</b></td><td>You're trying to maximize a metric (steps, productivity, engagement, grades, followers), and the game makes you feel what that does to everything else.</td></tr>
+<tr><td><b>The rigged system</b></td><td>Looks fair on the surface, but variables under the hood are stacked against the player. Good for structural inequality, algorithmic bias, "meritocracy".</td></tr>
+<tr><td><b>The bureaucratic maze</b></td><td>Navigating a system (healthcare, financial aid, a help desk) where the rules themselves are the antagonist. Papers, Please is the reference point.</td></tr>
+<tr><td><b>The impossible job</b></td><td>A role that can't actually be done well (content moderator, caregiver, teacher under impossible constraints), and the systems make the impossibility visible.</td></tr>
+<tr><td><b>The Chamber of Choices</b></td><td>Choices appear, disappear, or grey out based on stats, background, or earlier decisions. Crossed-out options can make an argument about what's available to whom.</td></tr>
+<tr><td><b>The unreliable narrator</b></td><td>The text says one thing, the variables track another, and the gap is the point. Good for propaganda, self-deception, corporate euphemism.</td></tr>
+<tr><td><b>Story mode</b></td><td>Branching narrative where choice and writing carry most of the weight. Fine, but the systems still have to do some arguing, not just gate scenes.</td></tr>
+<tr><td><b>Inventory as identity</b></td><td>What you pick up, keep, or lose changes who you are and what options you see. Class, consumption, memory.</td></tr>
+<tr><td><b>The countdown</b></td><td>Something is decreasing (time, money, health, hope, attention) and every choice spends it. Scarcity and what people are forced to trade away.</td></tr>
+<tr><td><b>Weird / poetic / abstract</b></td><td>Not every Twine game needs to be narrative or "gamey". Some of the best are closer to poems or mood pieces. Legitimate, if you have an argument that wants to be felt more than played.</td></tr>
+</table></div>
+<p>Doing something more "gamey" than narrative (a puzzle, a character generator)? You can trade more systems for less text. Flag it at your pitch meeting.</p>
+</article>
+
+<article class="q" id="paper" data-short="Paper prototype first">
+<h3>Should we start coding right away?</h3>
+<p class="short">No. Paper prototype first.</p>
+<p>Once you have a couple of promising ideas, sketch them on paper together: boxes for passages, arrows for choices, a note beside each box saying which variables change there. Rough in some dialogue. This is much faster than doing it in Twine, and it keeps you from getting stuck on technical problems before the design is settled. A photo of the sketch is also useful later for your reflection.</p>
+</article>
+
+<article class="q" id="inspiration" data-short="Games to play">
+<h3>Can I see some good Twine games for inspiration?</h3>
+<div class="tablewrap"><table>
+<tr><th>Game</th><th>Why look at it</th></tr>
+<tr><td><a href="https://direkris.itch.io/you-are-jeff-bezos" target="_blank" rel="noopener">You Are Jeff Bezos</a></td><td>A simple argument made with a simple system (basically one variable).</td></tr>
+<tr><td><a href="https://caeth.itch.io/accidental-character-generator" target="_blank" rel="noopener">Accidental Character Generator</a></td><td>Variable-heavy and not remotely narrative.</td></tr>
+<tr><td><a href="https://ztul.itch.io/the-uncle-who-works-for-nintendo" target="_blank" rel="noopener">The Uncle Who Works for Nintendo</a></td><td>Mild horror. Good backgrounds without straying far from default Twine.</td></tr>
+<tr><td><a href="https://crowscrowscrows.itch.io/the-temple-of-no" target="_blank" rel="noopener">The Temple of No</a></td><td>Great sense of style, and sound that isn't annoying.</td></tr>
+<tr><td><a href="https://erik108.itch.io/the-tiniest-room" target="_blank" rel="noopener">A Small Room</a></td><td>A not-quite-narrative puzzle game.</td></tr>
+<tr><td><a href="https://bphennessy.itch.io/birdland" target="_blank" rel="noopener">Birdland</a></td><td>Beautifully written and illustrated.</td></tr>
+<tr><td><a href="https://bravemule.itch.io/beneathfloes" target="_blank" rel="noopener">Beneath Floes</a></td><td>Excellent illustrations, close to the default Twine look.</td></tr>
+<tr><td><a href="https://litrouke.itch.io/please-answer-carefully" target="_blank" rel="noopener">Please Answer Carefully</a></td><td>A horror survey. Off the beaten path.</td></tr>
+<tr><td><a href="http://capsule.paperblurt.com/" target="_blank" rel="noopener">Capsule 1-2</a></td><td>The highest budget Twine game ever.</td></tr>
+<tr><td><a href="https://rana-strange.itch.io/twine-bundle" target="_blank" rel="noopener">Twine assets</a> / <a href="https://candygiants.itch.io/twine-2-harlowe-css-pack-1" target="_blank" rel="noopener">Harlowe CSS pack</a></td><td>Download and open in Twine to see how they're made, or as a starting point.</td></tr>
+</table></div>
+</article>
+</section>
+
+<!-- ============================ GETTING STARTED ============================ -->
+<section class="group" id="g-start" data-icon="🚀" data-title="Set up Twine" data-step="2">
+<h2>Getting started</h2>
+
+<article class="q" id="learn" data-short="Where to start">
+<h3>I don't know where to start. What's the fastest way to learn this?</h3>
+<ol>
+  <li>Play a couple of Twine games (see <a href="#inspiration">Inspiration</a>).</li>
+  <li>Read <a href="https://twinery.org/cookbook/starting/twine2/firststory.html" target="_blank" rel="noopener">Your First Story</a> and watch <a href="https://www.youtube.com/watch?v=1jukyU4EK2M" target="_blank" rel="noopener">the 20-minute intro video</a>.</li>
+  <li>Make a few passages and link them. Change link names so they differ from the passage name.</li>
+  <li>Make a variable (a key), and a door that checks whether you have the key. If you can do that, you can do this project.</li>
+  <li>Import my example project and look at how it's built.</li>
+</ol>
+<div class="call tip"><b class="k">Hidden help</b><p>If you forget the code for something, delete all the text in a passage. A "Twine basics" cheat sheet appears in the background of the empty passage.</p></div>
+</article>
+
+<article class="q" id="harlowe" data-short="Harlowe vs. other formats">
+<h3>Which version of Twine are we using? Why don't the tutorials I found work?</h3>
+<p class="short">Twine 2, with the <b>Harlowe</b> story format. Tutorials for other formats will not work in your game.</p>
+<p>Twine has several "story formats", which are basically different coding languages: <b>Harlowe</b>, <b>SugarCube</b>, <b>Snowman</b>, and <b>Chapbook</b>. They look similar and are completely incompatible. If a tutorial or a forum answer says <code>&lt;&lt;set $gold to 5&gt;&gt;</code> with double angle brackets, that's SugarCube, and it won't work in Harlowe. Harlowe code looks like <code>(set: $gold to 5)</code>, with round brackets and a colon.</p>
+<p>Before you use any resource, look for the word "Harlowe". If it isn't there, assume it's the wrong one.</p>
+<p>To check what your own story is using: open your story, click <b>Story</b> at the top, then <b>Details</b>.</p>
+<figure><img src="images/story-menu.webp" alt="Twine's Story menu with the Details button" loading="lazy"><figcaption>Story tab &rarr; Details.</figcaption></figure>
+<figure><img src="images/story-details.webp" alt="Story Details panel showing Story Format Harlowe 3.3.9, word count, passages and broken links" loading="lazy"><figcaption>The Story Format should say Harlowe 3.something. This panel also counts your <b>words</b>, <b>passages</b>, and <b>broken links</b>, which is handy for checking the project requirements.</figcaption></figure>
+</article>
+
+<article class="q" id="saving" data-short="Saving &amp; backups">
+<h3>Where is my work saved? I lost everything!</h3>
+<p class="short">Twine saves inside the program (or inside your browser, if you use the web version). It does not save a file anywhere you'd expect. Make your own backups.</p>
+<p>If you use Twine in a web browser, your stories live in that browser's storage. That means:</p>
+<ul>
+  <li>If you clear your browser history/cache, your story is <b>gone</b>.</li>
+  <li>If you switch browsers or computers (a lab computer, your friend's laptop), your story is <b>not there</b>.</li>
+  <li>If you use an incognito/private window, your story disappears when you close it.</li>
+</ul>
+<p>The fix: every time you finish working, click <b>Build</b> &rarr; <b>Publish to File</b>. That downloads an .html file of your whole game. Put it somewhere safe (Google Drive, OneDrive, email it to yourself). That file is both your backup <em>and</em> the thing you submit.</p>
+<figure><img src="images/build-menu.webp" alt="Twine's Build menu: Test, Play, Proof, Publish to File, Export As Twee" loading="lazy"><figcaption>Build &rarr; Publish to File. Do this at the end of every work session.</figcaption></figure>
+<div class="call tip"><b class="k">Tip</b><p>Rename your backups with a date or number (<code>shift-v3.html</code>) so you can go back to an older version if you break something.</p></div>
+<p><b>Backing up everything at once:</b> on the Twine home screen, <b>Library &rarr; Archive</b> downloads <em>all</em> your stories in one file. You can import that file later to get them all back. It's a backup only: you can't play it or submit it.</p>
+<figure><img src="images/library-archive.webp" alt="Twine Library tab with the Archive button circled" loading="lazy" style="max-width:450px"><figcaption>Library &rarr; Archive.</figcaption></figure>
+<div class="call warn"><b class="k">App and browser don't share</b><p>The Twine app you download and Twine in a browser keep <b>separate</b> libraries. A story you made in the lab's browser is not in the app on your laptop (and the other way around). Move it with Publish to File, then Library &rarr; Import.</p></div>
+<p>Here's where Twine says the files go: <a href="https://twinery.org/wiki/twine2:where_your_stories_are_saved" target="_blank" rel="noopener">Where your stories are saved</a>.</p>
+</article>
+
+<article class="q" id="reopen" data-short="Opening a saved game">
+<h3>How do I open my saved game again (or open the example game)?</h3>
+<p class="short">From the Twine home screen (the Library): <b>Library</b> &rarr; <b>Import</b>, then pick the .html file.</p>
+<figure><img src="images/library-import.webp" alt="Twine Library tab with the Import button" loading="lazy"><figcaption>Library &rarr; Import. Choose your .html (or .twee) file, then click the story card and Edit.</figcaption></figure>
+<p>Double-clicking the .html file on your computer will <em>play</em> the game in your browser, not open it for editing. To edit, you have to import it.</p>
+<div class="call warn"><b class="k">Importing can wipe out your game</b><p>If your library already has a story with the same name, importing <b>replaces it completely</b>. The only warning is one small line. If the file you're importing is older, you just lost your newer work.</p></div>
+<figure><img src="images/import-overwrite.webp" alt="Import dialog with the line 'A story with the same name in your library will be replaced' circled in red" loading="lazy" style="max-width:560px"><figcaption>If you see this line, stop and check which version is newer.</figcaption></figure>
+<p>Not sure? Rename the story in your library first (<b>Story &rarr; Rename</b>, or click the story card and <b>Rename</b>), then import. You'll have both.</p>
+</article>
+
+</section>
+
+<!-- ============================ GROUPS ============================ -->
+<section class="group" id="g-groups" data-icon="👥" data-title="Decide how your group works" data-step="3">
+<h2>Working together</h2>
+
+<article class="q" id="collab-options" data-short="Ways to split the work">
+<h3>How do we work on one Twine game as a group?</h3>
+<p class="short">Honestly, Twine isn't built for this. There's no "share" button like Google Docs. Here's what works.</p>
+<div class="call warn"><b class="k">The one rule</b><p>Only <b>one person</b> edits the real Twine file at a time. If two people edit two copies, you can't just combine them, and someone's work gets lost. Decide who holds the "master" file.</p></div>
+<p>Pick one approach (or combine them):</p>
+<ul>
+  <li><b>Plan together, build alone.</b> Meet (in class, on a call, in person) to do the non-coding parts: brainstorming, paper prototyping, writing. Then one person assembles everything in Twine.</li>
+  <li><b>Divide by role.</b> Someone writes the reflection, someone does images and sound, someone writes the passages, someone does the code.</li>
+  <li><b>Pass the file around.</b> Everyone works on everything, but one at a time. Finish, Publish to File, send the .html to the next person, who imports it. Say in the group chat who has it.</li>
+  <li><b>One long session.</b> Get in a room with laptops and knock out a full draft in an afternoon.</li>
+  <li><b>Write in a shared Google Doc, then import it.</b> Below.</li>
+</ul>
+</article>
+
+<article class="q" id="collab-twee" data-short="Writing in Google Docs">
+<h3>Can we write the game in Google Docs and bring it into Twine?</h3>
+<p class="short">Yes. Twine can import plain text written in a format called <b>Twee</b>. Everyone writes passages in one shared Google Doc, and one person imports it.</p>
+<p>In Twee, each passage starts with two colons and its name. Everything under it is the passage text, links and code included:</p>
+<div class="codewrap"><div class="label">Shared Google Doc</div><pre class="hl">:: StoryTitle
+The Shift
+
+:: Start
+(set: $energy to 10)
+Your shift starts at 6:00. The app is already watching.
+[[Clock in-&gt;Locker Room]]
+
+:: Locker Room
+Your badge is hanging in the locker.
+[[Take the badge-&gt;Badge Taken]]
+[[Leave it-&gt;Floor]]
+
+:: StatusBar [footer]
+Energy: $energy</pre></div>
+<p>Tags go in square brackets after the name, like <code>[footer]</code> above.</p>
+<ol class="steps">
+  <li><b>Turn off smart quotes first</b> (everyone in the group): Google Docs &rarr; <b>Tools &rarr; Preferences</b> &rarr; uncheck <b>Use smart quotes</b>. Otherwise your code breaks (<a href="#smart-quotes">why</a>).</li>
+  <li>Write passages in the Doc. Put your name in a comment (<code>&lt;!-- Ana --&gt;</code>) so you know who wrote what.</li>
+  <li>When ready, the assembler copies <b>all</b> the text out of the Doc and pastes it into a plain text editor (Windows: <b>Notepad</b>. Mac: <b>TextEdit</b>, then <b>Format &rarr; Make Plain Text</b>).</li>
+  <li>Save it as <code>our-game.twee</code>. In Notepad, set "Save as type" to <b>All files</b> so it doesn't become <code>our-game.twee.txt</code>. Twine only accepts .twee or .html files.</li>
+  <li>In Twine: <b>Library &rarr; Import</b>, choose the .twee file.</li>
+  <li>Open it, drag the passages into a sensible layout, then do images and testing in Twine.</li>
+</ol>
+<figure><img src="images/story-map.webp" alt="The imported story shown as a map of passages" loading="lazy"><figcaption>The Doc above, after importing. Passages, links, and the footer tag all came through.</figcaption></figure>
+<div class="call tip"><b class="k">Going the other way</b><p><b>Build &rarr; Export As Twee</b> turns your Twine game back into text. Handy for pasting the current version into the Doc so everyone can read it, or for merging: two people can export, paste their passages into one text file, and import that (just make sure no two passages have the same name).</p></div>
+<p>Once you've imported, treat the Twine version as the master.</p>
+<div class="call warn"><b class="k">Don't re-import over your work</b><p>If you import the Doc again later, it <b>replaces</b> the story in Twine with the same name, including all the images and code you added since (<a href="#reopen">see the warning</a>). To bring in new passages, rename the old story first, or give the new import a different <code>StoryTitle</code>.</p></div>
+</article>
+</section>
+
+<!-- ============================ CODE ============================ -->
+<section class="group" id="g-code" data-icon="🧩" data-title="Write &amp; code" data-step="4">
+<h2>Writing &amp; code</h2>
+
+<article class="q" id="links" data-short="Links &amp; passage names">
+<h3>How do links work? Why did a weird empty passage appear?</h3>
+<p class="short">A link is <code>[[what the player sees-&gt;Name Of Passage]]</code>. The part after the arrow has to match the passage name exactly.</p>
+<div class="codewrap"><pre class="hl">[[Clock in-&gt;Locker Room]]
+[[Locker Room]]</pre></div>
+<p>The first shows "Clock in" to the player and goes to the passage called <b>Locker Room</b>. The second shows "Locker Room" and goes to the same place. Using the arrow lets you hide the passage name, which you almost always want.</p>
+<div class="codewrap bad"><div class="label">&#10007; Typo: lowercase "r" doesn't match the passage "Locker Room"</div><pre class="hl">[[Clock in-&gt;Locker room]]</pre></div>
+<p>If you make a typo like this, Twine thinks you mean a <em>new</em> passage and creates an empty one. That empty passage is a dead end for the player. Check <b>Story &rarr; Details</b> for <b>Broken Links</b> before submitting.</p>
+<figure><img src="images/story-map.webp" alt="Twine story map showing passages connected by arrows, with a green rocket on the start passage" loading="lazy"><figcaption>The story map. Arrows show links; the green rocket marks the first passage. A passage with no arrows coming out of it is an ending (or a mistake).</figcaption></figure>
+</article>
+
+<article class="q" id="set-on-choice" data-short="Change a variable on a choice">
+<h3>How do I change a variable when the player makes a choice?</h3>
+<p class="short">Two ways. Either put the <code>(set:)</code> at the top of the passage the choice leads to, or nest it inside the link.</p>
+
+<p><b>Option A: set it at the top of the next passage (easiest).</b> Give each choice its own passage, and change the variable first thing in that passage.</p>
+<div class="codewrap"><div class="label">Passage: Locker Room</div><pre class="hl">[[Take the badge-&gt;Badge Taken]]
+[[Leave it-&gt;Floor]]</pre></div>
+<div class="codewrap"><div class="label">Passage: Badge Taken</div><pre class="hl">(set: $hasBadge to true)
+You clip the badge to your shirt. It's warm, somehow.
+[[Go to the floor-&gt;Floor]]</pre></div>
+
+<p><b>Option B: nest it inside the link.</b> Use <code>(link:)</code> with a hook. When the player clicks, everything in the square brackets runs: first the <code>(set:)</code>, then <code>(goto:)</code> sends them to the next passage.</p>
+<div class="codewrap"><div class="label">Passage: Locker Room</div><pre class="hl">(link: "Take the badge")[(set: $hasBadge to true)(goto: "Floor")]
+[[Leave it-&gt;Floor]]</pre></div>
+<figure><img src="images/passage-link-set.webp" alt="Twine passage editor showing a link macro containing set and goto" loading="lazy"><figcaption>Option B in the Twine editor. Note: links made this way don't draw an arrow on the story map, so the map can look disconnected even when the game works.</figcaption></figure>
+
+<div class="call warn"><b class="k">Common mistake</b><p>A <code>(set:)</code> sitting next to a link does <em>not</em> wait for the click. It runs the moment the passage appears, whatever the player chooses.</p></div>
+<div class="codewrap bad"><div class="label">&#10007; Doesn't work</div><pre class="hl">(set: $hasBadge to true)
+[[Take the badge-&gt;Floor]]
+[[Leave it-&gt;Floor]]</pre></div>
+<p>The player gets the badge even if they click "Leave it", because the <code>(set:)</code> already ran when Locker Room appeared.</p>
+<div class="codewrap good"><div class="label">&#10003; Works (Option B)</div><pre class="hl">(link: "Take the badge")[(set: $hasBadge to true)(goto: "Floor")]
+[[Leave it-&gt;Floor]]</pre></div>
+</article>
+
+<article class="q" id="variables-basics" data-short="Variables: set, change, check">
+<h3>How do variables work? (set, change, check)</h3>
+<p class="short">A variable is a named box that remembers something. In Harlowe they start with <code>$</code>.</p>
+<div class="codewrap"><div class="label">Make it (in your <a href="#startup">startup passage</a>)</div><pre class="hl">(set: $energy to 10)
+(set: $hasBadge to false)
+(set: $name to "Sam")</pre></div>
+<div class="codewrap"><div class="label">Change it</div><pre class="hl">(set: $energy to it - 2)
+(set: $energy to $energy + 3)</pre></div>
+<div class="codewrap"><div class="label">Show it to the player</div><pre class="hl">You have $energy energy left.</pre></div>
+<div class="codewrap"><div class="label">Check it</div><pre class="hl">(if: $hasBadge is true)[The scanner beeps green.](else:)[The scanner beeps red.]
+(if: $energy &lt; 3)[You can barely keep your eyes open.]</pre></div>
+<figure><img src="images/passage-if-else.webp" alt="Passage with set, an image, and an if/else hook" loading="lazy"><figcaption>A passage that changes a variable, shows an image, and checks a variable.</figcaption></figure>
+<p>Rules that trip people up:</p>
+<ul>
+  <li>Use <code>to</code> when setting and <code>is</code> when checking. Not <code>=</code>.
+<div class="codewrap bad"><div class="label">&#10007; Doesn't work</div><pre class="hl">(set: $energy = 10)
+(if: $hasBadge = true)[...]</pre></div>
+<div class="codewrap good"><div class="label">&#10003; Works</div><pre class="hl">(set: $energy to 10)
+(if: $hasBadge is true)[...]</pre></div></li>
+  <li>Variable names are case-sensitive: <code>$Energy</code> and <code>$energy</code> are two different boxes.
+<div class="codewrap bad"><div class="label">&#10007; Shows 0, because $Energy was never set</div><pre class="hl">(set: $energy to 10)
+You have $Energy energy left.</pre></div></li>
+  <li>No spaces, and don't start with a number. Use camelCase: <code>$hasBadge</code>, <code>$timesLate</code>. (It's also more like camels.)</li>
+  <li>The text that's shown or hidden goes in <b>square brackets right after</b> the <code>(if:)</code>, with no space between them.
+<div class="codewrap bad"><div class="label">&#10007; Doesn't work (space before the bracket)</div><pre class="hl">(if: $hasBadge is true) [The scanner beeps green.]</pre></div>
+<div class="codewrap good"><div class="label">&#10003; Works</div><pre class="hl">(if: $hasBadge is true)[The scanner beeps green.]</pre></div></li>
+  <li>Use <code>is not</code> for "not equal". Not <code>!=</code>.
+<div class="codewrap bad"><div class="label">&#10007; Twine shows an error: "!=" isn't valid Harlowe syntax</div><pre class="hl">(if: $energy != 0)[You can still work.]</pre></div>
+<div class="codewrap good"><div class="label">&#10003; Works</div><pre class="hl">(if: $energy is not 0)[You can still work.]</pre></div></li>
+  <li>No quotes around <code>true</code>, <code>false</code>, or numbers. Quotes turn them into text.
+<div class="codewrap bad"><div class="label">&#10007; Never shows "green", and Twine doesn't warn you</div><pre class="hl">(set: $hasBadge to "true")
+(if: $hasBadge is true)[The scanner beeps green.]</pre></div>
+<div class="codewrap bad"><div class="label">&#10007; Twine shows an error: I can only do &gt; to numbers, not the string "18"</div><pre class="hl">(set: $age to "18")
+(if: $age &gt; 10)[...]</pre></div>
+<div class="codewrap good"><div class="label">&#10003; Works</div><pre class="hl">(set: $hasBadge to true)
+(set: $age to 18)</pre></div>
+<p>Quotes are only for words: <code>(set: $name to "Sam")</code>.</p></li>
+  <li>Set your starting values in your <a href="#startup">startup passage</a>, and only there. If you put <code>(set: $energy to 10)</code> in a passage the player can come back to, it resets every time.
+<div class="codewrap bad"><div class="label">&#10007; Passage: Floor (the player returns here after every break)</div><pre class="hl">(set: $energy to 10)
+(set: $energy to it - 2)
+Energy: $energy</pre></div>
+<p>This always says "Energy: 8", no matter how tired the player should be. Move <code>(set: $energy to 10)</code> to your startup passage.</p></li>
+</ul>
+<p>More: <a href="https://twine2.neocities.org/#macro_set" target="_blank" rel="noopener">(set:)</a>, <a href="https://twine2.neocities.org/#macro_if" target="_blank" rel="noopener">(if:)</a>, <a href="https://twinery.org/cookbook/conditionalstatements/harlowe/harlowe_conditionalstatements.html" target="_blank" rel="noopener">conditionals in the Cookbook</a>.</p>
+</article>
+
+<article class="q" id="startup" data-short="Starting values (startup tag)">
+<h3>Where do I put my starting variables?</h3>
+<p class="short">In one passage with the tag <code>startup</code>. Twine runs it first, every time, even when you test from the middle of your story.</p>
+<ol class="steps">
+  <li>Make a new passage. Call it <b>Setup</b>. It doesn't need any links, and players never see it.</li>
+  <li>Click <b>+ Tag</b> and type <code>startup</code>: all lowercase, one word.</li>
+  <li>Put all your starting values in it:<div class="codewrap"><div class="label">Passage: Setup (tag: startup)</div><pre class="hl">(set: $energy to 10)
+(set: $rating to 4.6)
+(set: $hasBadge to false)</pre></div></li>
+  <li>Delete those same <code>(set:)</code> lines from your first passage, so they're only in one place.</li>
+</ol>
+<figure><img src="images/startup-tag.webp" alt="A passage named Setup with the startup tag circled in red" loading="lazy"><figcaption>The <code>startup</code> tag, circled.</figcaption></figure>
+<div class="call"><b class="k">Why bother?</b><p>Without it, <b>Test From Here</b> skips your first passage, and every variable shows 0 (<a href="#test-zero">see this</a>). With it, you can test any passage and your variables are ready. The startup passage runs once, at the start, not on every passage.</p></div>
+</article>
+
+<article class="q" id="stats-bar" data-short="Stats bar (header/footer)">
+<h3>How do I make a stats bar that shows on every passage?</h3>
+<p class="short">Make a new passage, give it the tag <b>footer</b> (or <b>header</b>), and put your stats in it. Harlowe adds it to the bottom (or top) of every passage automatically.</p>
+<ol class="steps">
+  <li>Create a new passage. Call it anything (<b>StatusBar</b> is fine). It doesn't need to be linked to anything.</li>
+  <li>In that passage, click <b>+ Tag</b>, type <code>footer</code>, and save. Use <code>header</code> if you want it at the top instead. Type it exactly, all lowercase: <code>Footer</code> or <code>footers</code> won't work, and Twine won't tell you.</li>
+  <li>Write what you want shown:</li>
+</ol>
+<div class="codewrap"><div class="label">Passage: StatusBar (tag: footer)</div><pre class="hl">&lt;hr&gt;
+Energy: $energy | Rating: $rating</pre></div>
+<div class="two">
+<figure><img src="images/passage-footer-tag.webp" alt="StatusBar passage with the footer tag" loading="lazy"><figcaption>The tag shows up under the toolbar.</figcaption></figure>
+<figure><img src="images/play-stats-bar.webp" alt="Playing the game: passage text with the stats line at the bottom" loading="lazy"><figcaption>What the player sees. The line and the stats appear on every passage.</figcaption></figure>
+</div>
+<div class="call tip"><b class="k">Tip</b><p>You can put <code>(if:)</code> in a footer too, for example a warning that only shows when <code>$energy</code> is low.</p></div>
+</article>
+
+<article class="q" id="back-arrow" data-short="The back arrow (and hiding it)">
+<h3>What's the little back arrow in the corner? Should I hide it?</h3>
+<p class="short">It's Harlowe's <b>undo</b> button. Players see it in your exported game and on itch, and it lets them take back any choice. For this project, you probably want to hide it.</p>
+<figure><img src="images/play-stats-bar.webp" alt="A played passage with the curved undo arrow in the top left" loading="lazy"><figcaption>The curved arrow at top left appears from the second passage on.</figcaption></figure>
+<p>Clicking it doesn't break your game. It rewinds to the previous passage <em>and</em> rewinds your variables, so it's as if the choice never happened. That's exactly the problem:</p>
+<div class="call warn"><b class="k">Undo can undo your argument</b><p>If your game argues that you can't escape the rating, the debt, or the algorithm, a button that lets players escape any bad outcome works against you. Consequences only argue something if they stick.</p></div>
+<p><b>To hide it:</b></p>
+<ol class="steps">
+  <li>Open your story and click <b>Story</b> at the top, then <b>Stylesheet</b>.</li>
+  <li>Paste this in:<div class="codewrap"><pre>tw-sidebar { display: none; }</pre></div></li>
+  <li>Play the game again to check that the arrow is gone.</li>
+</ol>
+<figure><img src="images/story-menu.webp" alt="Twine's Story menu with the Stylesheet button" loading="lazy"><figcaption>Story &rarr; Stylesheet.</figcaption></figure>
+<div class="call"><b class="k">The browser's back button is different</b><p>The browser's own back button (or <kbd>Alt</kbd> + <kbd>&larr;</kbd>) doesn't go back one passage. It <b>leaves the game</b> and goes to whatever page you were on before. Warn your playtesters.</p></div>
+</article>
+
+
+
+<article class="q" id="random" data-short="Randomness &amp; dice">
+<h3>How do I add randomness (dice rolls, chance)?</h3>
+<div class="codewrap"><pre class="hl">(set: $roll to (random: 1, 6))
+(if: $roll is 6)[You find a twenty on the ground.](else:)[Nothing. Just pavement.]</pre></div>
+<p><code>(random: 1, 6)</code> picks a whole number from 1 to 6. More in the <a href="https://twinery.org/cookbook/dicerolling/harlowe/harlowe_dicerolling.html" target="_blank" rel="noopener">dice rolling recipe</a>.</p>
+</article>
+
+<article class="q" id="comments" data-short="Notes to yourself">
+<h3>How do I leave notes for myself or my group inside the game?</h3>
+<div class="codewrap"><pre class="hl">&lt;!-- TODO: Ana is writing this ending. Don't touch. --&gt;</pre></div>
+<p>Anything between <code>&lt;!--</code> and <code>--&gt;</code> is invisible to the player.</p>
+</article>
+
+<article class="q" id="formatting" data-short="Text styles">
+<h3>How do I style text (bold, italics, colours)?</h3>
+<div class="codewrap"><pre class="hl">''bold'' //italics// ~~strikethrough~~
+(text-colour: red)[This is red.]</pre></div>
+<p>Careful: it gets overwhelming fast. See <a href="https://twine2.neocities.org/#markup_style" target="_blank" rel="noopener">text formatting</a> in the Harlowe docs, and the <a href="https://www.youtube.com/playlist?list=PLklITFhXtPCCKadv-0Gcbqoj3OCev695D" target="_blank" rel="noopener">Twine Details and Aesthetics</a> playlist for CSS.</p>
+</article>
+</section>
+
+<!-- ============================ IMAGES ============================ -->
+<section class="group" id="g-images" data-icon="🖼️" data-title="Add images &amp; sound" data-step="5">
+<h2>Images &amp; sound</h2>
+
+
+<article class="q" id="images-online" data-short="Option 1: link online">
+<h3>Option 1: Put the image online and link to it</h3>
+<ol class="steps">
+  <li>Upload the image to an image host (for example <a href="https://imgur.com/" target="_blank" rel="noopener">Imgur</a>).</li>
+  <li>Open the image, <b>right-click on the image itself</b>, and choose <b>Copy image address</b> (Chrome) / <b>Copy Image Link</b> (Firefox, Safari). Not "Copy link", not the address bar.</li>
+  <li>Paste it inside the quotes: <code>&lt;img src="https://i.imgur.com/abc123.png" width="300"&gt;</code>. A good address usually ends in <code>.png</code>, <code>.jpg</code>, <code>.gif</code>, or <code>.webp</code>.</li>
+  <li>Test it in an incognito window after uploading to itch.</li>
+</ol>
+<p><b>Pros:</b> you can see the image while testing in Twine. <b>Cons:</b> you depend on the other site keeping your image up and letting you link to it.</p>
+</article>
+
+<article class="q" id="images-zip" data-short="Option 2: zip (recommended)">
+<h3>Option 2: Bundle your images with the game in a zip (recommended)</h3>
+<p class="short">Put your game and your images in one folder, link to the images by file name, zip the folder's contents, and upload the zip to itch.</p>
+<ol class="steps">
+  <li>Make a new folder on your computer. Put all your images in it.</li>
+  <li>In Twine, link to them by file name only:<div class="codewrap"><pre class="hl">&lt;img src="badge.png" width="300"&gt;</pre></div></li>
+  <li>When you're done, <b>Build &rarr; Publish to File</b>, and save the .html into that same folder.</li>
+  <li><b>Rename the .html to <code>index.html</code></b>. itch needs this name to know which file to start.</li>
+  <li>Open the folder, select <b>everything inside it</b>, and zip it (Windows: right-click &rarr; Send to &rarr; Compressed (zipped) folder. Mac: right-click &rarr; Compress).</li>
+  <li>Upload that .zip to itch (see <a href="#itch-upload">uploading to itch</a>).</li>
+</ol>
+<div class="tree">
+<div class="ok">my-game.zip</div>
+<div>&nbsp;&nbsp;├── index.html</div>
+<div>&nbsp;&nbsp;├── badge.png</div>
+<div>&nbsp;&nbsp;├── office.jpg</div>
+<div>&nbsp;&nbsp;└── music.mp3</div>
+</div>
+<p>&#10003; Above: open the zip and <code>index.html</code> is the first thing you see.</p>
+<div class="tree">
+<div class="bad">my-game.zip &#10007;</div>
+<div>&nbsp;&nbsp;└── my-game/</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── index.html</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── badge.png</div>
+</div>
+<p>&#10007; Above: the game is buried inside another folder. This happens when you zip the folder instead of the things <em>inside</em> it. Open your zip to check before uploading.</p>
+<div class="call warn"><b class="k">The three ways this goes wrong</b>
+<ul>
+  <li><b>Capital letters.</b> On itch, <code>Badge.PNG</code> and <code>badge.png</code> are different files. Your computer doesn't care, itch does. Use all lowercase and no spaces: <code>break-room.png</code>, not <code>Break Room.PNG</code>.</li>
+  <li><b>Wrong file name.</b> The game has to be called exactly <code>index.html</code> (not <code>index.html.html</code>, not <code>The Shift.html</code>).</li>
+  <li><b>Wrong kind of archive.</b> itch takes <b>.zip</b> only. Not .rar, not .7z.</li>
+</ul></div>
+<div class="call"><b class="k">Note</b><p>With this method, images <b>won't</b> show when you test inside Twine, because Twine doesn't know where your folder is. That's normal. To check them, Publish to File into the folder and double-click the .html there.</p></div>
+<p>You still submit the .html on Lea as usual. itch is where the images have to work.</p>
+</article>
+
+<article class="q" id="image-size" data-short="Image size">
+<h3>My image is huge / squished / stretched.</h3>
+<p>Set only the <b>width</b>. The height adjusts itself to keep the proportions:</p>
+<div class="codewrap"><pre class="hl">&lt;img src="badge.png" width="300"&gt;</pre></div>
+<p>If you set both width and height and they don't match the original shape, the image warps. Want to make your own art? Try <a href="https://www.piskelapp.com/" target="_blank" rel="noopener">Piskel</a> or <a href="https://www.pixilart.com/" target="_blank" rel="noopener">Pixilart</a> (pixel art, animated gifs too).</p>
+</article>
+
+<article class="q" id="background-image" data-short="Background images">
+<h3>How do I add a background image?</h3>
+<p class="short">With a few lines of CSS in your story's Stylesheet. You can set one background for the whole game, and give certain passages their own.</p>
+<p><b>One background for the whole game</b></p>
+<ol class="steps">
+  <li>Open your story, click <b>Story</b> at the top, then <b>Stylesheet</b>.</li>
+  <li>Paste this in, and replace <code>office.jpg</code> with your image's file name or full address (the same rules as <a href="#images-why">any other image</a>):<div class="codewrap"><pre>tw-story {
+  background-image: url("office.jpg");
+  background-size: cover;
+  background-position: center;
+}</pre></div></li>
+</ol>
+<p><b>A different background for some passages</b></p>
+<ol class="steps">
+  <li>On each passage that should look different, click <b>+ Tag</b> and give it a tag, for example <code>forest</code>.</li>
+  <li>Add this to the Stylesheet, under the code above:<div class="codewrap"><pre>tw-story[tags~="forest"] {
+  background-image: url("forest.jpg");
+}</pre></div></li>
+</ol>
+<p>Every passage tagged <code>forest</code> now gets the forest picture, and everything else keeps the main one. Make as many tags as you need.</p>
+<p><b>Can't read the text?</b> Busy pictures make white text hard to read. This puts a dark see-through box behind your text (raise <code>0.7</code> toward <code>1</code> for darker):</p>
+<div class="codewrap"><pre>tw-passage {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 1em;
+}</pre></div>
+<figure><img src="images/bg-stylesheet.webp" alt="Story Stylesheet with all three pieces of CSS" loading="lazy"><figcaption>All three pieces together in Story &rarr; Stylesheet.</figcaption></figure>
+<div class="two">
+<figure><img src="images/bg-desk.webp" alt="A passage over an office background" loading="lazy"><figcaption>The main background, with the dark box behind the text.</figcaption></figure>
+<figure><img src="images/bg-forest.webp" alt="A passage tagged forest, with a forest background" loading="lazy"><figcaption>The next passage is tagged <code>forest</code>, so it switches.</figcaption></figure>
+</div>
+<div class="call warn"><b class="k">Copy it exactly</b><p>CSS is fussy: every <code>{</code> needs a <code>}</code>, every line ends with <code>;</code>, and the quotes have to be straight (<a href="#smart-quotes">why</a>).</p></div>
+</article>
+
+<article class="q" id="layer-images" data-short="Images on top of images">
+<h3>How do I put an image on top of another image?</h3>
+<p class="short">Put both images in a box, and pin the top image to a spot inside that box with a position in pixels.</p>
+<div class="codewrap"><div class="label">Badge sitting on top of the office picture</div><pre class="hl">&lt;div style="position: relative; width: 480px;"&gt;&lt;img src="office.jpg" width="480"&gt;&lt;img src="badge.png" width="120" style="position: absolute; left: 300px; top: 160px;"&gt;&lt;/div&gt;</pre></div>
+<ul>
+  <li>The first image is the bottom layer. Its <code>width</code> should match the box's <code>width</code>.</li>
+  <li>The second image sits on top. <code>left</code> and <code>top</code> are how far it is, in pixels, from the top-left corner of the bottom image. Nudge the numbers until it's in the right place.</li>
+  <li>The top image should be a <b>PNG with a transparent background</b>, or it'll sit on top as a rectangle. (Piskel and Pixilart both save transparent PNGs.)</li>
+  <li>Keep the whole thing on <b>one line</b>, as above. Line breaks inside it add gaps.</li>
+</ul>
+<figure><img src="images/layered-badge.webp" alt="An office picture with a badge image layered on top" loading="lazy" style="max-width:520px"><figcaption>The result.</figcaption></figure>
+<p><b>Only show the top layer sometimes.</b> This is where it gets useful: the scene can change based on your variables (the badge appears once the player has taken it). Wrap the <em>whole box</em> in the <code>(if:)</code>, and use <code>(else:)</code> for the version without it:</p>
+<div class="codewrap good"><div class="label">&#10003; Works</div><pre class="hl">(if: $hasBadge is true)[&lt;div style="position: relative; width: 480px;"&gt;&lt;img src="office.jpg" width="480"&gt;&lt;img src="badge.png" width="120" style="position: absolute; left: 300px; top: 160px;"&gt;&lt;/div&gt;](else:)[&lt;img src="office.jpg" width="480"&gt;]</pre></div>
+<div class="codewrap bad"><div class="label">&#10007; Doesn't work: the badge lands in the wrong place</div><pre class="hl">&lt;div style="position: relative; width: 480px;"&gt;&lt;img src="office.jpg" width="480"&gt;(if: $hasBadge is true)[&lt;img src="badge.png" width="120" style="position: absolute; left: 300px; top: 160px;"&gt;]&lt;/div&gt;</pre></div>
+<p>Why: putting the <code>(if:)</code> <em>inside</em> the box changes what the badge measures its position from, so it ends up below the picture instead of on it.</p>
+</article>
+
+<article class="q" id="sound" data-short="Music &amp; sound">
+<h3>Can I add music or sound?</h3>
+<p>Yes, but Twine doesn't do it on its own. The easiest route is <a href="https://candle.itch.io/bitsy-audio" target="_blank" rel="noopener">Bitsy Audio</a> (yes, it's a Bitsy tool; no, that's not a typo). For more control, the <a href="https://twinelab.net/harlowe-audio/#/" target="_blank" rel="noopener">Harlowe Audio Library</a>. Either way, your audio files go in the folder with your game and you upload a zip, exactly like <a href="#images-zip">Option 2 for images</a>.</p>
+<div class="call warn"><b class="k">Don't start music on the first passage</b><p>Browsers block sound until the player has clicked something. Music on your very first passage usually stays silent. Put a "Start" link first, and start the music on the passage after it.</p></div>
+<p>Please don't make it annoying. Players will mute you.</p>
+</article>
+</section>
+
+<!-- ============================ ITCH ============================ -->
+<section class="group" id="g-itch" data-icon="🕹️" data-title="Put it on itch.io" data-step="6">
+<h2>itch.io</h2>
+
+<article class="q" id="itch-upload" data-short="Uploading, step by step">
+<h3>How do I upload my game to itch.io?</h3>
+<ol class="steps">
+  <li>Make a free account at <a href="https://itch.io" target="_blank" rel="noopener">itch.io</a> with an email you actually check.</li>
+  <li>Click the arrow next to your avatar (top right) &rarr; <b>Upload new project</b>.</li>
+  <li>Fill in a <b>title</b> and a short description. Nothing fancy.</li>
+  <li>Set <b>Kind of project</b> to <b>HTML</b>. This is the most important setting. If you leave it on "Downloadable", nobody can play in the browser.
+<figure><img src="images/itch-kind-of-project.png" alt="itch Kind of project dropdown with HTML selected" loading="lazy"></figure></li>
+  <li>Upload your file: the <b>.html</b> from Publish to File, or your <b>.zip</b> if you have images/sound bundled.</li>
+  <li>When it finishes uploading, tick <b>This file will be played in the browser</b>.</li>
+  <li>Set the <b>viewport size</b> (1280 &times; 720 is a fine start). Under <b>Frame options</b>, tick <b>Mobile friendly</b> and <b>Fullscreen button</b>.
+<figure><img src="images/itch-frame-options.png" alt="itch Frame options with Mobile friendly and Fullscreen button checked" loading="lazy"></figure></li>
+  <li>Scroll to the bottom, click <b>Save &amp; view page</b>. Check that your game shows up.</li>
+  <li>Go back to the settings (click the <b>DRAFT</b> banner or <b>Edit game</b> at the top), scroll to the bottom, and under <b>Visibility &amp; access</b> choose <b>Public</b>. Save again. You can only do this after saving once.
+<figure><img src="images/itch-visibility.png" alt="itch Visibility &amp; access options" loading="lazy"></figure></li>
+  <li>Copy the URL of the <b>game page</b> and test it in an incognito window.</li>
+</ol>
+</article>
+
+
+<article class="q" id="itch-index" data-short="Does it need index.html?">
+<h3>Does my file have to be called index.html?</h3>
+<p class="short">Only if you upload a zip.</p>
+<ul>
+  <li><b>Uploading just the .html file:</b> any name works (<code>The Shift.html</code> is fine).</li>
+  <li><b>Uploading a .zip</b> (because you have images or sound in it): the game inside must be called <code>index.html</code>.</li>
+</ul>
+<p>Also: a single .html upload can't see any other files you upload to itch. If your images are separate files, they need to be in the zip with the game.</p>
+</article>
+
+<article class="q" id="itch-update" data-short="Updating your game">
+<h3>I fixed something. How do I update the game on itch?</h3>
+<ol class="steps">
+  <li>Edit game &rarr; upload the new file.</li>
+  <li><b>Delete the old file</b> (or the old one may be the one that plays).</li>
+  <li>Tick <b>This file will be played in the browser</b> on the new one.</li>
+  <li>Save, and test in incognito. Your URL stays the same, so you don't need to resubmit the link.</li>
+</ol>
+</article>
+
+</section>
+
+<!-- ============================ SUBMIT ============================ -->
+<section class="group" id="g-submit" data-icon="✅" data-title="Submit" data-step="7">
+<h2>Submitting</h2>
+
+<article class="q" id="checklist" data-short="Final checklist">
+<h3>Final checklist: did I do everything?</h3>
+<p>Due dates live on Lea and nowhere else. Tick these off (the boxes are just for you; nothing is saved or sent):</p>
+<ul class="check">
+  <li><label><input type="checkbox">Did the pitch, and met with Steven if asked</label></li>
+  <li><label><input type="checkbox">Did the midpoint check-in play journal</label></li>
+  <li><label><input type="checkbox">Game meets the requirements (procedural rhetoric / gamification, variables, macros, hooks, images, word and passage counts)</label></li>
+  <li><label><input type="checkbox">Played every path start to finish; no broken links, dead ends, or missing images</label></li>
+  <li><label><input type="checkbox">Uploaded the game (.html) to the Lea dropbox</label></li>
+  <li><label><input type="checkbox">Uploaded the game to itch.io, set to Public, and tested the link in incognito</label></li>
+  <li><label><input type="checkbox">Pasted the itch link into the peer review spreadsheet</label></li>
+  <li><label><input type="checkbox">Pasted the itch link at the top of the written reflection</label></li>
+  <li><label><input type="checkbox">Reflection: all group names at the top, required MLA citations of course readings, self-graded with the rubric, uploaded to Lea as a PDF</label></li>
+  <li><label><input type="checkbox">Completed two peer reviews</label></li>
+</ul>
+</article>
+
+<article class="q" id="resources" data-short="Official docs &amp; links">
+<h3>Where's the official documentation?</h3>
+<div class="tablewrap"><table>
+<tr><th>Resource</th><th>Use it for</th></tr>
+<tr><td><a href="https://twinery.org/" target="_blank" rel="noopener">Twine</a></td><td>Download it, or use it in your browser (Chrome works best).</td></tr>
+<tr><td><a href="https://twinery.org/cookbook/" target="_blank" rel="noopener">The Twine Cookbook</a></td><td>Friendly explanations of almost everything you need.</td></tr>
+<tr><td><a href="https://twine2.neocities.org/" target="_blank" rel="noopener">The Harlowe Docs</a></td><td>The full reference. Looks intimidating; the sidebar is your friend.</td></tr>
+<tr><td><a href="https://www.youtube.com/playlist?list=PLlXuD3kyVEr5jWoG0oDygKWOgFC3qrKN-" target="_blank" rel="noopener">Dan Cox's Twine playlist</a></td><td>Intermediate topics. Watch at least through conditional statements. Check each video says Harlowe.</td></tr>
+<tr><td><a href="https://www.jezner.com/twine-2-tutorial-coding-with-variables/" target="_blank" rel="noopener">Coding with variables</a></td><td>A gentle intro to variables.</td></tr>
+<tr><td><a href="https://gersande.com/blog/designing-inventories-in-twine-2-with-the-built-in-harlowe-macros/" target="_blank" rel="noopener">Inventories in Harlowe</a></td><td>If you want to go wild. I wouldn't recommend it, but here you go.</td></tr>
+<tr><td><a href="https://itch.io/docs/creators/html5" target="_blank" rel="noopener">itch.io HTML5 docs</a></td><td>itch's own rules for uploading browser games.</td></tr>
+</table></div>
+</article>
+</section>
+
+<!-- ============================ TROUBLESHOOTING ============================ -->
+<section class="group" id="g-trouble" data-icon="🔧" data-title="Troubleshooting">
+<h2>Troubleshooting</h2>
+
+<article class="q" id="itch-broken" data-short="Link broken for others">
+<h3>My itch link works for me but my reviewers say it's broken.</h3>
+<p class="short">It's almost always still set to Draft.</p>
+<p>When you're logged in, itch shows <em>you</em> your own drafts. Nobody else can see them. Set Visibility to <b>Public</b>, then check in an incognito / private window.</p>
+<p>If it's Public and still broken, check the other three usual suspects:</p>
+<ol>
+  <li>Is <b>Kind of project</b> set to <b>HTML</b>? (<a href="#itch-upload">picture</a>)</li>
+  <li>Did you tick <b>This file will be played in the browser</b>?</li>
+  <li>Did you upload the <b>.html</b> from <b>Publish to File</b> (or your .zip), not a .twee or a screenshot?</li>
+</ol>
+<figure><img src="images/itch-visibility.png" alt="itch Visibility &amp; access: Draft, Restricted, Public" loading="lazy"><figcaption>Public only becomes available after you've saved the page once.</figcaption></figure>
+</article>
+
+<article class="q" id="images-why" data-short="Images not showing">
+<h3>Why aren't my images showing up?</h3>
+<p class="short">Almost always: the link you used isn't a link to an <em>image</em>. It's a link to a web page that has an image on it.</p>
+<p>An image in Twine is one line of HTML:</p>
+<div class="codewrap"><pre class="hl">&lt;img src="PUT THE IMAGE ADDRESS HERE" width="300"&gt;</pre></div>
+<div class="call tip"><b class="k">Test your code with this image first</b>
+<p>Copy this line into a passage and play it. You should see a green check mark saying "If you can see this, your image code works!"</p>
+<div class="codewrap"><pre class="hl" id="testImgCode">&lt;img src="TEST-IMAGE-URL" width="300"&gt;</pre></div>
+<p>If it shows up, your code is fine, and the problem is the address of your own image (keep reading). If even this doesn't show up, check your quotes and brackets against the line above.</p>
+<figure><img src="images/test-image.png" alt="Test image: If you can see this, your image code works!" loading="lazy" style="max-width:330px"><figcaption>What you should see.</figcaption></figure>
+</div>
+<p>The address has to point straight at the image file. A good test: paste the address into a new browser tab. If you see <b>only the image</b> on a blank background, it's right. If you see a website (menus, comments, a Google Drive viewer, a Pinterest page), it's wrong.</p>
+<div class="two">
+<figure><img src="images/passage-image-test.webp" alt="Passage with two img tags, one to a local file and one to a Google Drive share link" loading="lazy"><figcaption>Two images in the editor...</figcaption></figure>
+<figure><img src="images/play-image-test.webp" alt="Played version: first image shows, second is a broken image icon" loading="lazy"><figcaption>...and in the game. The Google Drive link becomes a broken-image icon.</figcaption></figure>
+</div>
+<p>Links that will <b>not</b> work:</p>
+<ul>
+  <li><b>Google Drive / Google Photos / OneDrive share links.</b> These are viewer pages, not images.</li>
+  <li><b>Images from Google Image search results.</b> Copy the address of the actual image, not of the search result.</li>
+  <li><b>Sites that block "hotlinking"</b> (using their images on someone else's page). Some sites refuse, so the image works when you visit the site and fails in your game.</li>
+  <li><b>Addresses starting with <code>http://</code></b> (no "s"). itch only loads <code>https://</code> links.</li>
+  <li><b>Anything on your own computer</b> like <code>C:\Users\...</code> or <code>/Users/...</code>. It works on your machine only.</li>
+</ul>
+<p>Two ways that do work: <a href="#images-online">linking to an image online</a>, or <a href="#images-zip">bundling images in a zip</a>. For the final project, the zip is the most reliable.</p>
+</article>
+
+<article class="q" id="smart-quotes" data-short="Pasted code doesn't work">
+<h3>I copied code from a PDF or Google Doc and it doesn't work.</h3>
+<p class="short">Curly "smart" quotes. Code needs straight quotes.</p>
+<p>Word, Google Docs, and PDFs often turn <code>"</code> into <code>&ldquo;</code> and <code>&rdquo;</code>. They look almost the same to you, but Twine doesn't recognize them. The same goes for apostrophes. Either retype the quotes inside Twine, or turn smart quotes off (in Google Docs: <b>Tools &rarr; Preferences &rarr; uncheck "Use smart quotes"</b>).</p>
+<div class="codewrap"><div class="label">Broken (curly quotes)</div><pre>(goto: &ldquo;Floor&rdquo;)</pre></div>
+<div class="codewrap"><div class="label">Works (straight quotes)</div><pre class="hl">(goto: "Floor")</pre></div>
+</article>
+
+<article class="q" id="test-zero" data-short="My variables all say 0">
+<h3>When I test, my variables all say 0. Why?</h3>
+<p class="short">Your starting <code>(set:)</code>s didn't run. Fix: put them in a passage tagged <code>startup</code> (<a href="#startup">how</a>).</p>
+<p>In Harlowe, a variable that was never set shows up as <code>0</code>. This usually happens when you click <b>Test From Here</b> on a passage in the middle of your story: Twine starts right there and skips your first passage, where your <code>(set:)</code>s are.</p>
+<figure><img src="images/play-image-test.webp" alt="Test mode showing Energy: 0 | Rating: 0 and the debug panel" loading="lazy"><figcaption>Tested from the middle: "Energy: 0 | Rating: 0", because the passage that sets them never ran.</figcaption></figure>
+<p>A passage tagged <code>startup</code> always runs first, even with Test From Here. Move your starting values there and this problem goes away for good.</p>
+</article>
+
+<article class="q" id="text-not-updating" data-short="Variable changed, text didn't">
+<h3>My variable changed, but the text on screen didn't.</h3>
+<p class="short">Your code probably works. Twine runs a passage's code once, top to bottom, the moment the passage appears. Text that's already on screen doesn't refresh when a variable changes afterwards.</p>
+<div class="codewrap bad"><div class="label">&#10007; Looks broken</div><pre class="hl">(set: $strength to 1)
+Your strength is: $strength
+(link: "Do squats")[(set: $strength to it + 1)]</pre></div>
+<p>The player clicks "Do squats" and the screen still says <b>Your strength is: 1</b>. The variable <em>did</em> change to 2, but that line was written before the click and doesn't update. So don't start rewriting your <code>(set:)</code>: it's fine.</p>
+<p>Two fixes:</p>
+<div class="codewrap good"><div class="label">&#10003; Fix 1: show the new value inside the hook, after the change</div><pre class="hl">(set: $strength to 1)
+Your strength is: $strength
+(link: "Do squats")[(set: $strength to it + 1)Your strength is now $strength.]</pre></div>
+<div class="codewrap good"><div class="label">&#10003; Fix 2: send the player to a new passage, where everything is written fresh</div><pre class="hl">(link: "Do squats")[(set: $strength to it + 1)(goto: "Gym Results")]</pre></div>
+<div class="call"><b class="k">Same thing with stats bars</b><p>A <a href="#stats-bar">header or footer</a> is written when the passage appears too. If a link changes a variable without leaving the passage, the stats bar keeps showing the old number until the player reaches the next passage. Fix 2 avoids this.</p></div>
+</article>
+
+<article class="q" id="music-silent" data-short="Music doesn't play">
+<h3>My music doesn't play.</h3>
+<p class="short">Most likely the browser blocked it. Browsers don't allow sound until the player clicks something, so start your music after a click.</p>
+<ol class="steps">
+  <li>Make your first passage a title screen with a <b>Start</b> link.</li>
+  <li>Start the music on the passage that link goes to, not on the first one.</li>
+</ol>
+<p>Still silent? Check these:</p>
+<ul>
+  <li>The audio file is <b>in your zip</b>, next to <code>index.html</code> (<a href="#images-zip">same as images</a>).</li>
+  <li>The file name in your code matches <b>exactly</b>, capitals included: <code>Music.MP3</code> is not <code>music.mp3</code> on itch.</li>
+  <li>If it's a link to a file online, it starts with <code>https://</code>.</li>
+</ul>
+<p>More on adding sound: <a href="#sound">Music &amp; sound</a>.</p>
+</article>
+
+<article class="q" id="itch-cramped" data-short="Cramped or cut off">
+<h3>My game looks cramped or cut off on itch.</h3>
+<p>Make the viewport size bigger, and check that <b>Fullscreen button</b> is ticked under Frame options. If long passages get cut off at the bottom, also tick <b>Enable scrollbars</b>. Then test it again.</p>
+</article>
+
+<article class="q" id="mistakes" data-short="Mistakes people make every semester">
+<h3>What are the mistakes people make every semester?</h3>
+<p>In rough order of how often I see them:</p>
+<ul>
+  <li><b>itch page left on Draft.</b> Works for you, broken for everyone else. <a href="#itch-broken">Fix</a>.</li>
+  <li><b>Images linked from Google Drive or their own computer.</b> <a href="#images-why">Fix</a>.</li>
+  <li><b>Following a SugarCube tutorial.</b> <a href="#harlowe">Fix</a>.</li>
+  <li><b>Losing the whole game</b> because it only lived in a browser. Publish to File every session. <a href="#saving">Fix</a>.</li>
+  <li><b>Submitting the wrong file:</b> a .twee, a screenshot, a link to twinery.org, or a Word doc. Lea gets the <b>.html</b> from Publish to File.</li>
+  <li><b>Curly quotes</b> pasted from a doc or PDF. <a href="#smart-quotes">Fix</a>.</li>
+  <li><b>Typos in passage names</b>, which create empty dead-end passages. Check Story &rarr; Details for broken links.</li>
+  <li><b>Dead ends.</b> A passage with no links and no ending. Players get stuck. Every passage should either link onward or clearly be an ending.</li>
+  <li><b>Importing an old file over a newer game</b> with the same name. <a href="#reopen">Fix</a>.</li>
+  <li><b>Starting values in the first passage</b> instead of a startup passage, so testing shows 0s. <a href="#startup">Fix</a>.</li>
+  <li><b>Tag typos:</b> <code>Footer</code>, <code>start up</code>. Tags must be typed exactly, lowercase.</li>
+  <li><b>Variables that reset</b> because the <code>(set:)</code> is in a passage the player returns to.</li>
+  <li><b>Using <code>=</code></b> instead of <code>to</code> (setting) or <code>is</code> (checking).</li>
+  <li><b>Capitalization mismatches</b> in variable names or image file names.</li>
+  <li><b>Variables that don't do anything.</b> A variable that's set but never checked doesn't change the game, and doesn't make an argument. Say in your reflection what each variable does.</li>
+  <li><b>Two group members editing two copies</b> of the game. <a href="#collab-options">Fix</a>.</li>
+  <li><b>Never playing it start to finish</b> before submitting. Play every path at least once. Better: get a friend to play it while you watch and say nothing.</li>
+</ul>
+</article>
+</section>
+
+<p class="noresults" id="noresults">Nothing matches that. Try a different word, or send me a Mio.</p>
+
+</main>
+</div>
+
+<div id="lb"><img alt=""></div>
+
+<script>
+(function(){
+  // ---------- Theme toggle ----------
+  var root=document.documentElement;
+  try{var saved=localStorage.getItem('faq-theme'); if(saved) root.setAttribute('data-theme',saved);}catch(e){}
+  document.getElementById('themeBtn').addEventListener('click',function(){
+    var dark = root.getAttribute('data-theme')==='dark' || (!root.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
+    var next = dark ? 'light' : 'dark';
+    root.setAttribute('data-theme',next);
+    try{localStorage.setItem('faq-theme',next);}catch(e){}
+  });
+
+  var sections=[].slice.call(document.querySelectorAll('section.group'));
+  var arts=[].slice.call(document.querySelectorAll('article.q'));
+  function title(a){return a.querySelector('h3').textContent;}
+  function shortOf(a){return a.getAttribute('data-short')||title(a);}
+  function secOf(a){return a.closest('section.group');}
+  function icon(sec){var n=sec.getAttribute('data-step'); return n?'<span class="badge">'+n+'</span>':(sec.getAttribute('data-icon')||'');}
+  function label(sec){var n=sec.getAttribute('data-step'); return (n?'Step '+n+': ':'')+sec.getAttribute('data-title');}
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+  // ---------- Sidebar ----------
+  var side=document.getElementById('side'), html='<a class="homelink" href="#">&#8962; Home</a>';
+  var trouble=document.getElementById('g-trouble');
+  var ordered=[trouble].concat(sections.filter(function(x){return x!==trouble;}));
+  ordered.forEach(function(sec,ix){
+    if(ix===1) html+='<div class="sep"></div>';
+    var list=sec.querySelectorAll('article.q');
+    html+='<div class="grp" data-sec="'+sec.id+'"><button class="gh" type="button" aria-expanded="false" aria-controls="items-'+sec.id+'"><span class="chev">&#9654;</span><span class="ic">'+icon(sec)+'</span>'+sec.getAttribute('data-title')+'<span class="n">'+list.length+'</span></button><div class="items" id="items-'+sec.id+'">';
+    [].forEach.call(list,function(a){
+      html+='<a href="#'+a.id+'" data-for="'+a.id+'" title="'+esc(title(a))+'">'+shortOf(a)+'</a>';
+    });
+    html+='</div></div>';
+  });
+  side.innerHTML=html;
+  side.querySelectorAll('.gh').forEach(function(b){
+    b.addEventListener('click',function(){ var o=b.parentNode.classList.toggle('open'); b.setAttribute('aria-expanded',o?'true':'false'); });
+  });
+  var links={}; side.querySelectorAll('.items a').forEach(function(a){links[a.getAttribute('data-for')]=a;});
+
+  // ---------- Home cards ----------
+  function card(sec,cls){
+    var c='<div class="card'+cls+'"><h3>'+icon(sec)+'<span>'+(sec.id==='g-trouble'?'Something broken? Troubleshooting':sec.getAttribute('data-title'))+'</span></h3><ul>';
+    sec.querySelectorAll('article.q').forEach(function(a){ c+='<li><a href="#'+a.id+'">'+shortOf(a)+'</a></li>'; });
+    return c+'</ul></div>';
+  }
+  var cards='';
+  sections.forEach(function(sec){ if(sec!==trouble) cards+=card(sec,''); });
+  document.getElementById('cards').innerHTML=cards;
+
+  // ---------- Prev / next on every question ----------
+  var stepArts=arts.filter(function(a){return secOf(a)!==trouble;}), trArts=arts.filter(function(a){return secOf(a)===trouble;});
+  arts.forEach(function(a){
+    var seq=secOf(a)===trouble?trArts:stepArts, i=seq.indexOf(a);
+    var prev=seq[i-1], next=seq[i+1], h='<p class="stuck">Still stuck? Click <b>Copy link to this question</b> at the top, and send it to me in a Mio with a screenshot of your problem.</p><div class="pager">';
+    h+= prev ? '<a href="#'+prev.id+'"><small>&larr; Previous</small>'+shortOf(prev)+'</a>' : '<span></span>';
+    h+= next ? '<a class="next" href="#'+next.id+'"><small>Next &rarr;</small>'+shortOf(next)+'</a>' : '<span></span>';
+    a.insertAdjacentHTML('beforeend',h+'</div>');
+    a.querySelector('h3').insertAdjacentHTML('afterend','<button class="linkbtn" type="button" data-id="'+a.id+'">&#128279; Copy link to this question</button>');
+  });
+
+  // ---------- Routing: one question at a time ----------
+  var home=document.getElementById('home'), crumb=document.getElementById('crumb'), results=document.getElementById('results');
+  var q=document.getElementById('q'), none=document.getElementById('noresults'), live=document.getElementById('live');
+  function openGroup(sec){
+    side.querySelectorAll('.grp').forEach(function(g){ var o=!!sec && g.getAttribute('data-sec')===sec.id; g.classList.toggle('open',o); g.querySelector('.gh').setAttribute('aria-expanded',o?'true':'false'); });
+  }
+  function route(){
+    var id=decodeURIComponent(location.hash.slice(1));
+    var target=id?document.getElementById(id):null;
+    var art=target?(target.matches('article.q')?target:target.closest('article.q')):null;
+    if(q.value){ q.value=''; resetSearch(); }
+    arts.forEach(function(a){a.classList.toggle('show',a===art);});
+    home.style.display=art?'none':'';
+    results.style.display='none'; none.style.display='none';
+    side.querySelectorAll('.items a').forEach(function(l){l.classList.toggle('active',!!art && l.getAttribute('data-for')===art.id);});
+    if(art){
+      var sec=secOf(art);
+      crumb.innerHTML='<a href="#">Home</a> &rsaquo; '+label(sec)+(sec===trouble?'':' &middot; '+(stepArts.indexOf(art)+1)+' of '+stepArts.length);
+      crumb.style.display='block';
+      openGroup(sec);
+      document.title=shortOf(art).replace(/&amp;/g,'&')+' | Twine Project FAQ';
+      var h3=art.querySelector('h3'); h3.setAttribute('tabindex','-1'); try{ h3.focus({preventScroll:true}); }catch(e){}
+      live.textContent=title(art);
+    } else if(id && !target){
+      crumb.innerHTML="Couldn't find that question. It may have moved: pick one below, or search at the top.";
+      crumb.style.display='block';
+      document.title='Twine Project FAQ';
+    } else {
+      crumb.style.display='none';
+      document.title='Twine Project FAQ';
+    }
+    setTimeout(function(){ if(target && art && target!==art){ target.scrollIntoView(); } else { window.scrollTo(0,0); } },0);
+    side.classList.remove('open');
+  }
+  window.addEventListener('hashchange',route);
+
+  // ---------- Search ----------
+  var SYN=[['image','picture','img','photo','pic','png','jpg'],['itch','itchio','itch.io'],['variable','varible','variabel'],['music','sound','audio','song','mp3'],['link','url','address'],['save','saved','lost','backup','gone','disappeared','deleted'],['zip','zipped','compress'],['background','backdrop','bg'],['undo','back arrow','back button','arrow'],['group','team','partner','together','google doc','docs'],['error','broken','not working','doesnt work',"doesn't work",'bug'],['startup','start up','starting values','setup'],['stats','stat bar','health','score','footer','header'],['quote','quotes','smart quotes'],['random','dice','chance'],['import','replace','overwrite']];
+  function resetSearch(){
+    side.querySelectorAll('.items a, .grp').forEach(function(x){x.classList.remove('hidden');});
+  }
+  q.addEventListener('input',function(){
+    var v=q.value.trim().toLowerCase();
+    if(!v){ resetSearch(); route(); return; }
+    var terms=[v]; SYN.forEach(function(g){ if(g.some(function(w){return v.indexOf(w)>-1 || w.indexOf(v)===0 && v.length>2;})) terms=terms.concat(g); });
+    var scored=arts.map(function(a){
+      var t=a.textContent.toLowerCase(), h=(title(a)+' '+shortOf(a)).toLowerCase(), sc=0;
+      if(h.indexOf(v)>-1) sc+=100; else if(terms.some(function(w){return h.indexOf(w)>-1;})) sc+=50;
+      if(t.indexOf(v)>-1) sc+=10; else if(terms.some(function(w){return t.indexOf(w)>-1;})) sc+=3;
+      return {a:a,sc:sc};
+    }).filter(function(x){return x.sc>0;}).sort(function(x,y){return y.sc-x.sc;});
+    var top=scored.filter(function(x){return x.sc>=50;});
+    var hits=(top.length? top.concat(scored.filter(function(x){return x.sc<50;}).slice(0,Math.max(0,6-top.length))) : scored.slice(0,8)).map(function(x){return x.a;});
+    home.style.display='none'; crumb.style.display='none';
+    arts.forEach(function(a){a.classList.remove('show');});
+    var h='<p class="lede">'+hits.length+' question'+(hits.length===1?'':'s')+' mention "'+esc(q.value.trim())+'"</p>';
+    hits.forEach(function(a){
+      var sec=secOf(a);
+      h+='<a class="res" href="#'+a.id+'"><small>'+label(sec)+'</small>'+esc(title(a))+'</a>';
+    });
+    results.innerHTML=h; results.style.display=hits.length?'block':'none';
+    none.style.display=hits.length?'none':'block';
+    if(!hits.length) none.innerHTML='Nothing matches that. Try a shorter word, or one of these: <a href="#images-why">pictures not showing</a>, <a href="#itch-broken">itch link broken</a>, <a href="#test-zero">variables say 0</a>, <a href="#saving">lost my work</a>. Still stuck? Send me a Mio.';
+    side.querySelectorAll('.items a').forEach(function(l){ l.classList.toggle('hidden', hits.indexOf(document.getElementById(l.getAttribute('data-for')))<0); });
+    side.querySelectorAll('.grp').forEach(function(g){
+      var vis=g.querySelectorAll('.items a:not(.hidden)').length>0;
+      g.classList.toggle('hidden',!vis); g.classList.toggle('open',vis);
+    });
+  });
+
+  // ---------- Test image URL (works wherever the page is hosted) ----------
+  var tic=document.getElementById('testImgCode');
+  if(tic){
+    var u=new URL('images/test-image.png', location.href).href;
+    if(location.protocol==='file:') u='https://YOUR-SITE/images/test-image.png';
+    tic.textContent='<img src="'+u+'" width="300">';
+  }
+
+  // ---------- Harlowe-ish highlighting ----------
+  var re=/(<!--[\s\S]*?-->)|(\[\[[\s\S]*?\]\])|(\([a-zA-Z][\w-]*:)|(\$\w+)|("[^"\n]*")|(<\/?[a-zA-Z][^>]*>)|(^::.*$)/gm;
+  document.querySelectorAll('pre.hl').forEach(function(pre){
+    var src=pre.textContent, out='', last=0, m;
+    re.lastIndex=0;
+    while((m=re.exec(src))){
+      out+=esc(src.slice(last,m.index));
+      var cls=m[1]?'t-c':m[2]?'t-l':m[3]?'t-m':m[4]?'t-v':m[5]?'t-s':m[6]?'t-h':'t-m';
+      out+='<span class="'+cls+'">'+esc(m[0])+'</span>';
+      last=re.lastIndex;
+    }
+    out+=esc(src.slice(last));
+    pre.innerHTML=out;
+  });
+
+  // ---------- Copy buttons ----------
+  function fallback(t){var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}ta.remove();}
+  document.querySelectorAll('.codewrap').forEach(function(w){
+    var pre=w.querySelector('pre'); if(!pre) return;
+    var b=document.createElement('button'); b.className='copy'; b.textContent='Copy';
+    b.addEventListener('click',function(){
+      var txt=pre.textContent;
+      var done=function(){b.textContent='Copied!'; setTimeout(function(){b.textContent='Copy';},1400);};
+      if(navigator.clipboard){navigator.clipboard.writeText(txt).then(done,function(){fallback(txt);done();});}
+      else {fallback(txt);done();}
+    });
+    w.appendChild(b);
+  });
+
+  document.querySelectorAll('.linkbtn').forEach(function(b){
+    b.addEventListener('click',function(){
+      var url=location.href.split('#')[0]+'#'+b.getAttribute('data-id');
+      var done=function(){var t=b.innerHTML; b.textContent='Copied!'; setTimeout(function(){b.innerHTML=t;},1400);};
+      if(navigator.clipboard){navigator.clipboard.writeText(url).then(done,function(){fallback(url);done();});} else {fallback(url);done();}
+    });
+  });
+
+  // ---------- Mobile menu ----------
+  document.getElementById('menuBtn').addEventListener('click',function(){side.classList.toggle('open');});
+
+  // ---------- Lightbox ----------
+  var lb=document.getElementById('lb'), lbi=lb.querySelector('img');
+  document.querySelectorAll('figure img').forEach(function(img){
+    img.addEventListener('click',function(){lbi.src=img.src; lbi.alt=img.alt; lb.style.display='flex';});
+  });
+  lb.addEventListener('click',function(){lb.style.display='none';});
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') lb.style.display='none'; });
+
+  route();
+  window.addEventListener('load',function(){ setTimeout(function(){ if(location.hash){ var t=document.getElementById(location.hash.slice(1)); if(t && t.matches('article.q')) window.scrollTo(0,0); } },50); });
+})();
+</script>
+</body>
+</html>
