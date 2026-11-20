@@ -300,6 +300,16 @@ th{background:var(--side)}
 .lt-fields select{width:100%;max-width:100%;min-width:0;box-sizing:border-box;font:14px Inter,sans-serif;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--text)}
 .lf-presets .tool-btn{padding:6px 12px}
 .lf-prev{width:100%;height:400px;border:1px solid var(--line);border-radius:10px;margin-top:8px;background:#000}
+section.group > p.note{display:none}
+section.group:has(article.q.show) > p.note{display:block}
+.play-box iframe{width:100%;border:1px solid var(--line);border-radius:10px;background:#000;display:block}
+.play-box .note{margin:6px 0 14px}
+.tpl-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
+.tpl-card .tpl-btns .tool-btn{margin-top:0}
+.more-problems{margin:10px 0 6px;border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:10px 14px}
+.more-problems summary{cursor:pointer;font-weight:600}
+.more-problems ul{margin:8px 0 2px}
+.more-problems li{margin:4px 0}
 </style>
 </head>
 <body>
@@ -307,7 +317,7 @@ th{background:var(--side)}
 <header class="top">
   <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
   <a class="brand" href="#">Twine Project FAQ <span>&middot; Views on Games and Play</span></a>
-  <span class="ver" title="Last updated">Updated Nov 20, 2026 &middot; v11</span>
+  <span class="ver" title="Last updated">Updated Nov 20, 2026 &middot; v13</span>
   <label class="search">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
     <input id="q" type="search" placeholder="Search: images, itch, variables, zip..." autocomplete="off">
@@ -321,24 +331,29 @@ th{background:var(--side)}
 <main id="main">
 <div id="home">
 <h1>Twine Project FAQ</h1>
-<p class="ver-home">Updated Nov 20, 2026 &middot; v11</p>
+<p class="ver-home">Updated Nov 20, 2026 &middot; v13</p>
 <p class="lede"><b>Something broken?</b> Click your problem below.<br><b>Learning Twine?</b> Go step by step: start at Step 1, then click <b>Next</b> at the bottom of each page.<br><b>Still stuck?</b> Send me a Mio.</p>
 <a class="banner" href="#never-lose"><span class="pi">💾</span><span><b>Before you start anything:</b> how to never lose your game. Two minutes now, or redo everything later.</span></a>
 <div class="pj-buttons"><span>Doing a play journal?</span><a href="#pj6" data-pj>PJ #6</a><a href="#pj8" data-pj>PJ #8</a><a href="#pj14" data-pj>PJ #14</a><a href="#pj15" data-pj>PJ #15</a><a href="#pjfinal" data-pj>Final project</a><a href="#pj16" data-pj>PJ #16</a></div>
 <h2 class="steps-h warn-h">What's wrong?</h2>
 <div class="picker">
-  <a href="#itch-broken"><span class="pi">🔗</span>My itch link doesn't work for other people</a>
   <a href="#images-why"><span class="pi">🖼️</span>My pictures don't show up</a>
-  <a href="#smart-quotes"><span class="pi">📋</span>Code I copied doesn't work</a>
-  <a href="#test-zero"><span class="pi">0️⃣</span>My game acts weird when I test from the middle (stats say 0)</a>
-  <a href="#wrong-start"><span class="pi">🚀</span>My game starts in the wrong passage</a>
-  <a href="#undo-trouble"><span class="pi">↩️</span>I clicked the back arrow and now my stats are wrong</a>
+  <a href="#collab-options"><span class="pi">👥</span>Working on one game as a group is a mess</a>
+  <a href="#itch-broken"><span class="pi">🔗</span>My itch link doesn't work for other people</a>
   <a href="#text-not-updating"><span class="pi">🔢</span>I clicked, but the number on screen didn't change</a>
-  <a href="#music-silent"><span class="pi">🔇</span>My music doesn't play</a>
-  <a href="#itch-cramped"><span class="pi">📐</span>My game looks squished on itch</a>
   <a href="#lost-work"><span class="pi">😱</span>Help, my game is gone</a>
-  <a href="#mistakes"><span class="pi">🎯</span>Don't lose easy marks: check these before you submit</a>
 </div>
+<details class="more-problems"><summary>Something else? See 7 more problems</summary>
+  <ul>
+    <li><a href="#smart-quotes">I copied code and it doesn't work, even though it looks exactly right.</a></li>
+    <li><a href="#test-zero">My game acts weird when I test from the middle (stats say 0, choices forgotten).</a></li>
+    <li><a href="#wrong-start">My game starts in the wrong passage.</a></li>
+    <li><a href="#undo-trouble">I clicked the little back arrow, and now my stats or choices are wrong.</a></li>
+    <li><a href="#music-silent">My music doesn't play.</a></li>
+    <li><a href="#itch-cramped">My game looks squished or cut off on itch.</a></li>
+    <li><a href="#mistakes">Don't lose easy marks: what should I check before I submit?</a></li>
+  </ul>
+</details>
 <h2 class="steps-h">Step by step</h2>
 <div id="cards" class="cards"></div>
 <h2 class="steps-h" id="pj-paths-h">Doing a Twine play journal? Read these, in order</h2>
@@ -458,7 +473,7 @@ th{background:var(--side)}
   <li>Go to <a href="https://twinery.org/" target="_blank" rel="noopener">twinery.org</a>. Download the app (free, Mac or PC), or click <b>Use it online</b> to work in your browser.</li>
   <li><b>Use Chrome.</b> Twine works best there. Safari and Firefox can act up.</li>
   <li><b>Don't use your phone.</b> Building on a phone doesn't really work, and playing on a phone is hit or miss. Use a computer, and test your finished game on a computer.</li>
-  <li>Read <a href="#never-lose">how to never lose your game</a>. Really.</li>
+  <li>Read <a href="#never-lose">how to never lose your game</a> first.</li>
   <li>Make your first passages and choices: <a href="#links">Your first choices</a>. Then keep clicking Next.</li>
 </ol>
 <div class="call tip"><b class="k">Hidden help</b><p>Forgot the code for something? Delete all the text in a passage, and a "Twine basics" cheat sheet appears in the background of the empty passage.</p></div>
@@ -683,7 +698,7 @@ Your badge is in the locker.</pre></div>
 
 <article class="q" id="how-code-runs" data-short="How Twine runs your code">
 <h3>When does my code actually run?</h3>
-<p class="sit">Your code looks right, but the game does something else: a variable changes too early, a number on screen shows the old value, a choice you made "didn't count". Almost always, it's about <em>when</em> the code runs.</p>
+<p class="sit">Your code looks right, but the game does something else: a variable changes too early, a number on screen shows the old value, a choice you made "didn't count". Usually the problem is <em>when</em> the code runs.</p>
 <p class="short">Twine reads a passage <b>once</b>, <b>top to bottom</b>, the moment it appears. That's when every macro runs, except the ones inside a <code>(link:)</code> hook, which wait for a click.</p>
 <p><b>Rule 1: top to bottom, in order.</b> A line only "knows" what happened above it.</p>
 <div class="two">
@@ -733,7 +748,7 @@ Your badge is in the locker.</pre></div>
 (set: $name to "Sam")</pre></div></li>
 </ol>
 <figure><img src="images/v-setup.webp" alt="The Setup passage with the startup tag circled in red and four set lines" loading="lazy" style="max-width:min(100%,600px)"><figcaption>Your Setup passage: the <code>startup</code> tag (circled), and one line per variable.</figcaption></figure>
-<p>That's it: your variables now exist from the very start of the game. Next, let's show them to the player.</p>
+<p>Now your variables exist from the very start of the game. Next, let's show them to the player.</p>
 </article>
 
 <article class="q" id="show-variable" data-short="Lesson: show a variable">
@@ -1438,8 +1453,8 @@ Energy: (if: $energy &lt; 30)[(text-colour: red)[(str-repeated: (round: $energy 
 
 <p><b>Nicer way: a smooth bar (uses the Stylesheet)</b></p>
 <p>Download the recipe to try it first:</p>
-<div class="tool-row"><a class="tool-btn" href="recipes/recipe-meter.twee" download>Download recipe-meter.twee</a></div>
-<p class="note">To open it: in Twine, <b>Library &rarr; Import</b>, pick the file (<a href="#templates">pictures</a>).</p>
+<div class="tool-row"><a class="tool-btn" href="recipes/recipe-meter.twee" download>Download recipe-meter.twee</a><button type="button" class="tool-btn ghost play-btn" data-play="play/recipe-meter.html" data-h="360">&#9654; Play it here</button></div><div class="play-box"></div>
+<p class="note">Try it right here first, or download it and open it in Twine: <b>Library &rarr; Import</b>, pick the file (<a href="#templates">pictures</a>).</p>
 <div class="two">
 <figure><img src="images/rc-meter-70.webp" alt="A passage with an energy bar 70 percent full, in green" loading="lazy"><figcaption>Energy at 70.</figcaption></figure>
 <figure><img src="images/rc-meter-low.webp" alt="The same bar almost empty, in red" loading="lazy"><figcaption>Below 30, it turns red.</figcaption></figure>
@@ -1484,7 +1499,7 @@ Ana: Wow. OK.</pre></div>
 <p>Same rules as any picture: <a href="#images-online">online</a> or <a href="#images-zip">on your computer</a>. For most games, this is all you need.</p>
 <p><b>Level 2: her face remembers what you did</b></p>
 <p>Use this when the face depends on something from <b>earlier</b>: you were rude in the first scene, and ten passages later, in a scene everyone sees, she's still angry with you. You'd need a separate copy of every later passage for each mood. A variable does it instead.</p>
-<div class="tool-row"><a class="tool-btn" href="recipes/recipe-expressions.twee" download>Download recipe-expressions.twee</a></div>
+<div class="tool-row"><a class="tool-btn" href="recipes/recipe-expressions.twee" download>Download recipe-expressions.twee</a><button type="button" class="tool-btn ghost play-btn" data-play="play/recipe-expressions.html" data-h="560">&#9654; Play it here</button></div><div class="play-box"></div>
 <div class="three">
 <figure><img src="images/rc-expr-1.webp" alt="Ana with a neutral face" loading="lazy"><figcaption><code>"neutral"</code></figcaption></figure>
 <figure><img src="images/rc-expr-happy.webp" alt="Ana smiling after the player said sorry" loading="lazy"><figcaption><code>"happy"</code> (you said sorry)</figcaption></figure>
@@ -1511,7 +1526,7 @@ Ana: Wow. OK.</pre></div>
 <h3>Recipe: how do I make a visual novel dialogue box, with the name on top?</h3>
 <p class="sit">You want people's lines to look like a visual novel: the words in a box, and the speaker's name in a little tag sitting on top of it.</p>
 <p class="short">Paste the CSS into your Stylesheet once. After that, every line of speech is one line of code.</p>
-<div class="tool-row"><a class="tool-btn" href="recipes/recipe-dialogue-box.twee" download>Download recipe-dialogue-box.twee</a></div>
+<div class="tool-row"><a class="tool-btn" href="recipes/recipe-dialogue-box.twee" download>Download recipe-dialogue-box.twee</a><button type="button" class="tool-btn ghost play-btn" data-play="play/recipe-dialogue-box.html" data-h="480">&#9654; Play it here</button></div><div class="play-box"></div>
 <div class="two">
 <figure><img src="images/rc-dialogue.webp" alt="Three dialogue boxes with name tags: Ana, Boss, and You in a different colour" loading="lazy"><figcaption>On a computer.</figcaption></figure>
 <figure><img src="images/rc-dialogue-phone.webp" alt="The same dialogue boxes on a phone-sized screen" loading="lazy" style="max-width:min(100%,260px)"><figcaption>On a phone.</figcaption></figure>
@@ -1553,7 +1568,7 @@ Ana: Wow. OK.</pre></div>
 <h3>Recipe: how do I make lines appear one at a time, with a "Next" button?</h3>
 <p class="sit">Your conversation is a wall of text. You want one line, then the player clicks <b>Next</b>, then the next line, like a visual novel or a text chat.</p>
 <p class="short">Two ways. <b>Way 1:</b> put each Next inside the one before it, and the lines pile up on one screen. <b>Way 2:</b> one passage per line, and the screen clears each time.</p>
-<div class="tool-row"><a class="tool-btn" href="recipes/recipe-next.twee" download>Download recipe-next.twee</a></div>
+<div class="tool-row"><a class="tool-btn" href="recipes/recipe-next.twee" download>Download recipe-next.twee</a><button type="button" class="tool-btn ghost play-btn" data-play="play/recipe-next.html" data-h="360">&#9654; Play it here</button></div><div class="play-box"></div>
 
 <p><b>Way 1: the lines pile up (good for chats and texts)</b></p>
 <div class="codewrap"><div class="label">One passage</div><pre class="hl">Ana: You're late.
@@ -1586,7 +1601,8 @@ Ana: Wow. OK.</pre></div>
 <p class="short">Download a template, import it into Twine, play it to see how it works, then replace the words with yours.</p>
 <p><b>How to use a template</b></p>
 <ol class="steps">
-  <li>On a computer, click a <b>Download</b> button below. You get a <code>.twee</code> file.</li>
+  <li>Not sure which one? Click <b>Play it</b> on any template below to try it first.</li>
+  <li>On a computer, click a <b>Download</b> button. You get a <code>.twee</code> file.</li>
   <li>In Twine: <b>Library &rarr; Import</b>, pick the file, and click <b>Import</b>.
   <figure><img src="images/library-import.webp" alt="Library tab with the Import button" loading="lazy" style="max-width:min(100%,520px)"></figure></li>
   <li><b>Rename it right away</b>: click the story card, then <b>Story &rarr; Rename</b>. If you import the template again later, Twine <b>replaces</b> anything with the same name.
@@ -1604,35 +1620,35 @@ Ana: Wow. OK.</pre></div>
 <h4>📱 Phone / text messages</h4>
 <p>Text bubbles (theirs grey, yours blue), choices that look like replies, a status bar showing <code>$rating</code> and <code>$battery</code>, and a notification box.</p>
 <p class="note">Good for: gig work, a boss who texts at midnight, dating apps, group chats.</p>
-<a class="tool-btn" href="templates/phone-template.twee" download>Download</a>
+<div class="tpl-btns"><a class="tool-btn" href="templates/phone-template.twee" download>Download</a><a class="tool-btn ghost" href="play/phone-template.html" target="_blank" rel="noopener">&#9654; Play it</a></div>
 </div>
 <div class="tpl-card">
 <img src="images/tpl-dash.webp" alt="App dashboard template: a big productivity score of 100, streak and sleep cards, and a badge" loading="lazy">
 <h4>📊 App dashboard</h4>
 <p>A big score, small stat cards, a badge that unlocks with <code>(if:)</code>, a warning when sleep gets low, and big app-style buttons.</p>
 <p class="note">Good for: productivity apps, fitness trackers, gamified work, social credit.</p>
-<a class="tool-btn" href="templates/dashboard-template.twee" download>Download</a>
+<div class="tpl-btns"><a class="tool-btn" href="templates/dashboard-template.twee" download>Download</a><a class="tool-btn ghost" href="play/dashboard-template.html" target="_blank" rel="noopener">&#9654; Play it</a></div>
 </div>
 <div class="tpl-card">
 <img src="images/tpl-form.webp" alt="Form template: a paper form with a green RECEIVED stamp" loading="lazy">
 <h4>📝 Form / document</h4>
 <p>A paper form the player fills in: a name box, a dropdown, a checkbox, and a DENIED or RECEIVED stamp depending on what they did.</p>
 <p class="note">Good for: bureaucracy, applications, surveys, terms and conditions.</p>
-<a class="tool-btn" href="templates/form-template.twee" download>Download</a>
+<div class="tpl-btns"><a class="tool-btn" href="templates/form-template.twee" download>Download</a><a class="tool-btn ghost" href="play/form-template.html" target="_blank" rel="noopener">&#9654; Play it</a></div>
 </div>
 <div class="tpl-card">
 <img src="images/tpl-term.webp" alt="Terminal template: green text on black, with remove and approve commands" loading="lazy">
 <h4>💻 Computer terminal</h4>
 <p>Green text on black, a system line at the top, and choices that look like commands. Counts your decisions with <code>$flagged</code>.</p>
 <p class="note">Good for: content moderation, surveillance, workplace monitoring, hacking.</p>
-<a class="tool-btn" href="templates/terminal-template.twee" download>Download</a>
+<div class="tpl-btns"><a class="tool-btn" href="templates/terminal-template.twee" download>Download</a><a class="tool-btn ghost" href="play/terminal-template.html" target="_blank" rel="noopener">&#9654; Play it</a></div>
 </div>
 <div class="tpl-card">
 <img src="images/tpl-inbox.webp" alt="Email inbox template: three emails, one already read and greyed out" loading="lazy">
 <h4>📨 Email inbox</h4>
 <p>A list of emails. Unread ones are bold; once the player opens one, it turns grey (that's <code>(visited:)</code>, <a href="#history">explained here</a>).</p>
 <p class="note">Good for: office work, HR, corporate life.</p>
-<a class="tool-btn" href="templates/inbox-template.twee" download>Download</a>
+<div class="tpl-btns"><a class="tool-btn" href="templates/inbox-template.twee" download>Download</a><a class="tool-btn ghost" href="play/inbox-template.html" target="_blank" rel="noopener">&#9654; Play it</a></div>
 </div>
 </div>
 <div class="call tip"><b class="k">The form template uses three new macros</b><p><code>(input-box: bind $name, "X", 1)</code> makes a box the player types in, and puts what they typed into <code>$name</code>. <code>(dropdown: bind $reason, "Housing", "Food")</code> and <code>(checkbox: bind $agree, "I agree")</code> work the same way. To show a checkbox's value, use <code>(print: $agree)</code>; just writing <code>$agree</code> shows nothing.</p></div>
@@ -1731,10 +1747,10 @@ Ana: Wow. OK.</pre></div>
 <section class="group" id="g-trouble" data-icon="🔧" data-title="Troubleshooting">
 <h2>Troubleshooting</h2>
 
-<article class="q" id="itch-broken" data-short="itch link broken for others">
+<article class="q" id="itch-broken" data-short="My itch link works for me, but other people say it's broken.">
 <h3>My itch link works for me, but other people say it's broken.</h3>
 <p class="sit">Your game plays fine when you open it. Your peer reviewers (or I) get "page not found", or a page with no game on it.</p>
-<p class="short">Almost always: your page is still set to <b>Draft</b>. Change it to <b>Public</b>.</p>
+<p class="short">Most of the time, your page is still set to <b>Draft</b>. Change it to <b>Public</b>.</p>
 <p>When you're logged in, itch shows <em>you</em> your own drafts, so it looks fine to you. Nobody else can see them.</p>
 <figure><img src="images/itch-visibility.png" alt="itch Visibility &amp; access: Draft, Restricted, Public" loading="lazy"><figcaption>Bottom of your game's Edit page. Public only appears after you've saved once.</figcaption></figure>
 <p>Then open your link in an <b>incognito / private window</b>. If it works there, it works for everyone. Still broken? Check these:</p>
@@ -1745,10 +1761,10 @@ Ana: Wow. OK.</pre></div>
 </ol>
 </article>
 
-<article class="q" id="images-why" data-short="Pictures don't show up">
+<article class="q" id="images-why" data-short="Why aren't my pictures showing up?">
 <h3>Why aren't my pictures showing up?</h3>
 <p class="sit">You added an image, and in the game there's a little broken-picture icon, or nothing at all.</p>
-<p class="short">Almost always: the address you used isn't the address of an <em>image</em>. It's the address of a web page that has an image on it.</p>
+<p class="short">Usually, the address you used isn't the address of an <em>image</em>. It's the address of a web page that has an image on it.</p>
 <div class="call tip"><b class="k">Step 1: test your code with this image</b>
 <p>Copy this line into a passage and play it. You should see a green check mark.</p>
 <div class="codewrap"><pre class="hl" id="testImgCode">&lt;img src="TEST-IMAGE-URL" width="300"&gt;</pre></div>
@@ -1770,7 +1786,7 @@ Ana: Wow. OK.</pre></div>
 </ul>
 </article>
 
-<article class="q" id="smart-quotes" data-short="Copied code doesn't work">
+<article class="q" id="smart-quotes" data-short="I copied code and it doesn't work, even though it looks exactly right.">
 <h3>I copied code and it doesn't work, even though it looks exactly right.</h3>
 <p class="sit">You copied code from a PDF, a Google Doc, or a Word file, pasted it into Twine, and got an error (or nothing happened).</p>
 <p class="short">Curly "smart" quotes. Twine needs straight quotes. Retype the quotes inside Twine.</p>
@@ -1781,7 +1797,7 @@ Ana: Wow. OK.</pre></div>
 <p>Copied it from a website or forum? It might also be <a href="#harlowe">code for a different story format</a>.</p>
 </article>
 
-<article class="q" id="test-zero" data-short="Testing from the middle acts weird">
+<article class="q" id="test-zero" data-short="My game acts weird when I test from the middle (stats say 0, choices forgotten).">
 <h3>My game acts weird when I test from the middle (stats say 0, choices forgotten).</h3>
 <p class="sit">You clicked <b>Test From Here</b> on a passage near the end. Your stats say 0, the badge the player picked up earlier is gone, or a passage that should work looks broken.</p>
 <p class="short">Test From Here starts the game in the middle, as if the player teleported there. Nothing before that passage happened. Before you decide something is broken, test it again from the start with <b>Build &rarr; Test</b>.</p>
@@ -1795,7 +1811,7 @@ Ana: Wow. OK.</pre></div>
 <p>Next to Test From Here is <b>Start Story Here</b>, which is something else entirely: <a href="#wrong-start">don't click it by accident</a>.</p>
 </article>
 
-<article class="q" id="wrong-start" data-short="Game starts in the wrong passage">
+<article class="q" id="wrong-start" data-short="My game starts in the wrong passage.">
 <h3>My game starts in the wrong passage.</h3>
 <p class="sit">You press Play (or open your game on itch), and it begins in the middle of the story, or on some random passage, instead of your first one.</p>
 <p class="short">Someone clicked <b>Start Story Here</b> by accident. It moves the green rocket, and the rocket marks where your game begins. Move it back.</p>
@@ -1810,7 +1826,7 @@ Ana: Wow. OK.</pre></div>
 <div class="call warn"><b class="k">Not a test button</b><p>Start Story Here sits right next to <b>Test From Here</b>, and it's easy to mix them up. Test From Here only tests. Start Story Here changes your game, for everyone.</p></div>
 </article>
 
-<article class="q" id="undo-trouble" data-short="Back arrow messed up my stats">
+<article class="q" id="undo-trouble" data-short="I clicked the little back arrow, and now my stats or choices are wrong.">
 <h3>I clicked the little back arrow, and now my stats or choices are wrong.</h3>
 <p class="sit">You (or a playtester) clicked the curved arrow in the top-left corner to go back a step. Now the money is back, a choice is undone, or the numbers don't add up the way your game says they should.</p>
 <p class="short">That arrow is Harlowe's <b>undo</b>. It rewinds everything, your variables included, as if the last choice never happened. Your code isn't broken.</p>
@@ -1822,7 +1838,7 @@ Ana: Wow. OK.</pre></div>
 </ul>
 </article>
 
-<article class="q" id="text-not-updating" data-short="Number on screen didn't change">
+<article class="q" id="text-not-updating" data-short="I clicked, my variable changed, but the number on screen stayed the same.">
 <h3>I clicked, my variable changed, but the number on screen stayed the same.</h3>
 <p class="sit">Your passage shows <b>Strength: 1</b>, with a "Do squats" link that adds 1. The player clicks it, and the screen still says <b>Strength: 1</b>. Your code looks right. What happened?</p>
 <div class="codewrap"><div class="label">The code</div><pre class="hl">Strength: $strength
@@ -1841,7 +1857,7 @@ Ana: Wow. OK.</pre></div>
 <div class="codewrap good"><pre class="hl">(link: "Do squats")[(set: $strength to it + 1)(goto: "Gym Results")]</pre></div>
 </article>
 
-<article class="q" id="music-silent" data-short="Music doesn't play">
+<article class="q" id="music-silent" data-short="My music doesn't play.">
 <h3>My music doesn't play.</h3>
 <p class="sit">You added music, and the game is silent.</p>
 <p class="short">Most likely the browser blocked it. Browsers don't allow sound until the player clicks something, so start your music after a click.</p>
@@ -1857,7 +1873,7 @@ Ana: Wow. OK.</pre></div>
 </ul>
 </article>
 
-<article class="q" id="itch-cramped" data-short="Squished on itch">
+<article class="q" id="itch-cramped" data-short="My game looks squished or cut off on itch.">
 <h3>My game looks squished or cut off on itch.</h3>
 <p class="sit">Your game works on itch, but it's stuck in a small box, the bottom of the text is cut off, or players can't scroll.</p>
 <p class="short">On your itch Edit page, scroll to <b>Embed options</b> and change these:</p>
@@ -1870,7 +1886,7 @@ Ana: Wow. OK.</pre></div>
 <p>Save, then check it again in an incognito window.</p>
 </article>
 
-<article class="q" id="lost-work" data-short="My game is gone">
+<article class="q" id="lost-work" data-short="Help, my game is gone!">
 <h3>Help, my game is gone!</h3>
 <p class="sit">You opened Twine and your story isn't there.</p>
 <p class="short">Don't panic yet. Check where you're working, then import your latest saved file.</p>
@@ -1883,7 +1899,7 @@ Ana: Wow. OK.</pre></div>
 <p>If none of these work, the game is gone, and I'm sorry. Start the <a href="#never-lose">save-a-dated-file habit</a> right now, so it can't happen twice.</p>
 </article>
 
-<article class="q" id="mistakes" data-short="Avoid losing easy marks">
+<article class="q" id="mistakes" data-short="Don't lose easy marks: what should I check before I submit?">
 <h3>Don't lose easy marks: what should I check before I submit?</h3>
 <p class="sit">These are the things that cost groups marks every semester: broken links, missing images, games nobody can open. Most take two minutes to check. Go down the list.</p>
 <ul class="check">
@@ -1984,6 +2000,7 @@ Ana: Wow. OK.</pre></div>
   function route(){
     var id=decodeURIComponent(location.hash.slice(1));
     var target=id?document.getElementById(id):null;
+    if(target && target.matches('section.group')){ var first=target.querySelector('article.q'); if(first){ history.replaceState(null,'','#'+first.id); target=first; id=first.id; } }
     var art=target?(target.matches('article.q')?target:target.closest('article.q')):null;
     if(q.value){ q.value=''; resetSearch(); }
     arts.forEach(function(a){a.classList.toggle('show',a===art);});
@@ -2391,6 +2408,20 @@ Ana: Wow. OK.</pre></div>
   document.querySelectorAll('#lookTool [data-preset]').forEach(function(b){ b.addEventListener('click',function(){ apply(b.getAttribute('data-preset')); }); });
   Object.keys(f).forEach(function(k){ f[k].addEventListener('input',render); f[k].addEventListener('change',render); });
   apply('twine');
+})();
+</script>
+<script>
+// ---------- Play it here ----------
+(function(){
+  document.querySelectorAll('.play-btn').forEach(function(b){
+    b.addEventListener('click',function(){
+      var box=b.parentNode.nextElementSibling; if(!box||!box.classList.contains('play-box')) return;
+      if(box.innerHTML){ box.innerHTML=''; b.innerHTML='&#9654; Play it here'; return; }
+      var src=b.getAttribute('data-play');
+      box.innerHTML='<iframe src="'+src+'" style="height:'+b.getAttribute('data-h')+'px" title="Playable example"></iframe><p class="note">This is the recipe running for real. Click <b>Close</b> and <b>Play it here</b> again to start over, or <a href="'+src+'" target="_blank" rel="noopener">open it in a new tab</a>.</p>';
+      b.innerHTML='&#9632; Close';
+    });
+  });
 })();
 </script>
 </body>
