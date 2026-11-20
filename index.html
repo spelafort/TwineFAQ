@@ -190,6 +190,15 @@ h3[tabindex]:focus,h3[tabindex]:focus-visible{outline:none}
 .uc ul{margin:6px 0 0;padding-left:18px}
 @media (max-width:600px){.urlcheck{grid-template-columns:1fr}}
 h4.rh{margin:20px 0 4px;font-size:15px}
+.ver{font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:2px 9px;white-space:nowrap}
+@media (max-width:700px){.ver{display:none}}
+.ver-home{font-size:13px;color:var(--muted);margin:-4px 0 14px}
+.pj-paths{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:8px}
+.pj{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 18px}
+.pj h3{margin:0 0 2px;font-size:16px}
+.pj p{margin:0 0 8px;font-size:13.5px;color:var(--muted)}
+.pj ol{margin:0;padding-left:20px;font-size:14px}
+.pj li{margin:3px 0}
 /* callouts */
 .call{border-left:4px solid var(--info);background:var(--info-bg);border-radius:0 8px 8px 0;padding:10px 14px;margin:14px 0}
 .call.tip{border-color:var(--tip);background:var(--tip-bg)}
@@ -260,6 +269,7 @@ th{background:var(--side)}
 <header class="top">
   <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
   <a class="brand" href="#">Twine Project FAQ <span>&middot; Views on Games and Play</span></a>
+  <span class="ver" title="Last updated">Updated Nov 20, 2026 &middot; v5</span>
   <label class="search">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
     <input id="q" type="search" placeholder="Search: images, itch, variables, zip..." autocomplete="off">
@@ -273,6 +283,7 @@ th{background:var(--side)}
 <main id="main">
 <div id="home">
 <h1>Twine Project FAQ</h1>
+<p class="ver-home">Updated Nov 20, 2026 &middot; v5</p>
 <p class="lede"><b>Something broken?</b> Click your problem below.<br><b>Learning Twine?</b> Go step by step: start at Step 1, then click <b>Next</b> at the bottom of each page.<br><b>Still stuck?</b> Send me a Mio.</p>
 <a class="banner" href="#never-lose"><span class="pi">💾</span><span><b>Before you start anything:</b> how to never lose your game. Two minutes now, or redo everything later.</span></a>
 <h2 class="steps-h warn-h">What's wrong?</h2>
@@ -289,6 +300,15 @@ th{background:var(--side)}
 </div>
 <h2 class="steps-h">Step by step</h2>
 <div id="cards" class="cards"></div>
+<h2 class="steps-h" id="pj-paths-h">Doing a Twine play journal? Read these, in order</h2>
+<div class="pj-paths">
+<div class="pj"><h3>Play Journal #6: Twine Intro</h3><p>Your first Twine story with choices.</p><ol><li><a href="#never-lose">Read first: never lose your game</a></li><li><a href="#learn">Where to start</a></li><li><a href="#links">Your first choices (links)</a></li><li><a href="#harlowe">Why code from online breaks</a></li><li><a href="#reopen">Opening a saved game</a></li></ol></div>
+<div class="pj"><h3>Play Journal #8: Twine Variables</h3><p>A story where a variable changes what happens.</p><ol><li><a href="#macros-hooks">Macros and hooks</a></li><li><a href="#variables-basics">Variables: the 3 kinds</a></li><li><a href="#startup">Give variables starting values</a></li><li><a href="#show-variable">Show a variable</a></li><li><a href="#set-on-choice">Change a variable on a choice</a></li><li><a href="#if-else">If / else</a></li><li><a href="#show-hide-choices">Show or hide a choice</a></li><li><a href="#random">Randomness & dice</a></li><li><a href="#variable-mistakes">Variable code that breaks</a></li></ol></div>
+<div class="pj"><h3>Play Journal #14: Pitch</h3><p>Your idea, your argument, your systems.</p><ol><li><a href="#essay-test">What counts as an argument</a></li><li><a href="#shapes">Idea starters</a></li><li><a href="#inspiration">Games to play</a></li><li><a href="#variables-basics">Variables: the 3 kinds</a></li><li><a href="#paper">Paper prototype first</a></li><li><a href="#collab-options">Ways to split the work</a></li></ol></div>
+<div class="pj"><h3>Play Journal #15: Check-in</h3><p>Where your group is at, with screenshots.</p><ol><li><a href="#never-lose">Make sure you have a backup</a></li><li><a href="#collab-options">Ways to split the work</a></li><li><a href="#collab-twee">Writing in Google Docs</a></li><li><a href="#screenshots">Take a screenshot, make a PDF</a></li></ol></div>
+<div class="pj"><h3>Final project</h3><p>Finish, polish, and upload.</p><ol><li><a href="#images-online">Add an image from online</a></li><li><a href="#images-zip">Add images from your computer</a></li><li><a href="#stats-bar">Stats bar</a></li><li><a href="#back-arrow">The back arrow</a></li><li><a href="#itch-upload">Upload to itch</a></li><li><a href="#mistakes">Don't lose easy marks</a></li><li><a href="#checklist">Final checklist</a></li></ol></div>
+<div class="pj"><h3>Play Journal #16: Peer Reviews</h3><p>Playing and reviewing two games.</p><ol><li><a href="#learn">Use Chrome, on a computer</a></li><li><a href="#back-arrow">Undo arrow vs. browser back button</a></li><li><a href="#itch-cramped">If a game looks squished</a></li></ol></div>
+</div>
 </div>
 <div id="crumb" class="crumb"></div>
 <div id="results" class="results"></div>
@@ -789,12 +809,7 @@ Energy: $energy | Rating: $rating</pre></div></li>
   <li><b>Click on the image</b> so it opens big, by itself. (In Google Images, click the image, then click it again or click "Visit" to get to the actual picture.)</li>
   <li><b>Right-click on the picture itself</b> (on a Mac trackpad: click with two fingers). A menu pops up.</li>
   <li>Click <b>Copy image address</b>. Not "Copy link address", not "Copy image", and not the address bar at the top.
-  <figure class="ctx-demo" aria-label="Illustration of the right-click menu over an image, with Copy image address highlighted">
-    <div class="ctx-wrap"><img src="images/sample-office.jpg" alt="" class="ctx-img"><div class="ctx-menu">
-      <div>Open image in new tab</div><div>Save image as...</div><div>Copy image</div><div class="ctx-hi">Copy image address</div><div>Search with Google Lens</div>
-    </div></div>
-    <figcaption>Illustration of Chrome's right-click menu. Firefox calls it <b>Copy Image Link</b>; Safari: <b>Copy Image Address</b>.</figcaption>
-  </figure></li>
+  <figure><img src="images/copy-image-address.webp" alt="Chrome's right-click menu over a photo, with Copy image address circled in red" loading="lazy" style="max-width:min(100%,640px)"><figcaption>Right-click on the picture, then <b>Copy image address</b>. (Firefox calls it <b>Copy Image Link</b>; Safari, <b>Copy Image Address</b>.)</figcaption></figure></li>
   <li><b>Check what you copied.</b> Paste it into a new browser tab and press Enter. You should see <b>only the picture</b>, on a plain background. If you see a whole website (menus, comments, other pictures), you copied the wrong thing: go back to step 2.</li>
   <li><b>Check the address itself.</b> Paste it somewhere you can read it and compare with this:
   <div class="urlcheck">
@@ -984,6 +999,23 @@ Energy: $energy | Rating: $rating</pre></div></li>
 <!-- ============================ SUBMIT ============================ -->
 <section class="group" id="g-submit" data-icon="✅" data-title="Submit" data-step="7">
 <h2>Submitting</h2>
+
+<article class="q" id="screenshots" data-short="Take a screenshot, make a PDF">
+<h3>How do I take a screenshot and put it in a PDF?</h3>
+<p class="sit">Your check-in (or reflection) needs screenshots of your game inside a PDF, and you've never taken a screenshot on purpose.</p>
+<p class="short">Take the screenshot with a keyboard shortcut, paste it into a Google Doc, and download the Doc as a PDF.</p>
+<ol class="steps">
+  <li>Open your game (or the Twine passage you want to show) on screen.</li>
+  <li><b>Take the screenshot:</b>
+    <ul>
+      <li><b>Windows:</b> press <kbd>Windows</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd> together. The screen dims. Drag a box around what you want. It's now copied.</li>
+      <li><b>Mac:</b> press <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>4</kbd> together. Drag a box around what you want. It's saved on your Desktop.</li>
+    </ul></li>
+  <li><b>Put it in your Google Doc:</b> click where you want it and press <kbd>Ctrl</kbd> + <kbd>V</kbd> (Windows). On a Mac, drag the file from your Desktop into the Doc.</li>
+  <li><b>Make the PDF:</b> in Google Docs, click <b>File &rarr; Download &rarr; PDF Document (.pdf)</b>.</li>
+  <li>Open the PDF before you submit, and check the screenshots are really in it.</li>
+</ol>
+</article>
 
 <article class="q" id="checklist" data-short="Final checklist">
 <h3>Did I do everything? (final checklist)</h3>
