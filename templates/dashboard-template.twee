@@ -1,0 +1,51 @@
+:: StoryTitle
+Dashboard Template
+
+:: StoryData
+{
+  "format": "Harlowe",
+  "format-version": "3.3.9",
+  "start": "Dashboard",
+  "zoom": 1
+}
+
+:: Setup [startup] {"position":"25,25","size":"100,100"}
+<!-- Starting values. Change these to fit your game. -->
+(set: $score to 80)
+(set: $streak to 3)
+(set: $sleep to 7)
+(set: $lost to 0)
+
+:: App Bar [header] {"position":"25,150","size":"100,100"}
+<!-- Shows at the top of every passage. -->
+<div class="appbar">✨ ProductiveMe</div>
+
+:: Dashboard {"position":"150,25","size":"100,100"}
+<div class="card big"><div class="label">Productivity score</div><div class="score">$score</div></div>
+<div class="row"><div class="card"><div class="label">Streak</div>🔥 $streak days</div><div class="card"><div class="label">Sleep</div>😴 $sleep h</div></div>
+(if: $score >= 100)[<div class="badge">🏆 Badge unlocked: Top Performer</div>]
+(if: $sleep < 5)[<div class="alert">⚠️ Your sleep is low. Keep going anyway?</div>]
+(link: "Do one more task (+10)")[(set: $score to it + 10)(set: $sleep to it - 1)(goto: "Dashboard")]
+(link: "Take the evening off")[(set: $lost to $streak)(set: $streak to 0)(set: $sleep to 8)(goto: "Streak Lost")]
+
+:: Streak Lost {"position":"275,25","size":"100,100"}
+<div class="alert">💔 You lost your $lost-day streak. Your streak is now $streak.</div>
+[[Back to the dashboard->Dashboard]]
+
+:: StoryStylesheet [stylesheet]
+/* ===== Dashboard template: the whole look lives here ===== */
+tw-sidebar { display: none; }                 /* hide the undo arrow */
+tw-story { background: #eef1f6; color: #1d1f24; font-family: "Segoe UI", Roboto, Arial, sans-serif; }
+tw-passage { max-width: 520px; margin: 0 auto; font-size: 17px; line-height: 1.4; }
+.appbar { background: #5b4bff; color: white; font-weight: 700; padding: 12px 16px; border-radius: 0 0 16px 16px; margin-bottom: 14px; }
+.card { background: white; border-radius: 16px; padding: 14px 16px; margin: 8px 0; box-shadow: 0 2px 10px rgba(0,0,0,.08); flex: 1; }
+.card.big { text-align: center; }
+.row { display: flex; gap: 10px; }
+.label { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: #777; }
+.score { font-size: 64px; font-weight: 800; color: #5b4bff; line-height: 1.1; }
+.badge { background: #fff4c2; border: 2px solid #f0c000; border-radius: 12px; padding: 10px 14px; margin: 10px 0; font-weight: 700; }
+.alert { background: #ffe3e3; border-radius: 12px; padding: 10px 14px; margin: 10px 0; }
+tw-link, tw-link.visited, tw-link:hover {                       /* choices look like app buttons */
+  display: block; text-align: center; background: #5b4bff; color: white;
+  border-radius: 12px; padding: 12px; margin: 10px 0; font-weight: 700; text-decoration: none;
+}

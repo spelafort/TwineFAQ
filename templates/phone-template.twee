@@ -1,0 +1,79 @@
+:: StoryTitle
+Phone Template
+
+:: StoryData
+{
+  "format": "Harlowe",
+  "format-version": "3.3.9",
+  "start": "Shift Offer",
+  "zoom": 1
+}
+
+:: Setup [startup] {"position":"25,25","size":"100,100"}
+<!-- Starting values. Change these to fit your game. -->
+(set: $battery to 63)
+(set: $rating to 96)
+
+:: Status Bar [header] {"position":"25,150","size":"100,100"}
+<!-- This shows at the top of every passage, like a phone's status bar. -->
+<div class="status"><span>9:41</span><span>⭐ $rating%</span><span>🔋 $battery%</span></div>
+
+:: Shift Offer {"position":"150,25","size":"100,100"}
+<div class="contact">Manager</div>
+<div class="them">Hey! Can you take an extra shift tonight?</div>
+<div class="them">We're short staffed 🙏</div>
+(link: "Sure, I'll come in")[(set: $battery to it - 20)(set: $rating to it + 1)(goto: "Accepted")]
+(link: "Sorry, I can't tonight")[(set: $rating to it - 5)(goto: "Declined")]
+
+:: Accepted {"position":"275,25","size":"100,100"}
+<div class="contact">Manager</div>
+<div class="them">Hey! Can you take an extra shift tonight?</div>
+<div class="me">Sure, I'll come in</div>
+<div class="them">Amazing, you're a star ⭐</div>
+<div class="notif">📈 Your rating went up to $rating%</div>
+[[Keep going->The End]]
+
+:: Declined {"position":"275,150","size":"100,100"}
+<div class="contact">Manager</div>
+<div class="them">Hey! Can you take an extra shift tonight?</div>
+<div class="me">Sorry, I can't tonight</div>
+<div class="them">No worries.</div>
+<div class="notif warn">📉 Your rating dropped to $rating%</div>
+[[Keep going->The End]]
+
+:: The End {"position":"400,75","size":"100,100"}
+<div class="notif">This is where your story goes next.</div>
+
+:: StoryStylesheet [stylesheet]
+/* ===== Phone template: the whole look lives here ===== */
+tw-sidebar { display: none; }                 /* hide the undo arrow */
+tw-story {
+  background: #2b2d42;                        /* colour around the phone */
+  font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  padding: 20px 0;
+}
+tw-passage {
+  max-width: 360px;
+  min-height: 600px;
+  margin: 0 auto;
+  background: #f2f2f7;                        /* the phone screen */
+  color: #111;
+  border: 12px solid #111;                    /* the phone's frame */
+  border-radius: 36px;
+  padding: 0 14px 20px;
+  font-size: 16px;
+  line-height: 1.35;
+  overflow: hidden;
+}
+.status { display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; padding: 10px 6px 8px; }
+.contact { text-align: center; font-weight: 700; padding: 8px 0 12px; border-bottom: 1px solid #ddd; margin-bottom: 10px; }
+.them, .me { max-width: 75%; padding: 9px 13px; border-radius: 18px; margin: 6px 0; width: fit-content; }
+.them { background: #e5e5ea; }                  /* their bubbles: grey, left */
+.me { background: #0b84ff; color: white; margin-left: auto; }   /* your bubbles: blue, right */
+.notif { background: white; border-radius: 14px; padding: 10px 12px; margin: 12px 0; font-size: 14px; box-shadow: 0 2px 8px rgba(0,0,0,.15); }
+.notif.warn { background: #ffe3e3; }
+tw-link, tw-link.visited, tw-link:hover {                       /* choices look like reply buttons */
+  display: block; width: fit-content; margin: 8px 0 0 auto;
+  background: white; color: #0b84ff; border: 1px solid #0b84ff;
+  border-radius: 18px; padding: 7px 14px; font-weight: 600; text-decoration: none;
+}

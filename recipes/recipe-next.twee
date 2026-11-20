@@ -1,0 +1,40 @@
+:: StoryTitle
+Recipe Next Button
+
+:: StoryData
+{
+  "format": "Harlowe",
+  "format-version": "3.3.9",
+  "start": "Way 1 Stacking",
+  "zoom": 1
+}
+
+:: Way 1 Stacking {"position":"150,25","size":"100,100"}
+<!-- WAY 1: each Next is INSIDE the hook of the one before. The lines pile up like a chat. -->
+Ana: You're late.
+(link: "Next")[Ana: Again.
+(link: "Next")[Ana: The app noticed.
+(link: "Next")[Ana: Anyway. Come on.
+
+[[Try Way 2->Ana 1]]]]]
+
+:: Ana 1 {"position":"150,175","size":"100,100"}
+<!-- WAY 2: one passage per line. The screen clears every time. -->
+Ana: You're late.
+
+[[Next->Ana 2]]
+
+:: Ana 2 {"position":"275,175","size":"100,100"}
+Ana: Again.
+
+[[Next->Ana 3]]
+
+:: Ana 3 {"position":"400,175","size":"100,100"}
+Ana: The app noticed.
+
+[[Next->Ana 4]]
+
+:: Ana 4 {"position":"525,175","size":"100,100"}
+Ana: Anyway. Come on.
+
+[[Back to Way 1->Way 1 Stacking]]

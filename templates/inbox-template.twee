@@ -1,0 +1,56 @@
+:: StoryTitle
+Inbox Template
+
+:: StoryData
+{
+  "format": "Harlowe",
+  "format-version": "3.3.9",
+  "start": "Inbox",
+  "zoom": 1
+}
+
+:: Mail Bar [header] {"position":"25,150","size":"100,100"}
+<!-- Shows at the top of every passage. -->
+<div class="mailbar">📨 WorkMail</div>
+
+:: Inbox {"position":"150,25","size":"100,100"}
+<div class="folder">Inbox</div>
+<!-- Each message is a link to its own passage. Unread ones are bold: (visited:) checks if the player opened it already. -->
+(if: (visited: "Mail Performance"))[<div class="mail read">[[HR: Your quarterly performance score->Mail Performance]]</div>](else:)[<div class="mail">[[HR: Your quarterly performance score->Mail Performance]]</div>]
+(if: (visited: "Mail Wellness"))[<div class="mail read">[[Wellness Team: Mandatory mindfulness module->Mail Wellness]]</div>](else:)[<div class="mail">[[Wellness Team: Mandatory mindfulness module->Mail Wellness]]</div>]
+(if: (visited: "Mail Pizza"))[<div class="mail read">[[Office: Pizza party postponed (again)->Mail Pizza]]</div>](else:)[<div class="mail">[[Office: Pizza party postponed (again)->Mail Pizza]]</div>]
+
+:: Mail Performance {"position":"275,25","size":"100,100"}
+<div class="head"><b>From:</b> HR<br><b>Subject:</b> Your quarterly performance score</div>
+<div class="body">Your score this quarter is 71. The target is 85.
+Employees below target will be offered a Development Opportunity.</div>
+
+<div class="back">[[← Back to inbox->Inbox]]</div>
+
+:: Mail Wellness {"position":"275,150","size":"100,100"}
+<div class="head"><b>From:</b> Wellness Team<br><b>Subject:</b> Mandatory mindfulness module</div>
+<div class="body">Please complete the 45-minute mindfulness module by Friday. Completion is tracked.</div>
+
+<div class="back">[[← Back to inbox->Inbox]]</div>
+
+:: Mail Pizza {"position":"275,275","size":"100,100"}
+<div class="head"><b>From:</b> Office<br><b>Subject:</b> Pizza party postponed (again)</div>
+<div class="body">Due to low team scores, the pizza party is postponed.</div>
+
+<div class="back">[[← Back to inbox->Inbox]]</div>
+
+:: StoryStylesheet [stylesheet]
+/* ===== Inbox template: the whole look lives here ===== */
+tw-sidebar { display: none; }                 /* hide the undo arrow */
+tw-story { background: #f3f5f8; color: #1f2328; font-family: "Segoe UI", Roboto, Arial, sans-serif; }
+tw-passage { max-width: 640px; margin: 0 auto; font-size: 16px; line-height: 1.5; background: white; border-radius: 12px; padding: 0 0 18px; box-shadow: 0 2px 12px rgba(0,0,0,.08); }
+.mailbar { background: #1a73e8; color: white; font-weight: 700; padding: 12px 18px; border-radius: 12px 12px 0 0; }
+.folder { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: #666; padding: 12px 18px 6px; }
+.mail { padding: 12px 18px; border-bottom: 1px solid #e6e8eb; font-weight: 700; }
+.mail.read { font-weight: 400; color: #666; }
+.back { padding: 0 18px; }
+.head { background: #f6f8fa; padding: 12px 18px; border-bottom: 1px solid #e6e8eb; margin-bottom: 12px; font-size: 14px; }
+.body { padding: 0 18px; }
+tw-link, tw-link.visited, tw-link:hover { color: inherit; font-weight: inherit; text-decoration: none; }
+tw-passage > br, tw-include > br { display: none; }   /* removes the extra blank lines between emails */
+tw-link:hover { color: #1a73e8; }

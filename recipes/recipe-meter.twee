@@ -1,0 +1,44 @@
+:: StoryTitle
+Recipe Meter
+
+:: StoryData
+{
+  "format": "Harlowe",
+  "format-version": "3.3.9",
+  "start": "Day",
+  "zoom": 1
+}
+
+:: Setup [startup] {"position":"25,25","size":"100,100"}
+<!-- STEP 1: the starting value. Use 0 to 100. -->
+(set: $energy to 70)
+
+:: Energy Meter [footer] {"position":"25,150","size":"100,100"}
+<!-- STEP 3: this draws the bar at the bottom of EVERY passage (because of the footer tag). -->
+Energy: $energy
+(if: $energy < 30)[(print: '<div class="bar"><div class="fill low" style="width:' + (str: $energy) + '%"></div></div>')](else:)[(print: '<div class="bar"><div class="fill" style="width:' + (str: $energy) + '%"></div></div>')]
+
+:: Day {"position":"150,25","size":"100,100"}
+Your shift starts. What do you do?
+
+<!-- STEP 4: change the number when the player picks something. (max: 0, ...) stops it going below 0. (min: 100, ...) stops it going above 100. -->
+(link: "Work a double shift (-30)")[(set: $energy to (max: 0, $energy - 30))(goto: "Day")]
+(link: "Take a break (+20)")[(set: $energy to (min: 100, $energy + 20))(goto: "Day")]
+
+:: StoryStylesheet [stylesheet]
+/* STEP 2: what the bar looks like */
+.bar {
+  width: 250px;            /* how long the bar is */
+  height: 20px;            /* how thick the bar is */
+  background: #444;        /* colour of the empty part */
+  border: 2px solid white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.fill {
+  height: 100%;
+  background: #3cb371;     /* colour of the full part (green) */
+}
+.fill.low {
+  background: #e53935;     /* colour when it's low (red) */
+}

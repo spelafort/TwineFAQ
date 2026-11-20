@@ -1,0 +1,43 @@
+:: StoryTitle
+Recipe Dialogue Box
+
+:: StoryData
+{
+  "format": "Harlowe",
+  "format-version": "3.3.9",
+  "start": "Talk",
+  "zoom": 1
+}
+
+:: Talk {"position":"150,25","size":"100,100"}
+<!-- Copy this ONE line every time someone talks. Change the name and the words. Keep it all on one line. -->
+<div class="dialogue"><div class="speaker">Ana</div>You're late. Again.</div>
+<div class="dialogue"><div class="speaker">Boss</div>The app already noticed.</div>
+<div class="dialogue you"><div class="speaker">You</div>The bus didn't come.</div>
+
+:: StoryStylesheet [stylesheet]
+/* the box the words go in */
+.dialogue {
+  position: relative;
+  background: rgba(0, 0, 0, 0.8);   /* dark see-through box */
+  color: white;
+  border: 2px solid white;
+  border-radius: 10px;
+  padding: 24px 18px 14px;
+  margin: 34px 0 10px;
+}
+/* the name tag that sits on top of the box */
+.speaker {
+  position: absolute;
+  top: -16px;
+  left: 14px;
+  background: #c2185b;              /* name tag colour */
+  color: white;
+  font-weight: bold;
+  padding: 3px 14px;
+  border-radius: 6px;
+}
+/* a different colour name tag for the player */
+.you .speaker {
+  background: #1976d2;
+}

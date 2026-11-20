@@ -1,0 +1,50 @@
+:: StoryTitle
+Terminal Template
+
+:: StoryData
+{
+  "format": "Harlowe",
+  "format-version": "3.3.9",
+  "start": "Login",
+  "zoom": 1
+}
+
+:: Setup [startup] {"position":"25,25","size":"100,100"}
+<!-- Starting values. Change these to fit your game. -->
+(set: $flagged to 0)
+
+:: Login {"position":"150,25","size":"100,100"}
+<div class="sys">WORKFORCE MONITOR v2.3 &middot; CONNECTED</div>
+Welcome back, moderator #4471.
+You have 3 posts to review. Average review time must stay under 9 seconds.
+
+[[> review queue->Queue]]
+[[> logout->Logout]]
+
+:: Queue {"position":"275,25","size":"100,100"}
+<div class="sys">POST 1 of 3 &middot; flagged by algorithm &middot; confidence 61%</div>
+"Protest downtown at 6pm. Bring water."
+
+(link: "> remove")[(set: $flagged to it + 1)(goto: "Result")]
+(link: "> approve")[(goto: "Result")]
+
+:: Result {"position":"400,25","size":"100,100"}
+<div class="sys">DECISION LOGGED</div>
+Posts removed today: $flagged
+(if: $flagged is 0)[<div class="warn">WARNING: your removal rate is below team average.</div>]
+
+[[> next post->Queue]]
+
+:: Logout {"position":"275,150","size":"100,100"}
+<div class="sys">SESSION ENDED</div>
+Unfinished reviews have been reassigned. This has been noted.
+
+:: StoryStylesheet [stylesheet]
+/* ===== Terminal template: the whole look lives here ===== */
+tw-sidebar { display: none; }                 /* hide the undo arrow */
+tw-story { background: #050805; color: #33ff66; font-family: "Courier New", Consolas, monospace; }
+tw-passage { max-width: 720px; margin: 0 auto; font-size: 17px; line-height: 1.6; text-shadow: 0 0 6px rgba(51,255,102,.45); }
+.sys { color: #0b0; border-bottom: 1px dashed #0b0; padding-bottom: 4px; margin-bottom: 12px; font-size: 14px; }
+.warn { color: #ffcc33; text-shadow: none; margin-top: 10px; }
+tw-link, tw-link.visited, tw-link:hover { color: #9dffb5; font-weight: 700; text-decoration: none; }
+tw-link:hover { background: #33ff66; color: #050805; }   /* highlight a command when you point at it */

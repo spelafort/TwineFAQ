@@ -1,0 +1,40 @@
+:: StoryTitle
+Recipe Expressions
+
+:: StoryData
+{
+  "format": "Harlowe",
+  "format-version": "3.3.9",
+  "start": "Meet Ana",
+  "zoom": 1
+}
+
+:: Setup [startup] {"position":"25,25","size":"100,100"}
+<!-- STEP 1: Ana starts neutral. -->
+(set: $mood to "neutral")
+
+:: Ana Picture [header] {"position":"25,150","size":"100,100"}
+<!-- STEP 2: show the right picture for her mood. This is a header, so it's at the top of every passage. -->
+(if: $mood is "happy")[<img class="char" src="https://spelafort.github.io/TwineFAQ/images/ana-happy.png">](else-if: $mood is "angry")[<img class="char" src="https://spelafort.github.io/TwineFAQ/images/ana-angry.png">](else:)[<img class="char" src="https://spelafort.github.io/TwineFAQ/images/ana-neutral.png">]
+
+:: Meet Ana {"position":"150,25","size":"100,100"}
+Ana looks up from her phone. "You're late."
+
+<!-- STEP 3: change her mood when the player chooses. -->
+(link: "Say sorry")[(set: $mood to "happy")(goto: "After")]
+(link: "Say nothing")[(set: $mood to "angry")(goto: "After")]
+
+:: After {"position":"275,25","size":"100,100"}
+(if: $mood is "happy")["Thanks. Seriously."](else:)["Wow. OK."]
+
+[[Start again->Reset]]
+
+:: Reset {"position":"400,25","size":"100,100"}
+(set: $mood to "neutral")(goto: "Meet Ana")
+
+:: StoryStylesheet [stylesheet]
+.char {
+  display: block;
+  height: 220px;      /* how tall the character is */
+  margin: 0 auto;     /* centres the picture */
+}

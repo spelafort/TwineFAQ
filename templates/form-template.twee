@@ -1,0 +1,56 @@
+:: StoryTitle
+Form Template
+
+:: StoryData
+{
+  "format": "Harlowe",
+  "format-version": "3.3.9",
+  "start": "Application",
+  "zoom": 1
+}
+
+:: Setup [startup] {"position":"25,25","size":"100,100"}
+<!-- Starting values. Change these to fit your game. -->
+(set: $name to "")
+(set: $reason to "Housing")
+(set: $agree to false)
+
+:: Application {"position":"150,25","size":"100,100"}
+<div class="form-title">FORM 27-B &middot; Application for Assistance</div>
+<div class="field">Full name:</div>(input-box: bind $name, "X", 1)
+<div class="field">Reason for request:</div>(dropdown: bind $reason, "Housing", "Food", "Medical", "Other")
+<div class="field"></div>(checkbox: bind $agree, "I confirm all information is correct and complete.")
+(link: "SUBMIT")[(goto: "Decision")]
+
+:: Decision {"position":"275,25","size":"100,100"}
+<div class="form-title">FORM 27-B &middot; Decision</div>
+<div class="field">Name: <b>(print: $name)</b></div>
+<div class="field">Reason: <b>(print: $reason)</b></div>
+(if: $agree is false or $name is "")[<div class="stamp denied">DENIED</div>
+Incomplete forms are not processed.
+[[Start over->Application]]](else:)[<div class="stamp approved">RECEIVED</div>
+Your request will be reviewed in 6 to 8 weeks.]
+
+:: StoryStylesheet [stylesheet]
+/* ===== Form template: the whole look lives here ===== */
+tw-sidebar { display: none; }                 /* hide the undo arrow */
+tw-story { background: #8d8a80; font-family: "Courier New", Courier, monospace; }
+tw-passage {
+  max-width: 560px; margin: 30px auto; padding: 30px 34px 40px;
+  background: #fbf7ea; color: #222;                       /* the paper */
+  box-shadow: 0 6px 20px rgba(0,0,0,.35);
+  font-size: 16px; line-height: 1.6; position: relative;
+}
+.form-title { font-weight: 700; border-bottom: 2px solid #222; padding-bottom: 6px; margin-bottom: 14px; letter-spacing: .04em; }
+.field { margin-top: 12px; font-size: 14px; text-transform: uppercase; }
+input, select { font: inherit; border: 0; border-bottom: 1px solid #222; background: transparent; padding: 2px 4px; width: 100%; }
+.stamp {
+  display: inline-block; font-size: 34px; font-weight: 900; letter-spacing: .1em;
+  padding: 4px 16px; border: 5px solid; border-radius: 6px; transform: rotate(-8deg); margin: 18px 0; opacity: .85;
+}
+.stamp.denied { color: #c0262d; }
+.stamp.approved { color: #1f6f3a; }
+tw-link, tw-link.visited, tw-link:hover {                       /* choices look like a form button */
+  display: inline-block; margin-top: 18px; padding: 6px 18px; border: 2px solid #222;
+  color: #222; font-weight: 700; text-decoration: none; background: #e9e3cf;
+}
