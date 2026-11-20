@@ -306,7 +306,9 @@ section.group:has(article.q.show) > p.note{display:block}
 .play-box .note{margin:6px 0 14px}
 .tpl-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
 .tpl-card .tpl-btns .tool-btn{margin-top:0}
-.all-problems{display:inline-block;margin:10px 0 4px;font-weight:600}
+.hub-cards a{align-items:flex-start}
+.hub-cards a b{display:block}
+.hub-cards a small{display:block;font-weight:400;color:var(--muted);font-size:13.5px;margin-top:3px}
 </style>
 </head>
 <body>
@@ -314,7 +316,7 @@ section.group:has(article.q.show) > p.note{display:block}
 <header class="top">
   <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
   <a class="brand" href="#">Twine Project FAQ <span>&middot; Views on Games and Play</span></a>
-  <span class="ver" title="Last updated">Updated Nov 20, 2026 &middot; v17</span>
+  <span class="ver" title="Last updated">Updated Nov 20, 2026 &middot; v18</span>
   <label class="search">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
     <input id="q" type="search" placeholder="Search: images, itch, variables, zip..." autocomplete="off">
@@ -328,19 +330,10 @@ section.group:has(article.q.show) > p.note{display:block}
 <main id="main">
 <div id="home">
 <h1>Twine Project FAQ</h1>
-<p class="ver-home">Updated Nov 20, 2026 &middot; v17</p>
-<p class="lede"><b>Something broken?</b> Click your problem below.<br><b>Learning Twine?</b> Go step by step: start at Step 1, then click <b>Next</b> at the bottom of each page.<br><b>Still stuck?</b> Send me a Mio.</p>
+<p class="ver-home">Updated Nov 20, 2026 &middot; v18</p>
+<p class="lede"><b>Something broken?</b> Go to <a href="#g-trouble">Troubleshooting</a>.<br><b>Learning Twine?</b> Go step by step: start at Step 1, then click <b>Next</b> at the bottom of each page.<br><b>Still stuck?</b> Send me a Mio.</p>
 <a class="banner" href="#never-lose"><span class="pi">💾</span><span><b>Before you start anything:</b> how to never lose your game. Two minutes now, or redo everything later.</span></a>
 <div class="pj-buttons"><span>Doing a play journal?</span><a href="#pj6" data-pj>PJ #6</a><a href="#pj8" data-pj>PJ #8</a><a href="#pj14" data-pj>PJ #14</a><a href="#pj15" data-pj>PJ #15</a><a href="#pjfinal" data-pj>Final project</a><a href="#pj16" data-pj>PJ #16</a></div>
-<h2 class="steps-h warn-h">What's wrong?</h2>
-<div class="picker">
-  <a href="#images-why"><span class="pi">🖼️</span>My pictures don't show up</a>
-  <a href="#collab-options"><span class="pi">👥</span>Working on one game as a group is a mess</a>
-  <a href="#itch-broken"><span class="pi">🔗</span>My itch link doesn't work for other people</a>
-  <a href="#text-not-updating"><span class="pi">🔢</span>I clicked, but the number on screen didn't change</a>
-  <a href="#lost-work"><span class="pi">😱</span>Help, my game is gone</a>
-</div>
-<a class="all-problems" href="#g-trouble">🔧 Something else? See all 13 problems &rarr;</a>
 <h2 class="steps-h">Step by step</h2>
 <div id="cards" class="cards"></div>
 <h2 class="steps-h" id="pj-paths-h">Doing a Twine play journal? Read these, in order</h2>
@@ -354,7 +347,31 @@ section.group:has(article.q.show) > p.note{display:block}
 </div>
 </div>
 <div id="crumb" class="crumb"></div>
-<div id="trouble-home" style="display:none">
+<div id="tools-home" class="hub" style="display:none">
+<h1>Tools</h1>
+<p class="lede">Tools that do the annoying parts for you. Everything runs in your browser: nothing gets uploaded anywhere.</p>
+<div class="picker hub-cards">
+  <a href="#image-check"><span class="pi">🖼️</span><span><b>Image link checker</b><small>Paste an image address. It tells you if it will work in your game.</small></span></a>
+  <a href="#zip-builder"><span class="pi">📦</span><span><b>Zip maker</b><small>Give it your game and your pictures. It makes the zip for itch.</small></span></a>
+  <a href="#twee-combine"><span class="pi">🧩</span><span><b>Twee combiner</b><small>Each person built part of the game? It joins the parts into one.</small></span></a>
+  <a href="#layer-images"><span class="pi">🗂️</span><span><b>Images on top of images</b><small>Drag a picture where you want it, then copy the code.</small></span></a>
+  <a href="#look-builder"><span class="pi">🎨</span><span><b>Look builder</b><small>Pick colours and a font. It writes the Stylesheet code for you.</small></span></a>
+</div>
+</div>
+<div id="look-home" class="hub" style="display:none">
+<h1>Make it look like a game</h1>
+<p class="lede">All optional. The look is not your argument: your choices and variables are. Get the game working first, then come here.</p>
+<div class="picker hub-cards">
+  <a href="#stylesheet"><span class="pi">📜</span><span><b>The Stylesheet</b><small>Where the look of your whole game lives. Start here.</small></span></a>
+  <a href="#templates"><span class="pi">📱</span><span><b>Templates</b><small>Start from a phone, app, form, terminal or inbox. Play them first.</small></span></a>
+  <a href="#meter"><span class="pi">🔋</span><span><b>Recipe: a meter</b><small>An energy or health bar that fills up and drains.</small></span></a>
+  <a href="#char-mood"><span class="pi">🙂</span><span><b>Recipe: a face that changes</b><small>A character picture that changes with their mood.</small></span></a>
+  <a href="#dialogue-box"><span class="pi">💬</span><span><b>Recipe: a dialogue box</b><small>Speech in a box, with the speaker's name on top.</small></span></a>
+  <a href="#next-lines"><span class="pi">⏭️</span><span><b>Recipe: a Next button</b><small>Lines that appear one at a time.</small></span></a>
+</div>
+<p class="note">Don't want to write code? The <a href="#look-builder">look builder</a> writes the colours and font for you.</p>
+</div>
+<div id="trouble-home" class="hub" style="display:none">
 <h1>Troubleshooting</h1>
 <p class="lede">Something isn't working? Click your problem. Each one walks you through the fix.</p>
 <div class="picker">
@@ -1347,7 +1364,7 @@ Energy: $energy | Rating: $rating</pre></div></li>
 <p class="note">The tool runs only in your browser: nothing is uploaded anywhere. Before you export, make sure no two people used the same passage name, and that everyone spelled the variables the same way (<a href="#collab-combine">more</a>).</p>
 </article>
 
-<article class="q" id="layer-images" data-short="Tool: images on top of images">
+<article class="q" id="layer-images" data-short="Images on top of images">
 <h3>How do I put one image on top of another?</h3>
 <p class="sit">You want a character standing in a room, or a badge that appears on the desk once the player picks it up.</p>
 <p class="note">Just want one picture in a passage? Start with <a href="#images-online">an image already online</a> or <a href="#images-zip">images on your computer</a>.</p>
@@ -1388,7 +1405,7 @@ Energy: $energy | Rating: $rating</pre></div></li>
 <p class="note">If you edit the code by hand: the <code>(if:)</code> has to go around the <em>whole</em> thing, like the tool does it. An <code>(if:)</code> placed inside the box makes the top image land below the picture instead of on it.</p>
 </article>
 
-<article class="q" id="look-builder" data-short="Tool: build your game's look">
+<article class="q" id="look-builder" data-short="Look builder (colours and fonts)">
 <h3>Tool: build your game's look (colours, font, text box)</h3>
 <p class="sit">You want your game to stop looking like plain Twine, but you don't want to write CSS yourself.</p>
 <p class="short">Pick a starting look, change what you want, and watch the preview. Then copy the code into <b>Story &rarr; Stylesheet</b>.</p>
@@ -1990,7 +2007,8 @@ You have $Energy energy left.</pre></div></li>
     if(ix===steps.length) html+='<div class="sep"></div>';
     var list=sec.querySelectorAll('article.q');
     html+='<div class="grp" data-sec="'+sec.id+'"><button class="gh" type="button" aria-expanded="false" aria-controls="items-'+sec.id+'"><span class="chev">&#9654;</span><span class="ic">'+icon(sec)+'</span>'+sec.getAttribute('data-title')+'<span class="n">'+list.length+'</span></button><div class="items" id="items-'+sec.id+'">';
-    if(sec===trouble) html+='<a href="#g-trouble" data-for="g-trouble"><b>All problems, on one page</b></a>';
+    var ALL={'g-trouble':'All problems, on one page','g-tools':'All tools, on one page','g-look':'Everything here, on one page'};
+    if(ALL[sec.id]) html+='<a href="#'+sec.id+'" data-for="'+sec.id+'"><b>'+ALL[sec.id]+'</b></a>';
     [].forEach.call(list,function(a){
       html+='<a href="#'+a.id+'" data-for="'+a.id+'" title="'+esc(title(a))+'">'+shortOf(a)+'</a>';
     });
@@ -1999,7 +2017,7 @@ You have $Energy energy left.</pre></div></li>
   side.innerHTML=html;
   side.querySelectorAll('.gh').forEach(function(b){
     b.addEventListener('click',function(){
-      if(b.parentNode.getAttribute('data-sec')==='g-trouble'){ b.parentNode.classList.add('open'); b.setAttribute('aria-expanded','true'); location.hash='g-trouble'; return; }
+      var ds=b.parentNode.getAttribute('data-sec'); if(ds==='g-trouble'||ds==='g-tools'||ds==='g-look'){ b.parentNode.classList.add('open'); b.setAttribute('aria-expanded','true'); if(location.hash==='#'+ds){ route(); } else { location.hash=ds; } return; }
       var o=b.parentNode.classList.toggle('open'); b.setAttribute('aria-expanded',o?'true':'false'); });
   });
   var links={}; side.querySelectorAll('.items a').forEach(function(a){links[a.getAttribute('data-for')]=a;});
@@ -2034,18 +2052,18 @@ You have $Energy energy left.</pre></div></li>
   function route(){
     var id=decodeURIComponent(location.hash.slice(1));
     var target=id?document.getElementById(id):null;
-    var th=document.getElementById('trouble-home');
-    if(id==='g-trouble'){
+    var HUBS={'g-trouble':['trouble-home','Troubleshooting'],'g-tools':['tools-home','Tools'],'g-look':['look-home','Make it look like a game']};
+    document.querySelectorAll('.hub').forEach(function(h){h.style.display='none';});
+    if(HUBS[id]){
       if(q.value){ q.value=''; resetSearch(); }
       arts.forEach(function(a){a.classList.remove('show');});
-      home.style.display='none'; results.style.display='none'; none.style.display='none'; th.style.display='';
-      side.querySelectorAll('.items a').forEach(function(l){l.classList.toggle('active',l.getAttribute('data-for')==='g-trouble');});
-      crumb.innerHTML='<a href="#">Home</a> &rsaquo; Troubleshooting'; crumb.style.display='block';
-      openGroup(trouble); document.title='Troubleshooting | Twine Project FAQ';
+      home.style.display='none'; results.style.display='none'; none.style.display='none'; document.getElementById(HUBS[id][0]).style.display='';
+      side.querySelectorAll('.items a').forEach(function(l){l.classList.toggle('active',l.getAttribute('data-for')===id);});
+      crumb.innerHTML='<a href="#">Home</a> &rsaquo; '+HUBS[id][1]; crumb.style.display='block';
+      openGroup(document.getElementById(id)); document.title=HUBS[id][1]+' | Twine Project FAQ';
       setTimeout(function(){window.scrollTo({top:0,behavior:'auto'});},0);
       return;
     }
-    th.style.display='none';
     if(target && target.matches('section.group')){ var first=target.querySelector('article.q'); if(first){ history.replaceState(null,'','#'+first.id); target=first; id=first.id; } }
     var art=target?(target.matches('article.q')?target:target.closest('article.q')):null;
     if(q.value){ q.value=''; resetSearch(); }
@@ -2055,7 +2073,7 @@ You have $Energy energy left.</pre></div></li>
     side.querySelectorAll('.items a').forEach(function(l){l.classList.toggle('active',!!art && l.getAttribute('data-for')===art.id);});
     if(art){
       var sec=secOf(art);
-      crumb.innerHTML='<a href="#">Home</a> &rsaquo; '+(sec===trouble?'<a href="#g-trouble">Troubleshooting</a>':label(sec))+(sec===trouble?'':' &middot; '+(stepArts.indexOf(art)+1)+' of '+stepArts.length);
+      var HB={'g-trouble':'Troubleshooting','g-tools':'Tools','g-look':'Make it look like a game'}; crumb.innerHTML='<a href="#">Home</a> &rsaquo; '+(HB[sec.id]?'<a href="#'+sec.id+'">'+HB[sec.id]+'</a>':label(sec))+(HB[sec.id]?'':' &middot; '+(stepArts.indexOf(art)+1)+' of '+stepArts.length);
       crumb.style.display='block';
       openGroup(sec);
       document.title=shortOf(art).replace(/&amp;/g,'&')+' | Twine Project FAQ';
@@ -2091,7 +2109,7 @@ You have $Energy energy left.</pre></div></li>
     }).filter(function(x){return x.sc>0;}).sort(function(x,y){return y.sc-x.sc;});
     var top=scored.filter(function(x){return x.sc>=50;});
     var hits=(top.length? top.concat(scored.filter(function(x){return x.sc<50;}).slice(0,Math.max(0,6-top.length))) : scored.slice(0,8)).map(function(x){return x.a;});
-    home.style.display='none'; crumb.style.display='none'; document.getElementById('trouble-home').style.display='none';
+    home.style.display='none'; crumb.style.display='none'; document.querySelectorAll('.hub').forEach(function(h){h.style.display='none';});
     arts.forEach(function(a){a.classList.remove('show');});
     var h='<p class="lede">'+hits.length+' question'+(hits.length===1?'':'s')+' mention "'+esc(q.value.trim())+'"</p>';
     hits.forEach(function(a){
