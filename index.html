@@ -307,7 +307,7 @@ th{background:var(--side)}
 <header class="top">
   <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
   <a class="brand" href="#">Twine Project FAQ <span>&middot; Views on Games and Play</span></a>
-  <span class="ver" title="Last updated">Updated Nov 20, 2026 &middot; v10</span>
+  <span class="ver" title="Last updated">Updated Nov 20, 2026 &middot; v11</span>
   <label class="search">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
     <input id="q" type="search" placeholder="Search: images, itch, variables, zip..." autocomplete="off">
@@ -321,7 +321,7 @@ th{background:var(--side)}
 <main id="main">
 <div id="home">
 <h1>Twine Project FAQ</h1>
-<p class="ver-home">Updated Nov 20, 2026 &middot; v10</p>
+<p class="ver-home">Updated Nov 20, 2026 &middot; v11</p>
 <p class="lede"><b>Something broken?</b> Click your problem below.<br><b>Learning Twine?</b> Go step by step: start at Step 1, then click <b>Next</b> at the bottom of each page.<br><b>Still stuck?</b> Send me a Mio.</p>
 <a class="banner" href="#never-lose"><span class="pi">💾</span><span><b>Before you start anything:</b> how to never lose your game. Two minutes now, or redo everything later.</span></a>
 <div class="pj-buttons"><span>Doing a play journal?</span><a href="#pj6" data-pj>PJ #6</a><a href="#pj8" data-pj>PJ #8</a><a href="#pj14" data-pj>PJ #14</a><a href="#pj15" data-pj>PJ #15</a><a href="#pjfinal" data-pj>Final project</a><a href="#pj16" data-pj>PJ #16</a></div>
@@ -1936,9 +1936,11 @@ Ana: Wow. OK.</pre></div>
   // ---------- Sidebar ----------
   var side=document.getElementById('side'), html='<a class="homelink" href="#">&#8962; Home</a>';
   var trouble=document.getElementById('g-trouble');
-  var ordered=[trouble].concat(sections.filter(function(x){return x!==trouble;}));
+  var steps=sections.filter(function(x){return x.getAttribute('data-step');});
+  var extras=sections.filter(function(x){return !x.getAttribute('data-step') && x!==trouble;});
+  var ordered=steps.concat([trouble]).concat(extras);
   ordered.forEach(function(sec,ix){
-    if(ix===1) html+='<div class="sep"></div>';
+    if(ix===steps.length) html+='<div class="sep"></div>';
     var list=sec.querySelectorAll('article.q');
     html+='<div class="grp" data-sec="'+sec.id+'"><button class="gh" type="button" aria-expanded="false" aria-controls="items-'+sec.id+'"><span class="chev">&#9654;</span><span class="ic">'+icon(sec)+'</span>'+sec.getAttribute('data-title')+'<span class="n">'+list.length+'</span></button><div class="items" id="items-'+sec.id+'">';
     [].forEach.call(list,function(a){
