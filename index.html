@@ -164,7 +164,13 @@ h3[tabindex]:focus,h3[tabindex]:focus-visible{outline:none}
 .lt-fields label{display:flex;flex-direction:column;font-size:13px;font-weight:600;color:var(--muted);gap:4px}
 .lt-fields input{font:14px "JetBrains Mono",monospace;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--text)}
 .lt-fields .lt-check{flex-direction:row;align-items:center;gap:8px;color:var(--text);font-weight:500;align-self:end}
-.lt-hint{font-size:13.5px;color:var(--muted);margin:10px 0 6px}
+.lt-hint{font-size:14px;margin:6px 0 10px}
+.lt-step{display:flex;gap:12px;padding:14px 0;border-top:1px solid var(--line)}
+.lt-step:first-child{border-top:0;padding-top:0}
+.lt-num{flex:none;width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+.lt-body{flex:1;min-width:0}
+.lt-body > .lt-fields{margin-top:8px}
+.lt-tag{position:absolute;background:#e8590c;color:#fff;font:700 11px/1 Inter,sans-serif;padding:4px 7px;border-radius:4px;pointer-events:none;white-space:nowrap;letter-spacing:.04em}
 .lt-stage-wrap{overflow:auto;max-width:100%}
 .lt-stage{position:relative;display:inline-block;line-height:0;border:1px dashed var(--line)}
 .lt-stage img{display:block}
@@ -288,6 +294,12 @@ th{background:var(--side)}
 .tpl-card p{margin:0}
 .tpl-card .tool-btn{align-self:flex-start;margin-top:auto}
 @media (max-width:640px){.three{grid-template-columns:1fr 1fr}}
+.lf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:8px 14px;margin-top:8px}
+.lf-grid label{display:flex;align-items:center;gap:10px;font-size:14px}
+.lf-grid input[type=color],.lt-fields input[type=color]{width:46px;height:34px;padding:2px;border:1px solid var(--line);border-radius:6px;background:var(--panel);cursor:pointer}
+.lt-fields select{width:100%;max-width:100%;min-width:0;box-sizing:border-box;font:14px Inter,sans-serif;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--text)}
+.lf-presets .tool-btn{padding:6px 12px}
+.lf-prev{width:100%;height:400px;border:1px solid var(--line);border-radius:10px;margin-top:8px;background:#000}
 </style>
 </head>
 <body>
@@ -295,7 +307,7 @@ th{background:var(--side)}
 <header class="top">
   <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
   <a class="brand" href="#">Twine Project FAQ <span>&middot; Views on Games and Play</span></a>
-  <span class="ver" title="Last updated">Updated Nov 20, 2026 &middot; v8</span>
+  <span class="ver" title="Last updated">Updated Nov 20, 2026 &middot; v9</span>
   <label class="search">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
     <input id="q" type="search" placeholder="Search: images, itch, variables, zip..." autocomplete="off">
@@ -309,7 +321,7 @@ th{background:var(--side)}
 <main id="main">
 <div id="home">
 <h1>Twine Project FAQ</h1>
-<p class="ver-home">Updated Nov 20, 2026 &middot; v8</p>
+<p class="ver-home">Updated Nov 20, 2026 &middot; v9</p>
 <p class="lede"><b>Something broken?</b> Click your problem below.<br><b>Learning Twine?</b> Go step by step: start at Step 1, then click <b>Next</b> at the bottom of each page.<br><b>Still stuck?</b> Send me a Mio.</p>
 <a class="banner" href="#never-lose"><span class="pi">💾</span><span><b>Before you start anything:</b> how to never lose your game. Two minutes now, or redo everything later.</span></a>
 <div class="pj-buttons"><span>Doing a play journal?</span><a href="#pj6" data-pj>PJ #6</a><a href="#pj8" data-pj>PJ #8</a><a href="#pj14" data-pj>PJ #14</a><a href="#pj15" data-pj>PJ #15</a><a href="#pjfinal" data-pj>Final project</a><a href="#pj16" data-pj>PJ #16</a></div>
@@ -922,8 +934,16 @@ Energy: $energy | Rating: $rating</pre></div></li>
   <li><b>Play it</b> (Build &rarr; Play). See the picture? Good. See a little broken-picture icon? <a href="#images-why">Go here</a>.</li>
   <li><b>Test it for real</b> once it's on itch, in an incognito window. Some websites block their pictures from showing on other sites, so an image can work in Twine and then break on itch.</li>
 </ol>
+<p><b>Where does the picture show up?</b> Exactly where you put the line in the passage.</p>
+<ul>
+  <li><b>Above the text:</b> put the <code>&lt;img&gt;</code> line first, before your words.</li>
+  <li><b>Below the text:</b> put it last, after your words (but before your links, if you want the links at the bottom).</li>
+  <li><b>In the middle of the screen (centred):</b> wrap it like this, all on one line:<div class="codewrap"><pre class="hl">&lt;div style="text-align: center"&gt;&lt;img src="PASTE THE ADDRESS HERE" width="200"&gt;&lt;/div&gt;</pre></div></li>
+</ul>
+<figure><img src="images/img-centred.webp" alt="A badge picture centred at the top of a passage, with the text under it" loading="lazy" style="max-width:min(100%,500px)"><figcaption>The centred line first, then the text.</figcaption></figure>
 <p>Using images you found online is fine for this project: just list where you got them in your reflection's works cited.</p>
 <p>Your picture is a file on your computer (not online)? Use <a href="#images-zip">Option 2</a>.</p>
+<p>Want it on top of another picture, like a badge on a desk? <a href="#layer-images">Go here</a>.</p>
 </article>
 
 <article class="q" id="images-zip" data-short="Option 2: images on your computer (zip)">
@@ -938,6 +958,8 @@ Energy: $energy | Rating: $rating</pre></div></li>
   <li>Open the folder, select <b>everything inside it</b>, and zip it (Windows: right-click &rarr; Send to &rarr; Compressed (zipped) folder. Mac: right-click &rarr; Compress).</li>
   <li>Upload that .zip to itch (<a href="#itch-upload">how</a>).</li>
 </ol>
+<p>Where the picture shows up in the passage (above the text, below it, centred) works the same way as <a href="#images-online">Option 1</a>.</p>
+<div class="call tip"><b class="k">Let a tool do steps 3 to 6</b><p>The <a href="#zip-builder">zip maker</a> takes your published .html and your pictures, fixes the names, and gives you the zip.</p></div>
 <div class="two-col">
 <div class="tree">
 <div class="ok">&#10003; my-game.zip</div>
@@ -1250,6 +1272,7 @@ tw-link:hover {
 }</pre></div></li>
   <li>Play your game (Build &rarr; Play) to see it. Change the colour codes to whatever you like. Google "colour picker" to get codes like <code>#ffcc00</code>.</li>
 </ol>
+<div class="call tip"><b class="k">Don't want to write it yourself?</b><p>Use the <a href="#look-builder">look builder</a>: pick colours and a font, and it writes this code for you.</p></div>
 <p><b>The names Twine uses</b> (this is what goes before the <code>{</code>):</p>
 <div class="tablewrap"><table>
 <tr><th>Write this</th><th>To change</th></tr>
@@ -1278,10 +1301,95 @@ tw-link:hover {
 </ul></div>
 </article>
 
+<article class="q" id="look-builder" data-short="Tool: build your game's look">
+<h3>Tool: build your game's look (colours, font, text box)</h3>
+<p class="sit">You want your game to stop looking like plain Twine, but you don't want to write CSS yourself.</p>
+<p class="short">Pick a starting look, change what you want, and watch the preview. Then copy the code into <b>Story &rarr; Stylesheet</b>.</p>
+<div class="tool" id="lookTool">
+  <div class="lt-step"><div class="lt-num">1</div><div class="lt-body"><b>Pick a starting look</b> (you can change everything after)
+    <div class="tool-row lf-presets">
+      <button type="button" class="tool-btn ghost" data-preset="twine">Plain Twine</button>
+      <button type="button" class="tool-btn ghost" data-preset="paper">Paper</button>
+      <button type="button" class="tool-btn ghost" data-preset="night">Night</button>
+      <button type="button" class="tool-btn ghost" data-preset="terminal">Terminal</button>
+      <button type="button" class="tool-btn ghost" data-preset="office">Office app</button>
+      <button type="button" class="tool-btn ghost" data-preset="arcade">Arcade</button>
+    </div></div></div>
+  <div class="lt-step"><div class="lt-num">2</div><div class="lt-body"><b>Colours</b> (click a square to pick a colour)
+    <div class="lf-grid">
+      <label><input type="color" id="lfBg"> Background</label>
+      <label><input type="color" id="lfText"> Text</label>
+      <label><input type="color" id="lfLink"> Choices (links)</label>
+      <label><input type="color" id="lfHover"> Choices when you point at them</label>
+    </div></div></div>
+  <div class="lt-step"><div class="lt-num">3</div><div class="lt-body"><b>Text</b>
+    <div class="lt-fields">
+      <label>Font<select id="lfFont">
+        <option value="Georgia, serif">Book (Georgia), Twine's normal font</option>
+        <option value="Arial, Helvetica, sans-serif">Clean (Arial)</option>
+        <option value="&quot;Trebuchet MS&quot;, Verdana, sans-serif">Friendly (Trebuchet)</option>
+        <option value="&quot;Courier New&quot;, Courier, monospace">Typewriter / computer (Courier)</option>
+        <option value="&quot;Times New Roman&quot;, Times, serif">Old newspaper (Times)</option>
+        <option value="Impact, &quot;Arial Black&quot;, sans-serif">Loud poster (Impact)</option>
+      </select></label>
+      <label>Text size<select id="lfSize">
+        <option value="18px">Small</option>
+        <option value="24px">Normal (Twine's size)</option>
+        <option value="30px">Big</option>
+      </select></label>
+    </div></div></div>
+  <div class="lt-step"><div class="lt-num">4</div><div class="lt-body"><b>A box behind your text</b> (helps if you use a background picture)
+    <div class="lt-fields">
+      <label>Box<select id="lfBox">
+        <option value="none">No box</option>
+        <option value="dark">Dark, see-through</option>
+        <option value="light">Light, see-through</option>
+        <option value="solid">Solid colour (pick it on the right)</option>
+      </select></label>
+      <label><span>Solid box colour</span><input type="color" id="lfBoxCol"></label>
+    </div></div></div>
+  <div class="lt-step"><div class="lt-num">5</div><div class="lt-body"><b>Extras</b>
+    <div class="lt-fields">
+      <label>Background picture (optional: file name or https:// address)<input id="lfImg" placeholder="office.jpg"></label>
+      <label class="lt-check"><input type="checkbox" id="lfHide" checked><span>Hide the undo arrow (<a href="#back-arrow">why</a>)</span></label>
+    </div></div></div>
+  <div class="lt-step"><div class="lt-num">6</div><div class="lt-body"><b>Preview</b> (this is roughly what a passage will look like)
+    <iframe id="lfPrev" class="lf-prev" title="Preview of your game's look"></iframe>
+    <p class="note" id="lfImgNote" style="display:none">The preview only shows background pictures with a full https:// address. A file name still works in your game if you use <a href="#images-zip">the zip method</a>.</p></div></div>
+  <div class="lt-step"><div class="lt-num">7</div><div class="lt-body"><b>Copy this into your Stylesheet</b>
+    <ol class="steps">
+      <li>Click <b>Copy</b> on the box below.</li>
+      <li>In Twine, open your story, then <b>Story &rarr; Stylesheet</b> (<a href="#stylesheet">pictures</a>).</li>
+      <li>Click at the very <b>bottom</b> of what's already there, press <kbd>Enter</kbd>, and paste (<kbd>Ctrl</kbd>+<kbd>V</kbd>, Mac: <kbd>Cmd</kbd>+<kbd>V</kbd>).</li>
+      <li>Play your game to see it.</li>
+    </ol>
+    <div class="codewrap"><div class="label">Story &rarr; Stylesheet</div><pre id="lfCode"></pre></div></div></div>
+</div>
+<div class="call"><b class="k">Changed your mind?</b><p>Paste a new version at the bottom of the Stylesheet: the lowest one wins. Or delete the old one first, from <code>/* My game's look</code> down to its last <code>}</code>. Using a <a href="#templates">template</a>? Paste this at the bottom of its Stylesheet to recolour it.</p></div>
+</article>
+
 <article class="q" id="meter" data-short="Recipe: a meter (energy bar)">
 <h3>Recipe: how do I make a meter, like a health or energy bar?</h3>
 <p class="sit">You show the player's energy as a number, and you want a bar that fills up and drains instead, like a health bar in a video game.</p>
-<p class="short">Three pieces: a starting number from 0 to 100, some CSS for the bar's look, and one long line that draws it. Download the recipe to try it first.</p>
+<p class="short">Two ways. <b>Simple:</b> one line made of blocks, no Stylesheet. <b>Nicer:</b> a smooth bar, using the Stylesheet.</p>
+
+<p><b>Simple way: a bar made of blocks</b></p>
+<div class="two">
+<figure><img src="images/rc-blocks-70.webp" alt="Energy shown as 7 green blocks and 3 grey blocks, then 70, with 3 hearts under it" loading="lazy"><figcaption>Energy at 70: 7 green blocks out of 10.</figcaption></figure>
+<figure><img src="images/rc-blocks-10.webp" alt="Energy shown as 1 red block and 9 grey blocks, then 10, with 1 heart" loading="lazy"><figcaption>Below 30, the blocks turn red.</figcaption></figure>
+</div>
+<ol class="steps">
+  <li><b>The starting number</b>, in your <a href="#startup">startup passage</a>. Keep it between <b>0 and 100</b>:<div class="codewrap"><pre class="hl">(set: $energy to 70)</pre></div></li>
+  <li>Make a passage with the tag <code>footer</code> (<a href="#stats-bar">how</a>), and paste this in. Copy it exactly, with the Copy button: the █ blocks are a special character you can't easily type.<div class="codewrap"><div class="label">Passage: Energy Meter (tag: footer)</div><pre class="hl">&lt;hr&gt;
+Energy: (if: $energy &lt; 30)[(text-colour: red)[(str-repeated: (round: $energy / 10), "█")]](else:)[(text-colour: green)[(str-repeated: (round: $energy / 10), "█")]](text-colour: grey)[(str-repeated: 10 - (round: $energy / 10), "█")] $energy</pre></div>
+  What it does: it divides energy by 10 and repeats a block that many times (70 &rarr; 7 blocks), in red if energy is under 30, green if not. Then it adds grey blocks to make 10.</li>
+  <li><b>Change the number</b> when the player chooses. Wrap it in <code>(max: 0, ...)</code> so it can't go below 0, or the game shows an error:<div class="codewrap"><pre class="hl">(link: "Work a double shift")[(set: $energy to (max: 0, $energy - 30))(goto: "Night")]</pre></div>
+  Going up? Use <code>(min: 100, $energy + 20)</code> so it stops at 100.</li>
+</ol>
+<div class="call tip"><b class="k">Hearts, coins, anything</b><p>For a small number like lives, just repeat an emoji: <code>Lives: (str-repeated: $lives, "❤️")</code> shows one heart per life. Same rule: never let <code>$lives</code> go below 0.</p></div>
+
+<p><b>Nicer way: a smooth bar (uses the Stylesheet)</b></p>
+<p>Download the recipe to try it first:</p>
 <div class="tool-row"><a class="tool-btn" href="recipes/recipe-meter.twee" download>Download recipe-meter.twee</a></div>
 <p class="note">To open it: in Twine, <b>Library &rarr; Import</b>, pick the file (<a href="#templates">pictures</a>).</p>
 <div class="two">
@@ -1289,8 +1397,7 @@ tw-link:hover {
 <figure><img src="images/rc-meter-low.webp" alt="The same bar almost empty, in red" loading="lazy"><figcaption>Below 30, it turns red.</figcaption></figure>
 </div>
 <ol class="steps">
-  <li><b>The starting number.</b> In your <a href="#startup">startup passage</a>:<div class="codewrap"><pre class="hl">(set: $energy to 70)</pre></div>
-  Keep it between <b>0 and 100</b>. The number is how full the bar is: 70 means 70% full.</li>
+  <li><b>The starting number</b>, same as the simple way: <code>(set: $energy to 70)</code> in your startup passage, between 0 and 100. 70 means 70% full.</li>
   <li><b>What the bar looks like.</b> Paste this into <b>Story &rarr; Stylesheet</b> (<a href="#stylesheet">how</a>):<div class="codewrap"><div class="label">Story &rarr; Stylesheet</div><pre>.bar {
   width: 250px;            /* how long the bar is */
   height: 20px;            /* how thick the bar is */
@@ -1319,8 +1426,16 @@ tw-link:hover {
 <article class="q" id="char-mood" data-short="Recipe: a character whose face changes">
 <h3>Recipe: how do I make a character's face change (happy, angry...)?</h3>
 <p class="sit">You have a character, and you want their picture to change depending on how the player treated them: smiling if you were nice, angry if you weren't.</p>
-<p class="short">Keep the character's mood in a variable, and show a different picture depending on it.</p>
-<div class="call"><b class="k">Maybe you don't need this</b><p>If the face just changes from one passage to the next, put a different <code>&lt;img&gt;</code> in each passage. No variable needed. Use this recipe when the mood depends on something the player did earlier.</p></div>
+<p class="short">Level 1: put a different picture in each passage. Level 2: if her face has to <b>remember</b> what the player did earlier, keep her mood in a variable.</p>
+<p><b>Level 1: a different picture in each passage</b> (nothing new to learn)</p>
+<p>Make one picture per face, then put the right one at the top of each passage. The player's choice decides which passage they go to, so it also decides which face they see.</p>
+<div class="codewrap"><div class="label">Passage: Say Sorry</div><pre class="hl">&lt;img src="ana-happy.png" width="200"&gt;
+Ana: Thanks. Seriously.</pre></div>
+<div class="codewrap"><div class="label">Passage: Say Nothing</div><pre class="hl">&lt;img src="ana-angry.png" width="200"&gt;
+Ana: Wow. OK.</pre></div>
+<p>Same rules as any picture: <a href="#images-online">online</a> or <a href="#images-zip">on your computer</a>. For most games, this is all you need.</p>
+<p><b>Level 2: her face remembers what you did</b></p>
+<p>Use this when the face depends on something from <b>earlier</b>: you were rude in the first scene, and ten passages later, in a scene everyone sees, she's still angry with you. You'd need a separate copy of every later passage for each mood. A variable does it instead.</p>
 <div class="tool-row"><a class="tool-btn" href="recipes/recipe-expressions.twee" download>Download recipe-expressions.twee</a></div>
 <div class="three">
 <figure><img src="images/rc-expr-1.webp" alt="Ana with a neutral face" loading="lazy"><figcaption><code>"neutral"</code></figcaption></figure>
@@ -1510,22 +1625,69 @@ tw-link:hover {
 <p class="note">The tool runs only in your browser: nothing is uploaded anywhere. Before you export, make sure no two people used the same passage name, and that everyone spelled the variables the same way (<a href="#collab-combine">more</a>).</p>
 </article>
 
+<article class="q" id="zip-builder" data-short="Zip maker (pictures for itch)">
+<h3>Tool: make my zip for itch (game + pictures)</h3>
+<p class="sit">Your game uses pictures (or sounds) saved on your computer. They work for you, but on itch they show as broken picture icons. Or you're just not sure how to zip everything the right way.</p>
+<p class="short">Give the tool your published game and all your pictures. It fixes the picture names inside your game, names the game <code>index.html</code>, and gives you a zip that's ready for itch.</p>
+<div class="tool" id="zipTool">
+  <ol class="steps">
+    <li>In Twine: <b>Build &rarr; Publish to File</b>. Save the .html file somewhere you can find it.</li>
+    <li>Pick that .html file:
+      <div class="tool-row"><input id="zpHtml" type="file" accept=".html,.htm"></div></li>
+    <li>Pick <b>all</b> your pictures and sounds. To pick several at once, hold <kbd>Ctrl</kbd> (Mac: <kbd>Cmd</kbd>) while you click them.
+      <div class="tool-row"><input id="zpFiles" type="file" multiple accept="image/*,audio/*,video/*,.png,.jpg,.jpeg,.gif,.webp,.svg,.mp3,.ogg,.wav,.m4a,.mp4,.webm"></div>
+      <ul id="zpList" class="tw-list"></ul></li>
+    <li><div class="tool-row"><button class="tool-btn" id="zpGo" type="button">Make my zip</button><button class="tool-btn ghost" id="zpClear" type="button">Start over</button></div>
+      <div id="zpOut" class="ic-out" aria-live="polite"></div></li>
+  </ol>
+</div>
+<p><b>What it fixes for you</b></p>
+<ul>
+  <li>Paths to your own computer, like <code>C:\Users\you\Downloads\badge.png</code>. They become just <code>badge.png</code>.</li>
+  <li>Capital letters that don't match. Your game says <code>Badge.PNG</code> but the file is <code>badge.png</code>: that works on your computer and breaks on itch.</li>
+  <li>Spaces and accents in file names (<code>Pause Café.jpg</code> becomes <code>Pause-Cafe.jpg</code>, in the zip and in your game).</li>
+  <li>Folders: everything goes in the top of the zip, with <code>index.html</code>, the way itch wants it.</li>
+</ul>
+<p><b>What it can't fix</b></p>
+<ul>
+  <li>Pictures you forgot to add. It lists them: find the file and run it again.</li>
+  <li>Pictures from websites (<code>https://...</code>). Check those with the <a href="#image-check">image link checker</a>.</li>
+  <li>Picture names your code builds out of pieces, like <code>'ana-' + $mood + '.png'</code>. It puts those files in the zip with their names unchanged, so spell them exactly like your code does, in lowercase.</li>
+</ul>
+<p class="note">Everything happens in your browser: your game and pictures aren't uploaded anywhere. Keep submitting your normal .html on Lea; the zip is for itch.</p>
+</article>
+
 <article class="q" id="layer-images" data-short="Images on top of images">
 <h3>How do I put one image on top of another?</h3>
 <p class="sit">You want a character standing in a room, or a badge that appears on the desk once the player picks it up.</p>
-<p class="short">Use this tool: type your file names, drag the top picture where you want it, and copy the code it gives you.</p>
+<p class="note">Just want one picture in a passage? Start with <a href="#images-online">an image already online</a> or <a href="#images-zip">images on your computer</a>.</p>
+<p class="short">Use the tool below. Fill in boxes 1 and 2, move the top picture in box 3, then copy the code in box 5 into your passage.</p>
 <div class="layer-tool" id="layerTool">
-  <div class="lt-fields">
-    <label>Bottom image (file name or https:// address)<input id="ltBottom" value="office.jpg"></label>
-    <label>Top image<input id="ltTop" value="badge.png"></label>
-    <label>Bottom width (px)<input id="ltBW" type="number" value="480" min="50" max="1200"></label>
-    <label>Top width (px)<input id="ltTW" type="number" value="120" min="10" max="1200"></label>
-    <label class="lt-check"><input id="ltIf" type="checkbox"> Only show the top image when a variable is true:</label>
-    <label>Variable<input id="ltVar" value="$hasBadge"></label>
-  </div>
-  <p class="lt-hint">&#9995; Drag the top picture. (Until you paste full https:// addresses, the preview uses sample pictures.)</p>
-  <div class="lt-stage-wrap"><div class="lt-stage" id="ltStage"><img id="ltBImg" alt="Bottom image preview" src="images/sample-office.jpg"><img id="ltTImg" alt="Top image preview: drag to move" src="images/sample-badge.png" tabindex="0"></div></div>
-  <div class="codewrap"><div class="label">Your code: copy this into a passage, all on one line</div><pre class="hl" id="ltCode"></pre></div>
+  <div class="lt-step"><div class="lt-num">1</div><div class="lt-body"><b>The background picture</b> (the big one at the back)
+    <div class="lt-fields">
+      <label>File name or https:// address<input id="ltBottom" value="office.jpg"></label>
+      <label>How wide, in pixels<input id="ltBW" type="number" value="480" min="50" max="1200"></label>
+    </div></div></div>
+  <div class="lt-step"><div class="lt-num">2</div><div class="lt-body"><b>The picture that goes on top</b> (the small one in front)
+    <div class="lt-fields">
+      <label>File name or https:// address<input id="ltTop" value="badge.png"></label>
+      <label>How wide, in pixels<input id="ltTW" type="number" value="120" min="10" max="1200"></label>
+    </div></div></div>
+  <div class="lt-step"><div class="lt-num">3</div><div class="lt-body"><b>Move the top picture to where you want it</b>
+    <p class="lt-hint">The picture with the blue dashed outline and the <b>DRAG ME</b> tag is your top picture. <b>On a computer:</b> put your mouse on it, hold the left button down, move the mouse, and let go. <b>On a phone:</b> use the two number boxes under the preview instead.</p>
+    <div class="lt-stage-wrap"><div class="lt-stage" id="ltStage"><img id="ltBImg" alt="Background picture preview" src="images/sample-office.jpg"><img id="ltTImg" alt="Top picture preview: drag to move" src="images/sample-badge.png" tabindex="0"><span class="lt-tag" id="ltTag">&#10021; DRAG ME</span></div></div>
+    <p class="note" id="ltSample">Until you type full https:// addresses in boxes 1 and 2, the preview shows sample pictures. The code still uses your file names.</p>
+    <div class="lt-fields">
+      <label>Distance from the left edge (pixels)<input id="ltX" type="number" value="300" min="0"></label>
+      <label>Distance from the top edge (pixels)<input id="ltY" type="number" value="160" min="0"></label>
+    </div></div></div>
+  <div class="lt-step"><div class="lt-num">4</div><div class="lt-body"><b>Optional:</b> only show the top picture after something happens (like picking up the badge)
+    <div class="lt-fields">
+      <label class="lt-check"><input id="ltIf" type="checkbox"> Only show it when this variable is true:</label>
+      <label>Variable<input id="ltVar" value="$hasBadge"></label>
+    </div></div></div>
+  <div class="lt-step"><div class="lt-num">5</div><div class="lt-body"><b>Click Copy, and paste it into your passage.</b> Keep it all on one line.
+    <div class="codewrap"><div class="label">Your code</div><pre class="hl" id="ltCode"></pre></div></div></div>
 </div>
 <ul>
   <li>The top image should be a <b>PNG with a transparent background</b>, or it'll sit there as a rectangle. (Piskel and Pixilart save transparent PNGs.)</li>
@@ -1597,7 +1759,7 @@ tw-link:hover {
   <li><b>Google Image search results.</b> Click through to the actual image, then Copy image address.</li>
   <li><b>Sites that block their images</b> from showing on other sites. Works on their site, breaks in your game.</li>
   <li><b>Addresses starting with <code>http://</code></b> (no "s"). itch's rules say files from other sites must use <code>https://</code>. Try changing <code>http</code> to <code>https</code>; if the image still loads, use that.</li>
-  <li><b>Files on your computer</b> like <code>C:\Users\...</code>. Works only for you. Use <a href="#images-zip">the zip method</a>.</li>
+  <li><b>Files on your computer</b> like <code>C:\Users\...</code>. Works only for you. Use <a href="#images-zip">the zip method</a>, or let the <a href="#zip-builder">zip maker</a> do it.</li>
 </ul>
 </article>
 
@@ -1809,7 +1971,7 @@ tw-link:hover {
   window.addEventListener('hashchange',route);
 
   // ---------- Search ----------
-  var SYN=[['image','picture','img','photo','pic','png','jpg'],['itch','itchio','itch.io'],['variable','varible','variabel'],['music','sound','audio','song','mp3'],['link','url','address'],['save','saved','lost','backup','gone','disappeared','deleted'],['zip','zipped','compress'],['background','backdrop','bg'],['undo','back arrow','back button','arrow'],['group','team','partner','together','google doc','docs'],['error','broken','not working','doesnt work',"doesn't work",'bug'],['startup','start up','starting values','setup'],['stats','stat bar','health','score','footer','header'],['quote','quotes','smart quotes'],['random','dice','chance'],['import','replace','overwrite'],['meter','bar','health bar','progress','energy'],['stylesheet','css','colour','color','font','look','style','design'],['template','phone','app','form','terminal','email','inbox','text message'],['dialogue','dialog','visual novel','vn','name box','speech','next','one at a time'],['character','face','expression','mood','emotion','portrait']];
+  var SYN=[['image','picture','img','photo','pic','png','jpg'],['itch','itchio','itch.io'],['variable','varible','variabel'],['music','sound','audio','song','mp3'],['link','url','address'],['save','saved','lost','backup','gone','disappeared','deleted'],['zip','zipped','compress','zip maker','folder'],['background','backdrop','bg'],['undo','back arrow','back button','arrow'],['group','team','partner','together','google doc','docs'],['error','broken','not working','doesnt work',"doesn't work",'bug'],['startup','start up','starting values','setup'],['stats','stat bar','health','score','footer','header'],['quote','quotes','smart quotes'],['random','dice','chance'],['import','replace','overwrite'],['meter','bar','health bar','progress','energy','hearts','lives','blocks'],['stylesheet','css','colour','color','font','look','style','design','theme','builder'],['template','phone','app','form','terminal','email','inbox','text message'],['dialogue','dialog','visual novel','vn','name box','speech','next','one at a time'],['character','face','expression','mood','emotion','portrait']];
   function resetSearch(){
     side.querySelectorAll('.items a, .grp').forEach(function(x){x.classList.remove('hidden');});
   }
@@ -1870,32 +2032,42 @@ tw-link:hover {
   (function(){
     var st=document.getElementById('ltStage'); if(!st) return;
     var bI=document.getElementById('ltBImg'), tI=document.getElementById('ltTImg'), code=document.getElementById('ltCode');
-    var f={b:document.getElementById('ltBottom'),t:document.getElementById('ltTop'),bw:document.getElementById('ltBW'),tw:document.getElementById('ltTW'),iff:document.getElementById('ltIf'),v:document.getElementById('ltVar')};
-    var x=300,y=160;
+    var f={b:document.getElementById('ltBottom'),t:document.getElementById('ltTop'),bw:document.getElementById('ltBW'),tw:document.getElementById('ltTW'),iff:document.getElementById('ltIf'),v:document.getElementById('ltVar'),x:document.getElementById('ltX'),y:document.getElementById('ltY')};
+    var tag=document.getElementById('ltTag'), sample=document.getElementById('ltSample');
+    var x=300,y=160,sc=1;
     function isUrl(u){return /^https:\/\//i.test(u.trim());}
     function num(el,d){var n=parseInt(el.value,10); return isNaN(n)||n<1?d:n;}
-    function render(){
+    function render(fromBoxes){
       var bw=num(f.bw,480), tw=num(f.tw,120);
       bI.src=isUrl(f.b.value)?f.b.value.trim():'images/sample-office.jpg'; bI.style.width=bw+'px';
       tI.src=isUrl(f.t.value)?f.t.value.trim():'images/sample-badge.png'; tI.style.width=tw+'px';
+      sample.style.display=(isUrl(f.b.value)&&isUrl(f.t.value))?'none':'';
       var maxX=Math.max(0,bw-10), maxY=Math.max(0,(bI.offsetHeight||bw*0.625)-10);
-      x=Math.max(0,Math.min(x,maxX)); y=Math.max(0,Math.min(y,maxY));
+      x=Math.round(Math.max(0,Math.min(x,maxX))); y=Math.round(Math.max(0,Math.min(y,maxY)));
+      var wrapW=st.parentNode.clientWidth||bw; sc=Math.min(1,(wrapW-2)/bw); st.style.zoom=sc;
       tI.style.left=x+'px'; tI.style.top=y+'px';
+      tag.style.left=x+'px'; tag.style.top=Math.max(0,y-24)+'px';
+      if(!fromBoxes || document.activeElement!==f.x) f.x.value=x;
+      if(!fromBoxes || document.activeElement!==f.y) f.y.value=y;
       var B=f.b.value.trim()||'office.jpg', T=f.t.value.trim()||'badge.png';
-      var box='<div style="position: relative; width: '+bw+'px;"><img src="'+B+'" width="'+bw+'"><img src="'+T+'" width="'+tw+'" style="position: absolute; left: '+Math.round(x)+'px; top: '+Math.round(y)+'px;"></div>';
+      var box='<div style="position: relative; width: '+bw+'px;"><img src="'+B+'" width="'+bw+'"><img src="'+T+'" width="'+tw+'" style="position: absolute; left: '+x+'px; top: '+y+'px;"></div>';
       var v=(f.v.value.trim()||'$hasBadge'); if(v.charAt(0)!=='$') v='$'+v;
       var out=f.iff.checked?'(if: '+v+' is true)['+box+'](else:)[<img src="'+B+'" width="'+bw+'">]':box;
       code.textContent=out; hl(code);
     }
     var drag=null;
     tI.addEventListener('pointerdown',function(e){ e.preventDefault(); tI.setPointerCapture(e.pointerId); drag={sx:e.clientX,sy:e.clientY,x:x,y:y}; });
-    tI.addEventListener('pointermove',function(e){ if(!drag) return; x=drag.x+(e.clientX-drag.sx); y=drag.y+(e.clientY-drag.sy); render(); });
+    tI.addEventListener('pointermove',function(e){ if(!drag) return; x=drag.x+(e.clientX-drag.sx)/sc; y=drag.y+(e.clientY-drag.sy)/sc; render(); });
     tI.addEventListener('pointerup',function(){ drag=null; });
     tI.addEventListener('keydown',function(e){ var s=e.shiftKey?10:2, k=e.key;
       if(k==='ArrowLeft')x-=s; else if(k==='ArrowRight')x+=s; else if(k==='ArrowUp')y-=s; else if(k==='ArrowDown')y+=s; else return; e.preventDefault(); render(); });
-    ['b','t','bw','tw','v'].forEach(function(k){ f[k].addEventListener('input',render); });
-    f.iff.addEventListener('change',render);
-    bI.addEventListener('load',render);
+    ['b','t','bw','tw','v'].forEach(function(k){ f[k].addEventListener('input',function(){render();}); });
+    f.x.addEventListener('input',function(){ var n=parseInt(f.x.value,10); if(!isNaN(n)){x=n; render(true);} });
+    f.y.addEventListener('input',function(){ var n=parseInt(f.y.value,10); if(!isNaN(n)){y=n; render(true);} });
+    f.x.addEventListener('change',function(){render();}); f.y.addEventListener('change',function(){render();});
+    f.iff.addEventListener('change',function(){render();});
+    bI.addEventListener('load',function(){render();});
+    window.addEventListener('resize',function(){render();});
     render();
   })();
 
@@ -2060,5 +2232,125 @@ tw-link:hover {
 })();
 </script>
 
+<script>
+// ---------- Zip maker ----------
+(function(){
+  var go=document.getElementById('zpGo'); if(!go) return;
+  var hIn=document.getElementById('zpHtml'), fIn=document.getElementById('zpFiles'), list=document.getElementById('zpList'), out=document.getElementById('zpOut');
+  var extra=[]; // files collected across several picks
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+  function unesc(s){return String(s).replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&');}
+  function safeName(n){ var d=n.lastIndexOf('.'), b=d>0?n.slice(0,d):n, e=d>0?n.slice(d):'';
+    b=b.normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,'-').replace(/[^A-Za-z0-9._-]/g,'');
+    return (b||'file')+e.replace(/\s+/g,'');}
+  function showList(){ list.innerHTML=extra.length?extra.map(function(f){return '<li>&#128206; '+esc(f.name)+'</li>';}).join(''):''; }
+  fIn.addEventListener('change',function(){ for(var i=0;i<fIn.files.length;i++){ var f=fIn.files[i]; if(!extra.some(function(x){return x.name===f.name;})) extra.push(f);} fIn.value=''; showList(); });
+  document.getElementById('zpClear').addEventListener('click',function(){ extra=[]; hIn.value=''; showList(); out.innerHTML=''; });
+  function loadZip(cb){ if(window.JSZip) return cb();
+    var s=document.createElement('script'); s.src='https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+    s.onload=cb; s.onerror=function(){ out.innerHTML='<div class="ic-line bad">&#10007; The zip maker couldn\'t load. Check your internet connection and try again, or <a href="#images-zip">zip it by hand</a>.</div>'; };
+    document.head.appendChild(s); }
+  function line(cls,html){ return '<div class="ic-line '+cls+'">'+html+'</div>'; }
+  go.addEventListener('click',function(){
+    out.innerHTML='';
+    var h=hIn.files[0];
+    if(!h){ out.innerHTML=line('bad','&#10007; Step 2: pick your game\'s .html file first.'); return; }
+    var rd=new FileReader();
+    rd.onload=function(){ loadZip(function(){ build(String(rd.result)); }); };
+    rd.readAsText(h);
+  });
+  function build(html){
+    var a=html.indexOf('<tw-storydata'), b=html.indexOf('</tw-storydata>');
+    if(a<0||b<0){ out.innerHTML=line('bad','&#10007; That file isn\'t a published Twine game. In Twine, use <b>Build &rarr; Publish to File</b> and pick the .html it saves. (Not a .twee, and not the Twine program itself.)'); return; }
+    var nm=(html.slice(a,a+400).match(/\bname="([^"]*)"/)||[])[1]||'my-game';
+    var byLower={}; extra.forEach(function(f){ byLower[f.name.toLowerCase()]=f; });
+    var used=[], fixed=[], ok={}, missing={}, web={}, http={}, code={};
+    function fix(ref){
+      var r=unesc(ref).trim();
+      if(!r || /^data:/i.test(r) || r.charAt(0)==='#') return null;
+      if(/^https:\/\//i.test(r)){ web[r]=1; return null; }
+      if(/^http:\/\//i.test(r)){ http[r]=1; return null; }
+      if(/[$+()'"]/.test(r)){ code[r]=1; return null; }
+      var base=r.replace(/^file:\/+/i,''); try{ base=decodeURIComponent(base); }catch(e){}
+      base=base.split(/[\\\/]/).pop();
+      var f=byLower[base.toLowerCase()];
+      if(!f){ missing[r]=1; return null; }
+      var nn=safeName(f.name); f._out=nn; if(used.indexOf(f)<0) used.push(f);
+      if(nn!==r){ if(!fixed.some(function(x){return x[0]===r;})) fixed.push([r,nn]); } else ok[r]=1;
+      return nn;
+    }
+    var story=html.slice(a,b);
+    story=story.replace(/(\bsrc=)(&quot;|&#39;)(.*?)\2/g,function(m,p,q,v){ var n=fix(v); return n===null?m:p+q+n+q; });
+    story=story.replace(/(\bsrc=)(["'])([^"']*)\2/g,function(m,p,q,v){ var n=fix(v); return n===null?m:p+q+n+q; });
+    story=story.replace(/url\(\s*(&quot;|&#39;|"|')?(.*?)\1\s*\)/g,function(m,q,v){ q=q||''; var n=fix(v); return n===null?m:'url('+q+n+q+')'; });
+    var newHtml=html.slice(0,a)+story+html.slice(b);
+    var unused=extra.filter(function(f){ return used.indexOf(f)<0; });
+    var zip=new JSZip(); zip.file('index.html',newHtml);
+    used.forEach(function(f){ zip.file(f._out,f); });
+    unused.forEach(function(f){ zip.file(f.name,f); });
+    var H='';
+    var K=function(o){return Object.keys(o);};
+    var good=K(ok).length+fixed.length;
+    H+=line('ok','&#10003; Your game is in the zip as <b>index.html</b>, next to '+(used.length+unused.length)+' file'+((used.length+unused.length)===1?'':'s')+'.');
+    if(fixed.length) H+=line('ok','&#10003; Fixed '+fixed.length+' picture name'+(fixed.length===1?'':'s')+' in your game:<ul>'+fixed.map(function(x){return '<li><code>'+esc(x[0])+'</code> &rarr; <code>'+esc(x[1])+'</code></li>';}).join('')+'</ul>');
+    if(K(ok).length) H+=line('ok','&#10003; Already fine: '+K(ok).map(function(x){return '<code>'+esc(x)+'</code>';}).join(', '));
+    if(K(missing).length) H+=line('bad','&#10007; Your game uses '+(K(missing).length===1?'this file':'these files')+', but you didn\'t add '+(K(missing).length===1?'it':'them')+' in step 3. '+(K(missing).length===1?'It':'They')+' will show as broken on itch. Find '+(K(missing).length===1?'it':'them')+', add '+(K(missing).length===1?'it':'them')+', and click Make my zip again:<ul>'+K(missing).map(function(x){return '<li><code>'+esc(x)+'</code></li>';}).join('')+'</ul>');
+    if(K(http).length) H+=line('bad','&#10007; '+(K(http).length===1?'This address starts':'These addresses start')+' with <code>http://</code> (no s). itch blocks those, so '+(K(http).length===1?'it':'they')+' won\'t show. Try the same address with <code>https://</code> in the <a href="#image-check">image link checker</a>:<ul>'+K(http).map(function(x){return '<li><code>'+esc(x)+'</code></li>';}).join('')+'</ul>');
+    if(unused.length) H+=line('warn','&#9888; I couldn\'t find '+(unused.length===1?'this file':'these files')+' by name in your game. '+(unused.length===1?'It\'s':'They\'re')+' in the zip anyway, unchanged, in case your code builds the name out of pieces (like <code>\'ana-\' + $mood + \'.png\'</code>). If so, the spelling and capitals must match your code exactly:<ul>'+unused.map(function(f){return '<li><code>'+esc(f.name)+'</code>'+(/[A-Z\s]/.test(f.name)?' (has capitals or spaces: risky)':'')+'</li>';}).join('')+'</ul>');
+    if(K(web).length) H+=line('warn','&#9888; Pictures from websites aren\'t in the zip (they don\'t need to be). If one shows as broken on itch, check it in the <a href="#image-check">image link checker</a>.');
+    if(!good && !K(missing).length && !extra.length) H+=line('warn','&#9888; Your game doesn\'t seem to use any pictures from your computer. If it only uses pictures from websites, you don\'t need a zip: upload the .html (renamed <code>index.html</code>) to itch.');
+    out.innerHTML=H+'<div class="tool-row"><span class="muted">Making the zip&hellip;</span></div>';
+    zip.generateAsync({type:'blob'}).then(function(blob){
+      var fn=safeName(nm).toLowerCase()+'-for-itch.zip', url=URL.createObjectURL(blob);
+      out.innerHTML=H+'<div class="tool-row"><a class="tool-btn" href="'+url+'" download="'+esc(fn)+'">Download '+esc(fn)+'</a></div>'+
+        '<p><b>Then check it:</b> unzip it (Windows: right-click the zip &rarr; <b>Extract All</b>. Mac: double-click it), and double-click the <code>index.html</code> inside. Your pictures should show. Then upload the zip to itch (<a href="#itch-upload">how</a>).</p>';
+    });
+  }
+})();
+</script>
+<script>
+// ---------- Look-and-feel builder ----------
+(function(){
+  var prev=document.getElementById('lfPrev'); if(!prev) return;
+  var $=function(id){return document.getElementById(id);};
+  var f={bg:$('lfBg'),text:$('lfText'),link:$('lfLink'),hover:$('lfHover'),font:$('lfFont'),size:$('lfSize'),box:$('lfBox'),boxCol:$('lfBoxCol'),img:$('lfImg'),hide:$('lfHide')};
+  var code=$('lfCode'), imgNote=$('lfImgNote');
+  var P={
+    twine:{bg:'#000000',text:'#ffffff',link:'#4169e1',hover:'#00bfff',font:'Georgia, serif',size:'24px',box:'none',boxCol:'#222222'},
+    paper:{bg:'#e9e2d0',text:'#2b2b2b',link:'#8b2e16',hover:'#c0392b',font:'"Times New Roman", Times, serif',size:'24px',box:'solid',boxCol:'#fbf7ea'},
+    night:{bg:'#14162b',text:'#e8e6f0',link:'#ffcc66',hover:'#ffffff',font:'Georgia, serif',size:'24px',box:'none',boxCol:'#222222'},
+    terminal:{bg:'#050805',text:'#33ff66',link:'#b6ffc8',hover:'#ffffff',font:'"Courier New", Courier, monospace',size:'18px',box:'none',boxCol:'#222222'},
+    office:{bg:'#eef1f6',text:'#1d1f24',link:'#1a73e8',hover:'#0b3d91',font:'Arial, Helvetica, sans-serif',size:'18px',box:'solid',boxCol:'#ffffff'},
+    arcade:{bg:'#1a0033',text:'#ffffff',link:'#ff3fa4',hover:'#ffe600',font:'Impact, "Arial Black", sans-serif',size:'30px',box:'dark',boxCol:'#222222'}
+  };
+  function apply(name){ var p=P[name]; Object.keys(p).forEach(function(k){ f[k].value=p[k]; }); render(); }
+  function rgba(hex,a){ var n=parseInt(hex.slice(1),16); return 'rgba('+(n>>16&255)+', '+(n>>8&255)+', '+(n&255)+', '+a+')'; }
+  function css(){
+    var L=['/* My game\'s look (made with the look builder) */','tw-story {','  background-color: '+f.bg.value+';','  color: '+f.text.value+';','  font-family: '+f.font.value+';','  font-size: '+f.size.value+';'];
+    var img=f.img.value.trim().replace(/"/g,'');
+    if(img){ L.push('  background-image: url("'+img+'");','  background-size: cover;','  background-position: center;','  background-attachment: fixed;'); }
+    L.push('}');
+    var b=f.box.value;
+    if(b!=='none'){
+      var c=b==='dark'?'rgba(0, 0, 0, 0.75)':b==='light'?'rgba(255, 255, 255, 0.8)':f.boxCol.value;
+      L.push('tw-passage {','  background-color: '+c+';','  padding: 1em;','  border-radius: 10px;','}');
+    }
+    L.push('tw-link, tw-link.visited {','  color: '+f.link.value+';','}','tw-link:hover {','  color: '+f.hover.value+';','}');
+    if(f.hide.checked) L.push('tw-sidebar {','  display: none;','}');
+    return L.join('\n');
+  }
+  function render(){
+    var c=css(); code.textContent=c;
+    var img=f.img.value.trim(); imgNote.style.display=(img && !/^https:\/\//i.test(img))?'':'none';
+    var pc=img && !/^https:\/\//i.test(img) ? c.replace(/  background-image: url\("[^"]*"\);\n/,'') : c;
+    var base='html,body{margin:0;height:100%}tw-story{display:block;min-height:100%;box-sizing:border-box;padding:6% 8%;font:24px/1.5 Georgia,serif;background:#000;color:#fff}tw-passage{display:block}tw-link{color:#4169e1;font-weight:bold;cursor:pointer}tw-link:hover{color:#00bfff}tw-sidebar{position:absolute;left:12px;top:30px;font-size:30px;opacity:.35;color:inherit}';
+    var doc='<!doctype html><html><head><style>'+base+'</style><style>'+pc+'</style></head><body><tw-story><tw-sidebar>&#8630;</tw-sidebar><tw-passage>Your phone buzzes. It\'s your manager again.<br><br><tw-link>Answer it</tw-link><br><tw-link class="visited">Ignore it</tw-link></tw-passage></tw-story></body></html>';
+    prev.srcdoc=doc;
+  }
+  document.querySelectorAll('#lookTool [data-preset]').forEach(function(b){ b.addEventListener('click',function(){ apply(b.getAttribute('data-preset')); }); });
+  Object.keys(f).forEach(function(k){ f[k].addEventListener('input',render); f[k].addEventListener('change',render); });
+  apply('twine');
+})();
+</script>
 </body>
 </html>
