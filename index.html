@@ -310,6 +310,7 @@ section.group:has(article.q.show) > p.note{display:block}
 .more-problems summary{cursor:pointer;font-weight:600}
 .more-problems ul{margin:8px 0 2px}
 .more-problems li{margin:4px 0}
+.all-problems{display:inline-block;margin:10px 0 4px;font-weight:600}
 </style>
 </head>
 <body>
@@ -317,7 +318,7 @@ section.group:has(article.q.show) > p.note{display:block}
 <header class="top">
   <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
   <a class="brand" href="#">Twine Project FAQ <span>&middot; Views on Games and Play</span></a>
-  <span class="ver" title="Last updated">Updated Nov 20, 2026 &middot; v13</span>
+  <span class="ver" title="Last updated">Updated Nov 20, 2026 &middot; v15</span>
   <label class="search">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
     <input id="q" type="search" placeholder="Search: images, itch, variables, zip..." autocomplete="off">
@@ -331,7 +332,7 @@ section.group:has(article.q.show) > p.note{display:block}
 <main id="main">
 <div id="home">
 <h1>Twine Project FAQ</h1>
-<p class="ver-home">Updated Nov 20, 2026 &middot; v13</p>
+<p class="ver-home">Updated Nov 20, 2026 &middot; v15</p>
 <p class="lede"><b>Something broken?</b> Click your problem below.<br><b>Learning Twine?</b> Go step by step: start at Step 1, then click <b>Next</b> at the bottom of each page.<br><b>Still stuck?</b> Send me a Mio.</p>
 <a class="banner" href="#never-lose"><span class="pi">💾</span><span><b>Before you start anything:</b> how to never lose your game. Two minutes now, or redo everything later.</span></a>
 <div class="pj-buttons"><span>Doing a play journal?</span><a href="#pj6" data-pj>PJ #6</a><a href="#pj8" data-pj>PJ #8</a><a href="#pj14" data-pj>PJ #14</a><a href="#pj15" data-pj>PJ #15</a><a href="#pjfinal" data-pj>Final project</a><a href="#pj16" data-pj>PJ #16</a></div>
@@ -343,17 +344,7 @@ section.group:has(article.q.show) > p.note{display:block}
   <a href="#text-not-updating"><span class="pi">🔢</span>I clicked, but the number on screen didn't change</a>
   <a href="#lost-work"><span class="pi">😱</span>Help, my game is gone</a>
 </div>
-<details class="more-problems"><summary>Something else? See 7 more problems</summary>
-  <ul>
-    <li><a href="#smart-quotes">I copied code and it doesn't work, even though it looks exactly right.</a></li>
-    <li><a href="#test-zero">My game acts weird when I test from the middle (stats say 0, choices forgotten).</a></li>
-    <li><a href="#wrong-start">My game starts in the wrong passage.</a></li>
-    <li><a href="#undo-trouble">I clicked the little back arrow, and now my stats or choices are wrong.</a></li>
-    <li><a href="#music-silent">My music doesn't play.</a></li>
-    <li><a href="#itch-cramped">My game looks squished or cut off on itch.</a></li>
-    <li><a href="#mistakes">Don't lose easy marks: what should I check before I submit?</a></li>
-  </ul>
-</details>
+<a class="all-problems" href="#g-trouble">🔧 Something else? See all 13 problems &rarr;</a>
 <h2 class="steps-h">Step by step</h2>
 <div id="cards" class="cards"></div>
 <h2 class="steps-h" id="pj-paths-h">Doing a Twine play journal? Read these, in order</h2>
@@ -367,6 +358,26 @@ section.group:has(article.q.show) > p.note{display:block}
 </div>
 </div>
 <div id="crumb" class="crumb"></div>
+<div id="trouble-home" style="display:none">
+<h1>Troubleshooting</h1>
+<p class="lede">Something isn't working? Click your problem. Each one walks you through the fix.</p>
+<div class="picker">
+  <a href="#images-why"><span class="pi">🖼️</span>Why aren't my pictures showing up?</a>
+  <a href="#twee-vs-html"><span class="pi">📄</span>.twee or .html? I'm not sure which file is my game.</a>
+  <a href="#collab-options"><span class="pi">👥</span>We're working on one game as a group, and it's a mess.</a>
+  <a href="#itch-broken"><span class="pi">🔗</span>My itch link works for me, but other people say it's broken.</a>
+  <a href="#text-not-updating"><span class="pi">🔢</span>I clicked, my variable changed, but the number on screen stayed the same.</a>
+  <a href="#variable-mistakes"><span class="pi">🐞</span>My variable code doesn't work. What did I get wrong?</a>
+  <a href="#lost-work"><span class="pi">😱</span>Help, my game is gone!</a>
+  <a href="#smart-quotes"><span class="pi">📋</span>I copied code and it doesn't work, even though it looks exactly right.</a>
+  <a href="#test-zero"><span class="pi">0️⃣</span>My game acts weird when I test from the middle (stats say 0, choices forgotten).</a>
+  <a href="#wrong-start"><span class="pi">🚀</span>My game starts in the wrong passage.</a>
+  <a href="#undo-trouble"><span class="pi">↩️</span>I clicked the little back arrow, and now my stats or choices are wrong.</a>
+  <a href="#music-silent"><span class="pi">🔇</span>My music doesn't play.</a>
+  <a href="#itch-cramped"><span class="pi">📐</span>My game looks squished or cut off on itch.</a>
+</div>
+<p class="note">Not on the list? Try the search bar at the top. Still stuck? Click <b>Copy link to this question</b> on the closest one and send it to me in a Mio, with a screenshot.</p>
+</div>
 <div id="results" class="results"></div>
 <div id="live" class="sr" aria-live="polite"></div>
 
@@ -437,7 +448,6 @@ section.group:has(article.q.show) > p.note{display:block}
 <tr><td><a href="https://rana-strange.itch.io/twine-bundle" target="_blank" rel="noopener">Twine assets</a> / <a href="https://candygiants.itch.io/twine-2-harlowe-css-pack-1" target="_blank" rel="noopener">Harlowe CSS pack</a></td><td>Download and open in Twine to see how they're made, or as a starting point.</td></tr>
 </table></div>
 </article>
-
 </section>
 
 <!-- ============================ GETTING STARTED ============================ -->
@@ -504,6 +514,70 @@ section.group:has(article.q.show) > p.note{display:block}
 <p>Not sure? Rename the story already in Twine first (click its card, then <b>Rename</b>), then import. You'll have both.</p>
 </article>
 
+<article class="q" id="resources" data-short="All the links (tutorials, docs, tools)">
+<h3>Where can I find tutorials, documentation, and tools?</h3>
+<p class="sit">This page didn't cover what you're trying to do, or you learn better from a video.</p>
+<p class="short">Everything is below. Before you use any tutorial, check that it says "Harlowe" (<a href="#harlowe">why</a>).</p>
+
+<h4 class="rh">Start here</h4>
+<div class="tablewrap"><table>
+<tr><th>Link</th><th>What it's for</th></tr>
+<tr><td><a href="https://twinery.org/" target="_blank" rel="noopener">Twine</a></td><td>Download it, or use it in your browser (Chrome works best).</td></tr>
+<tr><td><a href="https://twinery.org/cookbook/starting/twine2/firststory.html" target="_blank" rel="noopener">Your First Story</a></td><td>A great place to start.</td></tr>
+<tr><td><a href="https://twinery.org/reference/en/" target="_blank" rel="noopener">The Twine Reference</a></td><td>The official guide to the Twine app itself: the library, importing, saving, publishing.</td></tr>
+<tr><td><a href="https://www.youtube.com/watch?v=1jukyU4EK2M" target="_blank" rel="noopener">20-minute video intro</a> (<a href="https://www.youtube.com/playlist?list=PLFgjYYTq6xyjBtXJTvEaBTVUWxirY6q24" target="_blank" rel="noopener">whole playlist</a>)</td><td>A video starting guide. Careful: a lot of the later videos use a different story format. Check each one says Harlowe.</td></tr>
+<tr><td><a href="https://docs.wixstatic.com/ugd/d1fd96_4cea140f718a483689aa26a67981671c.pdf" target="_blank" rel="noopener">Twine Intro Manual (PDF)</a></td><td>A good guide, but harder to skim by topic.</td></tr>
+<tr><td><a href="https://blogs.stockton.edu/textscape/files/2015/04/A-Twine-Cheat-Sheet.pdf" target="_blank" rel="noopener">A Twine cheat sheet (PDF)</a></td><td>A quick reference for the essentials.</td></tr>
+</table></div>
+
+<h4 class="rh">The official references</h4>
+<div class="tablewrap"><table>
+<tr><th>Link</th><th>What it's for</th></tr>
+<tr><td><a href="https://twinery.org/cookbook/" target="_blank" rel="noopener">The Twine Cookbook</a></td><td>Friendly explanations of almost everything you need for the project.</td></tr>
+<tr><td><a href="https://twine2.neocities.org/" target="_blank" rel="noopener">The Harlowe manual</a></td><td>More in-depth than the Cookbook. Looks intimidating; the sidebar is your friend.</td></tr>
+<tr><td><a href="https://twine2.neocities.org/#introduction_example-stories" target="_blank" rel="noopener">Example games</a></td><td>Games from the Harlowe manual. Download them, import them into Twine, and see how they're made.</td></tr>
+<tr><td><a href="https://www.youtube.com/playlist?list=PLlXuD3kyVEr5jWoG0oDygKWOgFC3qrKN-" target="_blank" rel="noopener">Dan Cox's Twine playlist</a></td><td>Intermediate to advanced topics. Watch at least through the video on conditional statements. Check each one says Harlowe.</td></tr>
+<tr><td><a href="https://itch.io/docs/creators/html5" target="_blank" rel="noopener">itch.io HTML5 docs</a></td><td>itch's own rules for uploading browser games.</td></tr>
+</table></div>
+
+<h4 class="rh">Macros, hooks, and if/else</h4>
+<div class="tablewrap"><table>
+<tr><th>Link</th><th>What it's for</th></tr>
+<tr><td><a href="https://twinery.org/cookbook/terms/terms_macros.html" target="_blank" rel="noopener">What a macro is</a></td><td>The basic unit of code in Harlowe. Full list: the <a href="https://twine2.neocities.org/#markup_macro" target="_blank" rel="noopener">Harlowe manual</a> sidebar.</td></tr>
+<tr><td><a href="https://twine2.neocities.org/#markup_hook" target="_blank" rel="noopener">What a hook is</a></td><td>Text in square brackets that a macro acts on. The backbone of if/else.</td></tr>
+<tr><td><a href="https://twinery.org/cookbook/conditionalstatements/harlowe/harlowe_conditionalstatements.html" target="_blank" rel="noopener">Conditionals (Cookbook)</a> and <a href="https://twine2.neocities.org/#macro_if" target="_blank" rel="noopener">(if:) in the manual</a></td><td>Good examples of if/else.</td></tr>
+<tr><td><a href="https://twine2.neocities.org/#type_boolean" target="_blank" rel="noopener">Boolean data</a></td><td>The list of ways to compare things (greater than, less than, and so on).</td></tr>
+</table></div>
+
+<h4 class="rh">Variables and math</h4>
+<div class="tablewrap"><table>
+<tr><th>Link</th><th>What it's for</th></tr>
+<tr><td><a href="https://www.jezner.com/twine-2-tutorial-coding-with-variables/" target="_blank" rel="noopener">How to code variables</a> and <a href="https://damonwakes.wordpress.com/2018/01/24/twine-for-beginners-using-variables/" target="_blank" rel="noopener">Twine variables for beginners</a></td><td>Two articles explaining what variables are and how they work.</td></tr>
+<tr><td><a href="https://twine2.neocities.org/#macro_set" target="_blank" rel="noopener">The (set:) macro</a></td><td>How you create and change variables. Read the part about changing an existing variable (<code>(set: $a to $a + 1)</code>).</td></tr>
+<tr><td><a href="https://en.wikipedia.org/wiki/Camel_case" target="_blank" rel="noopener">camelCase</a></td><td>How to name variables without spaces.</td></tr>
+<tr><td><a href="https://twinery.org/cookbook/dicerolling/harlowe/harlowe_dicerolling.html" target="_blank" rel="noopener">Dice rolling</a></td><td>Using <code>(random:)</code> to add chance.</td></tr>
+</table></div>
+
+<h4 class="rh">Images, art, and sound</h4>
+<div class="tablewrap"><table>
+<tr><th>Link</th><th>What it's for</th></tr>
+<tr><td><a href="https://twinery.org/cookbook/images/harlowe/harlowe_images.html" target="_blank" rel="noopener">Images (Cookbook)</a></td><td>The official image recipe. The steps on this page go further.</td></tr>
+<tr><td><a href="https://imgur.com/" target="_blank" rel="noopener">Imgur</a></td><td>Free image hosting, to get an online address for your picture. (Google Drive won't work.)</td></tr>
+<tr><td><a href="https://www.piskelapp.com/" target="_blank" rel="noopener">Piskel</a></td><td>A great tool for pixel art. It even makes animated gifs.</td></tr>
+<tr><td><a href="https://www.pixilart.com/" target="_blank" rel="noopener">Pixilart</a></td><td>Another pixel art tool, more advanced and Photoshop-like.</td></tr>
+<tr><td><a href="https://candle.itch.io/bitsy-audio" target="_blank" rel="noopener">Bitsy Audio</a></td><td>The easiest way to add background music. (Yes, it's a Bitsy tool. No, that's not a typo.)</td></tr>
+<tr><td><a href="https://twinelab.net/harlowe-audio/#/" target="_blank" rel="noopener">Harlowe Audio Library</a></td><td>If you want more control over sound.</td></tr>
+</table></div>
+
+<h4 class="rh">Style and fancy stuff</h4>
+<div class="tablewrap"><table>
+<tr><th>Link</th><th>What it's for</th></tr>
+<tr><td><a href="https://twine2.neocities.org/#markup_link" target="_blank" rel="noopener">Link markup</a></td><td>Using <code>-&gt;</code> in links so you don't reveal the passage name.</td></tr>
+<tr><td><a href="https://twine2.neocities.org/#markup_style" target="_blank" rel="noopener">Text formatting</a></td><td>Bold, italics, and more. It gets overwhelming in a hurry.</td></tr>
+<tr><td><a href="https://www.youtube.com/playlist?list=PLklITFhXtPCCKadv-0Gcbqoj3OCev695D" target="_blank" rel="noopener">Twine Details and Aesthetics</a></td><td>A playlist on changing how your game looks (mostly CSS).</td></tr>
+<tr><td><a href="https://gersande.com/blog/designing-inventories-in-twine-2-with-the-built-in-harlowe-macros/" target="_blank" rel="noopener">Inventories in Harlowe</a></td><td>Want to build a complicated inventory? I wouldn't recommend it, but here you go.</td></tr>
+</table></div>
+</article>
 </section>
 
 <!-- ============================ WORKING TOGETHER ============================ -->
@@ -562,6 +636,7 @@ section.group:has(article.q.show) > p.note{display:block}
 <h3>How do we write the game in a Google Doc and bring it into Twine?</h3>
 <p class="sit">Your group wants to write at the same time, in one place, without passing a file around.</p>
 <p class="short">Write the passages in a shared Google Doc using a simple format called <b>Twee</b>, then import it into Twine.</p>
+<div class="call warn"><b class="k">A .twee file is not your game</b><p>It only opens inside Twine. To submit on Lea or upload to itch, always use <b>Build &rarr; Publish to File</b>, which makes the .html. <a href="#twee-vs-html">See the difference</a>.</p></div>
 <p>In Twee, each passage starts with two colons and its name. Everything under it is the passage: text, links, and code.</p>
 <div class="codewrap"><div class="label">Your shared Google Doc</div><pre class="hl">:: StoryTitle
 Our Game
@@ -612,7 +687,6 @@ Your badge is in the locker.</pre></div>
   <li>Only one person should have a <code>startup</code> passage with the starting values. Combine everyone's <code>(set:)</code> lines into that one.</li>
 </ul></div>
 </article>
-
 </section>
 
 <!-- ============================ LESSONS ============================ -->
@@ -849,34 +923,6 @@ Rating: $rating
 <p>A crossed-out choice can make an argument all by itself: it shows the player what's available to <em>someone else</em>.</p>
 </article>
 
-<article class="q" id="variable-mistakes" data-short="Variable code that breaks">
-<h3>My variable code doesn't work. What did I get wrong?</h3>
-<p class="sit">You wrote some variable code, and Twine shows an error, or it just doesn't do anything.</p>
-<p class="short">Check it against this list. These are the mistakes that break variables most often.</p>
-<ul>
-  <li>Use <code>to</code> when setting and <code>is</code> when checking. Not <code>=</code>.
-<div class="codewrap bad"><div class="label">&#10007; Doesn't work</div><pre class="hl">(set: $energy = 10)
-(if: $hasBadge = true)[...]</pre></div>
-<div class="codewrap good"><div class="label">&#10003; Works</div><pre class="hl">(set: $energy to 10)
-(if: $hasBadge is true)[...]</pre></div></li>
-  <li>Capitals matter: <code>$Energy</code> and <code>$energy</code> are two different boxes.
-<div class="codewrap bad"><div class="label">&#10007; Shows 0, because $Energy was never set</div><pre class="hl">(set: $energy to 10)
-You have $Energy energy left.</pre></div></li>
-  <li>The hook goes <b>right after</b> the <code>(if:)</code>, with no space.
-<div class="codewrap bad"><div class="label">&#10007; Doesn't work (space before the bracket)</div><pre class="hl">(if: $hasBadge is true) [The scanner beeps green.]</pre></div>
-<div class="codewrap good"><div class="label">&#10003; Works</div><pre class="hl">(if: $hasBadge is true)[The scanner beeps green.]</pre></div></li>
-  <li>For "not equal", use <code>is not</code>, not <code>!=</code>.
-<div class="codewrap bad"><div class="label">&#10007; Twine shows an error</div><pre class="hl">(if: $energy != 0)[You can still work.]</pre></div>
-<div class="codewrap good"><div class="label">&#10003; Works</div><pre class="hl">(if: $energy is not 0)[You can still work.]</pre></div></li>
-  <li>No quotes around <code>true</code>, <code>false</code>, or numbers. Quotes turn them into text.
-<div class="codewrap bad"><div class="label">&#10007; Never beeps green, and Twine doesn't warn you</div><pre class="hl">(set: $hasBadge to "true")
-(if: $hasBadge is true)[The scanner beeps green.]</pre></div>
-<div class="codewrap good"><div class="label">&#10003; Works</div><pre class="hl">(set: $hasBadge to true)</pre></div></li>
-  <li>Curly quotes from Google Docs or PDFs break everything (<a href="#smart-quotes">fix</a>). Code from other websites may be for a different format (<a href="#harlowe">why</a>).</li>
-  <li>Code running at the wrong moment? Read <a href="#how-code-runs">how Twine runs your code</a>. Variables showing 0 when you test? <a href="#test-zero">Fix</a>. Number on screen not changing after a click? <a href="#text-not-updating">Fix</a>.</li>
-</ul>
-</article>
-
 <article class="q" id="debugger" data-short="The debugger (test mode)">
 <h3>How do I see what my variables are doing? (the debugger)</h3>
 <p class="sit">Something's off: a variable doesn't seem to change, a choice doesn't count, the game says 0. You need to see what's actually going on inside your game.</p>
@@ -897,11 +943,12 @@ You have $Energy energy left.</pre></div></li>
   <li>A variable you set isn't in the list at all? It never got set. Check spelling and capitals, and your <a href="#startup">startup passage</a>.</li>
   <li>The panel says <code>the string "true"</code> (or <code>the string "18"</code>) when you wanted true/false or a number? You used quotes (<a href="#variable-mistakes">fix</a>).</li>
 </ul>
+<p>Found the problem but not sure what's wrong with your code? Check <a href="#variable-mistakes">the most common variable mistakes</a>.</p>
 </article>
 </section>
 <section class="group" id="g-images" data-icon="🖼️" data-title="Images" data-step="6">
 <h2>Images</h2>
-<p class="note">Your final project needs images (check the table in the project document). Pick the option that matches where your picture is. Broken picture? <a href="#images-why">Go here</a>. Pictures saved on your computer? The <a href="#zip-builder">zip maker</a> packs them for itch.</p>
+<p class="note">Your final project needs images (check the table in the project document). Pick the option that matches where your picture is. Broken picture? <a href="#images-why">Go here</a>. Pictures saved on your computer? The <a href="#zip-builder">zip maker</a> packs them for itch. Want one picture on top of another? Use the <a href="#layer-images">layering tool</a>.</p>
 
 <article class="q" id="images-online" data-short="Option 1: an image already online">
 <h3>Step by step: how do I add an image I found online?</h3>
@@ -1026,47 +1073,6 @@ You have $Energy energy left.</pre></div></li>
 <p>New to the Stylesheet? <a href="#stylesheet">Start here</a>.</p>
 <div class="call warn"><b class="k">Copy it exactly</b><p>CSS is fussy: every <code>{</code> needs a <code>}</code>, lines end with <code>;</code>, and quotes must be straight (<a href="#smart-quotes">why</a>).</p></div>
 </article>
-
-<article class="q" id="layer-images" data-short="Images on top of images">
-<h3>How do I put one image on top of another?</h3>
-<p class="sit">You want a character standing in a room, or a badge that appears on the desk once the player picks it up.</p>
-<p class="note">Just want one picture in a passage? Start with <a href="#images-online">an image already online</a> or <a href="#images-zip">images on your computer</a>.</p>
-<p class="short">Use the tool below. Fill in boxes 1 and 2, move the top picture in box 3, then copy the code in box 5 into your passage.</p>
-<div class="layer-tool" id="layerTool">
-  <div class="lt-step"><div class="lt-num">1</div><div class="lt-body"><b>The background picture</b> (the big one at the back)
-    <div class="lt-fields">
-      <label>File name or https:// address<input id="ltBottom" value="office.jpg"></label>
-      <label>How wide, in pixels<input id="ltBW" type="number" value="480" min="50" max="1200"></label>
-    </div></div></div>
-  <div class="lt-step"><div class="lt-num">2</div><div class="lt-body"><b>The picture that goes on top</b> (the small one in front)
-    <div class="lt-fields">
-      <label>File name or https:// address<input id="ltTop" value="badge.png"></label>
-      <label>How wide, in pixels<input id="ltTW" type="number" value="120" min="10" max="1200"></label>
-    </div></div></div>
-  <div class="lt-step"><div class="lt-num">3</div><div class="lt-body"><b>Move the top picture to where you want it</b>
-    <p class="lt-hint">The picture with the blue dashed outline and the <b>DRAG ME</b> tag is your top picture. <b>On a computer:</b> put your mouse on it, hold the left button down, move the mouse, and let go. <b>On a phone:</b> use the two number boxes under the preview instead.</p>
-    <div class="lt-stage-wrap"><div class="lt-stage" id="ltStage"><img id="ltBImg" alt="Background picture preview" src="images/sample-office.jpg"><img id="ltTImg" alt="Top picture preview: drag to move" src="images/sample-badge.png" tabindex="0"><span class="lt-tag" id="ltTag">&#10021; DRAG ME</span></div></div>
-    <p class="note" id="ltSample">Until you type full https:// addresses in boxes 1 and 2, the preview shows sample pictures. The code still uses your file names.</p>
-    <div class="lt-fields">
-      <label>Distance from the left edge (pixels)<input id="ltX" type="number" value="300" min="0"></label>
-      <label>Distance from the top edge (pixels)<input id="ltY" type="number" value="160" min="0"></label>
-    </div></div></div>
-  <div class="lt-step"><div class="lt-num">4</div><div class="lt-body"><b>Optional:</b> only show the top picture after something happens (like picking up the badge)
-    <div class="lt-fields">
-      <label class="lt-check"><input id="ltIf" type="checkbox"> Only show it when this variable is true:</label>
-      <label>Variable<input id="ltVar" value="$hasBadge"></label>
-    </div></div></div>
-  <div class="lt-step"><div class="lt-num">5</div><div class="lt-body"><b>Click Copy, and paste it into your passage.</b> Keep it all on one line.
-    <div class="codewrap"><div class="label">Your code</div><pre class="hl" id="ltCode"></pre></div></div></div>
-</div>
-<ul>
-  <li>The top image should be a <b>PNG with a transparent background</b>, or it'll sit there as a rectangle. (Piskel and Pixilart save transparent PNGs.)</li>
-  <li>Keep the code on <b>one line</b>, exactly as the tool gives it.</li>
-  <li>Using file names (not addresses)? Then this needs <a href="#images-zip">the zip method</a>, like any image on your computer.</li>
-</ul>
-<figure><img src="images/layered-badge.webp" alt="An office picture with a badge image layered on top" loading="lazy" style="max-width:min(100%,480px)"><figcaption>What it looks like in the game.</figcaption></figure>
-<p class="note">If you edit the code by hand: the <code>(if:)</code> has to go around the <em>whole</em> thing, like the tool does it. An <code>(if:)</code> placed inside the box makes the top image land below the picture instead of on it.</p>
-</article>
 </section>
 
 <!-- ============================ HOW DO I...? ============================ -->
@@ -1153,6 +1159,20 @@ Energy: $energy | Rating: $rating</pre></div></li>
 </ol>
 <p>Twine writes the code for you. Easy to overdo, so go light.</p>
 </article>
+
+<article class="q" id="history" data-short="Advanced: remember where the player has been">
+<h3>How can my game react to where the player has already been?</h3>
+<p class="sit">You want the game to remember what the player has seen, without making a variable for everything: a different message the second time they enter a room, a choice that only appears if they've already visited the break room.</p>
+<p class="short">Harlowe remembers every passage the player has visited. Ask it with <code>visits</code>, <code>(visited:)</code>, or <code>(history:)</code>.</p>
+<p><b>Has the player been to a passage before?</b> Use <code>(visited: "Name")</code>:</p>
+<div class="codewrap good"><pre class="hl">(if: (visited: "Break Room"))[You've already had your break today.](else:)[ [[Take your break-&gt;Break Room]] ]</pre></div>
+<p><b>Is this the first time in <em>this</em> passage?</b> <code>visits</code> counts how many times the player has been in the current passage (this visit included):</p>
+<div class="codewrap good"><pre class="hl">(if: visits is 1)[First day on the job.](else:)[Back again. Visit number (print: visits).]</pre></div>
+<p class="note">To <em>show</em> the number, use <code>(print: visits)</code>. Typing just "visits" in your text prints the word "visits".</p>
+<p><b>Another way to check:</b> <code>(history:)</code> is the list of every passage visited, in order. Check it with <code>contains</code>:</p>
+<div class="codewrap good"><pre class="hl">(if: (history:) contains "Break Room")[You've already had your break today.]</pre></div>
+<p>Good for arguments about memory, routine, or repetition: the game can notice that the player keeps coming back to the same place.</p>
+</article>
 </section>
 
 <!-- ============================ ITCH.IO ============================ -->
@@ -1163,6 +1183,7 @@ Energy: $energy | Rating: $rating</pre></div></li>
 <h3>How do I upload my game to itch.io?</h3>
 <p class="sit">Your game is ready to playtest (or submit), and you need a link people can click and play in their browser.</p>
 <p class="short">Make a free itch account, upload your .html (or .zip), and change four settings. Then test the link.</p>
+<div class="call warn"><b class="k">A .twee file is not your game</b><p>It only opens inside Twine. To submit on Lea or upload to itch, always use <b>Build &rarr; Publish to File</b>, which makes the .html. <a href="#twee-vs-html">See the difference</a>.</p></div>
 <ol class="steps">
   <li>Make a free account at <a href="https://itch.io" target="_blank" rel="noopener">itch.io</a> with an email you actually check.</li>
   <li>Click the arrow next to your avatar (top right) &rarr; <b>Upload new project</b>.</li>
@@ -1201,7 +1222,6 @@ Energy: $energy | Rating: $rating</pre></div></li>
   <li>Save, and test in incognito. Your link stays the same, so you don't need to resubmit it.</li>
 </ol>
 </article>
-
 </section>
 
 <!-- ============================ SUBMITTING ============================ -->
@@ -1243,125 +1263,133 @@ Energy: $energy | Rating: $rating</pre></div></li>
 </ul>
 </article>
 
-<article class="q" id="resources" data-short="All the links (tutorials, docs, tools)">
-<h3>Where can I find tutorials, documentation, and tools?</h3>
-<p class="sit">This page didn't cover what you're trying to do, or you learn better from a video.</p>
-<p class="short">Everything is below. Before you use any tutorial, check that it says "Harlowe" (<a href="#harlowe">why</a>).</p>
-
-<h4 class="rh">Start here</h4>
-<div class="tablewrap"><table>
-<tr><th>Link</th><th>What it's for</th></tr>
-<tr><td><a href="https://twinery.org/" target="_blank" rel="noopener">Twine</a></td><td>Download it, or use it in your browser (Chrome works best).</td></tr>
-<tr><td><a href="https://twinery.org/cookbook/starting/twine2/firststory.html" target="_blank" rel="noopener">Your First Story</a></td><td>A great place to start.</td></tr>
-<tr><td><a href="https://twinery.org/reference/en/" target="_blank" rel="noopener">The Twine Reference</a></td><td>The official guide to the Twine app itself: the library, importing, saving, publishing.</td></tr>
-<tr><td><a href="https://www.youtube.com/watch?v=1jukyU4EK2M" target="_blank" rel="noopener">20-minute video intro</a> (<a href="https://www.youtube.com/playlist?list=PLFgjYYTq6xyjBtXJTvEaBTVUWxirY6q24" target="_blank" rel="noopener">whole playlist</a>)</td><td>A video starting guide. Careful: a lot of the later videos use a different story format. Check each one says Harlowe.</td></tr>
-<tr><td><a href="https://docs.wixstatic.com/ugd/d1fd96_4cea140f718a483689aa26a67981671c.pdf" target="_blank" rel="noopener">Twine Intro Manual (PDF)</a></td><td>A good guide, but harder to skim by topic.</td></tr>
-<tr><td><a href="https://blogs.stockton.edu/textscape/files/2015/04/A-Twine-Cheat-Sheet.pdf" target="_blank" rel="noopener">A Twine cheat sheet (PDF)</a></td><td>A quick reference for the essentials.</td></tr>
-</table></div>
-
-<h4 class="rh">The official references</h4>
-<div class="tablewrap"><table>
-<tr><th>Link</th><th>What it's for</th></tr>
-<tr><td><a href="https://twinery.org/cookbook/" target="_blank" rel="noopener">The Twine Cookbook</a></td><td>Friendly explanations of almost everything you need for the project.</td></tr>
-<tr><td><a href="https://twine2.neocities.org/" target="_blank" rel="noopener">The Harlowe manual</a></td><td>More in-depth than the Cookbook. Looks intimidating; the sidebar is your friend.</td></tr>
-<tr><td><a href="https://twine2.neocities.org/#introduction_example-stories" target="_blank" rel="noopener">Example games</a></td><td>Games from the Harlowe manual. Download them, import them into Twine, and see how they're made.</td></tr>
-<tr><td><a href="https://www.youtube.com/playlist?list=PLlXuD3kyVEr5jWoG0oDygKWOgFC3qrKN-" target="_blank" rel="noopener">Dan Cox's Twine playlist</a></td><td>Intermediate to advanced topics. Watch at least through the video on conditional statements. Check each one says Harlowe.</td></tr>
-<tr><td><a href="https://itch.io/docs/creators/html5" target="_blank" rel="noopener">itch.io HTML5 docs</a></td><td>itch's own rules for uploading browser games.</td></tr>
-</table></div>
-
-<h4 class="rh">Macros, hooks, and if/else</h4>
-<div class="tablewrap"><table>
-<tr><th>Link</th><th>What it's for</th></tr>
-<tr><td><a href="https://twinery.org/cookbook/terms/terms_macros.html" target="_blank" rel="noopener">What a macro is</a></td><td>The basic unit of code in Harlowe. Full list: the <a href="https://twine2.neocities.org/#markup_macro" target="_blank" rel="noopener">Harlowe manual</a> sidebar.</td></tr>
-<tr><td><a href="https://twine2.neocities.org/#markup_hook" target="_blank" rel="noopener">What a hook is</a></td><td>Text in square brackets that a macro acts on. The backbone of if/else.</td></tr>
-<tr><td><a href="https://twinery.org/cookbook/conditionalstatements/harlowe/harlowe_conditionalstatements.html" target="_blank" rel="noopener">Conditionals (Cookbook)</a> and <a href="https://twine2.neocities.org/#macro_if" target="_blank" rel="noopener">(if:) in the manual</a></td><td>Good examples of if/else.</td></tr>
-<tr><td><a href="https://twine2.neocities.org/#type_boolean" target="_blank" rel="noopener">Boolean data</a></td><td>The list of ways to compare things (greater than, less than, and so on).</td></tr>
-</table></div>
-
-<h4 class="rh">Variables and math</h4>
-<div class="tablewrap"><table>
-<tr><th>Link</th><th>What it's for</th></tr>
-<tr><td><a href="https://www.jezner.com/twine-2-tutorial-coding-with-variables/" target="_blank" rel="noopener">How to code variables</a> and <a href="https://damonwakes.wordpress.com/2018/01/24/twine-for-beginners-using-variables/" target="_blank" rel="noopener">Twine variables for beginners</a></td><td>Two articles explaining what variables are and how they work.</td></tr>
-<tr><td><a href="https://twine2.neocities.org/#macro_set" target="_blank" rel="noopener">The (set:) macro</a></td><td>How you create and change variables. Read the part about changing an existing variable (<code>(set: $a to $a + 1)</code>).</td></tr>
-<tr><td><a href="https://en.wikipedia.org/wiki/Camel_case" target="_blank" rel="noopener">camelCase</a></td><td>How to name variables without spaces.</td></tr>
-<tr><td><a href="https://twinery.org/cookbook/dicerolling/harlowe/harlowe_dicerolling.html" target="_blank" rel="noopener">Dice rolling</a></td><td>Using <code>(random:)</code> to add chance.</td></tr>
-</table></div>
-
-<h4 class="rh">Images, art, and sound</h4>
-<div class="tablewrap"><table>
-<tr><th>Link</th><th>What it's for</th></tr>
-<tr><td><a href="https://twinery.org/cookbook/images/harlowe/harlowe_images.html" target="_blank" rel="noopener">Images (Cookbook)</a></td><td>The official image recipe. The steps on this page go further.</td></tr>
-<tr><td><a href="https://imgur.com/" target="_blank" rel="noopener">Imgur</a></td><td>Free image hosting, to get an online address for your picture. (Google Drive won't work.)</td></tr>
-<tr><td><a href="https://www.piskelapp.com/" target="_blank" rel="noopener">Piskel</a></td><td>A great tool for pixel art. It even makes animated gifs.</td></tr>
-<tr><td><a href="https://www.pixilart.com/" target="_blank" rel="noopener">Pixilart</a></td><td>Another pixel art tool, more advanced and Photoshop-like.</td></tr>
-<tr><td><a href="https://candle.itch.io/bitsy-audio" target="_blank" rel="noopener">Bitsy Audio</a></td><td>The easiest way to add background music. (Yes, it's a Bitsy tool. No, that's not a typo.)</td></tr>
-<tr><td><a href="https://twinelab.net/harlowe-audio/#/" target="_blank" rel="noopener">Harlowe Audio Library</a></td><td>If you want more control over sound.</td></tr>
-</table></div>
-
-<h4 class="rh">Style and fancy stuff</h4>
-<div class="tablewrap"><table>
-<tr><th>Link</th><th>What it's for</th></tr>
-<tr><td><a href="https://twine2.neocities.org/#markup_link" target="_blank" rel="noopener">Link markup</a></td><td>Using <code>-&gt;</code> in links so you don't reveal the passage name.</td></tr>
-<tr><td><a href="https://twine2.neocities.org/#markup_style" target="_blank" rel="noopener">Text formatting</a></td><td>Bold, italics, and more. It gets overwhelming in a hurry.</td></tr>
-<tr><td><a href="https://www.youtube.com/playlist?list=PLklITFhXtPCCKadv-0Gcbqoj3OCev695D" target="_blank" rel="noopener">Twine Details and Aesthetics</a></td><td>A playlist on changing how your game looks (mostly CSS).</td></tr>
-<tr><td><a href="https://gersande.com/blog/designing-inventories-in-twine-2-with-the-built-in-harlowe-macros/" target="_blank" rel="noopener">Inventories in Harlowe</a></td><td>Want to build a complicated inventory? I wouldn't recommend it, but here you go.</td></tr>
-</table></div>
+<article class="q" id="mistakes" data-short="Avoid losing easy marks">
+<h3>Don't lose easy marks: what should I check before I submit?</h3>
+<p class="sit">These are the things that cost groups marks every semester: broken links, missing images, games nobody can open. Most take two minutes to check. Go down the list.</p>
+<ul class="check">
+  <li><label><input type="checkbox"><b>Is your itch page Public?</b> Open your link in incognito. <a href="#itch-broken">Fix</a></label></li>
+  <li><label><input type="checkbox"><b>Do all your images show on itch?</b> Not just in Twine. <a href="#images-why">Fix</a></label></li>
+  <li><label><input type="checkbox"><b>Any broken links?</b> Story &rarr; Details shows them. Fix the spelling and delete stray empty passages. <a href="#links">More</a></label></li>
+  <li><label><input type="checkbox"><b>Any dead ends?</b> Every passage should either link onward or clearly be an ending.</label></li>
+  <li><label><input type="checkbox"><b>Does your game start in the right place?</b> The green rocket should be on your first passage. <a href="#debugger">Why it moves</a></label></li>
+  <li><label><input type="checkbox"><b>Did you play every path, start to finish?</b> Better: watch a friend play it, and say nothing.</label></li>
+  <li><label><input type="checkbox"><b>Do your variables actually do something?</b> A variable that's set but never checked doesn't change the game, and doesn't make an argument. Say in your reflection what each one does.</label></li>
+  <li><label><input type="checkbox"><b>Do your stats start right?</b> Starting values in a startup passage, not one the player comes back to. <a href="#startup">Fix</a></label></li>
+  <li><label><input type="checkbox"><b>Are your tags lowercase?</b> <code>footer</code>, <code>startup</code>, not <code>Footer</code>.</label></li>
+  <li><label><input type="checkbox"><b>Did you submit the right file?</b> Lea gets the <b>.html</b> from Publish to File: not a .twee, a screenshot, or a Word doc.</label></li>
+  <li><label><input type="checkbox"><b>Is it the newest version?</b> Check you didn't import an old file over your new one. <a href="#reopen">Why</a></label></li>
+  <li><label><input type="checkbox"><b>Is all your code Harlowe?</b> Nothing copied from SugarCube tutorials. <a href="#harlowe">Why</a></label></li>
+</ul>
 </article>
-
 </section>
 
 <!-- ============================ TOOLS ============================ -->
-<section class="group" id="g-look" data-icon="🎨" data-title="Extra: make it look like a game">
-<h2>Make it look like a game</h2>
-<p class="note">All optional. The look is not your argument: your choices and variables are. Get the game working first, then come here.</p>
+<section class="group" id="g-tools" data-icon="🛠️" data-title="Tools">
+<h2>Tools</h2>
 
-<article class="q" id="stylesheet" data-short="The Stylesheet: change the whole look">
-<h3>How do I change the colours, font, and look of my whole game?</h3>
-<p class="sit">Your game still looks like plain Twine (black page, white text, blue links), and you want it to look like your world: an app, an office, a phone.</p>
-<p class="short">Open <b>Story &rarr; Stylesheet</b> and paste code there. Everything in the Stylesheet changes every passage at once.</p>
-<ol class="steps">
-  <li>Open your story. Click <b>Story</b> at the top, then <b>Stylesheet</b>.
-  <figure><img src="images/story-menu.webp" alt="Twine's Story menu with the Stylesheet button" loading="lazy"></figure></li>
-  <li>Paste this in. It changes the background colour, the text colour, the font, and the link colour:<div class="codewrap"><div class="label">Story &rarr; Stylesheet</div><pre>tw-story {
-  background-color: #1b1b2f;
-  color: #f5f5f5;
-  font-family: Georgia, serif;
-}
-tw-link, tw-link.visited {
-  color: #ffcc00;
-}
-tw-link:hover {
-  color: white;
-}</pre></div></li>
-  <li>Play your game (Build &rarr; Play) to see it. Change the colour codes to whatever you like. Google "colour picker" to get codes like <code>#ffcc00</code>.</li>
-</ol>
-<div class="call tip"><b class="k">Don't want to write it yourself?</b><p>Use the <a href="#look-builder">look builder</a>: pick colours and a font, and it writes this code for you.</p></div>
-<p><b>The names Twine uses</b> (this is what goes before the <code>{</code>):</p>
-<div class="tablewrap"><table>
-<tr><th>Write this</th><th>To change</th></tr>
-<tr><td><code>tw-story</code></td><td>The whole page: background, text colour, font</td></tr>
-<tr><td><code>tw-passage</code></td><td>The box your text sits in: its width, a see-through background (<a href="#background-image">example</a>)</td></tr>
-<tr><td><code>tw-link, tw-link.visited</code></td><td>Your choices. Write both, or links change colour after they've been clicked once.</td></tr>
-<tr><td><code>tw-sidebar</code></td><td>The undo arrow (<a href="#back-arrow">hide it</a>)</td></tr>
-<tr><td><code>tw-story[tags~="forest"]</code></td><td>Only passages with the tag <code>forest</code> (<a href="#background-image">example</a>)</td></tr>
-<tr><td><code>.warning</code> (starts with a dot)</td><td>Your own box, called whatever you want (see below)</td></tr>
-</table></div>
-<p><b>Making your own box.</b> This is how every recipe on this page works. Give the box a name in the Stylesheet (with a dot in front):</p>
-<div class="codewrap"><div class="label">Story &rarr; Stylesheet</div><pre>.warning {
-  background: #ffe3e3;
-  color: #222;
-  padding: 10px;
-  border-radius: 8px;
-}</pre></div>
-<p>Then use it in any passage (no dot here), all on one line:</p>
-<div class="codewrap"><div class="label">In a passage</div><pre class="hl">&lt;div class="warning"&gt;Your rating dropped.&lt;/div&gt;</pre></div>
-<div class="call warn"><b class="k">If everything suddenly looks wrong</b>
+<article class="q" id="image-check" data-short="Image link checker">
+<h3>Tool: is my image link a good one?</h3>
+<p class="sit">You copied an image address, and you're not sure it's the right kind of link, or your picture shows up as a broken icon in your game.</p>
+<p class="short">Paste the address below and click <b>Check</b>. You'll see if it loads, what's wrong with it, and the code to put in your passage.</p>
+<div class="tool" id="imgTool">
+  <label class="tool-label" for="icUrl">Paste your image address here</label>
+  <div class="tool-row"><input id="icUrl" type="text" placeholder="https://i.imgur.com/Ab12Cd3.png" autocomplete="off" spellcheck="false"><button class="tool-btn" id="icBtn" type="button">Check</button></div>
+  <div id="icOut" class="ic-out" aria-live="polite"></div>
+</div>
+<p class="note">If it loads here, it will very likely load in your game too. Still test on itch, in an incognito window, once you upload. More help: <a href="#images-online">getting an image address</a>, <a href="#images-why">pictures don't show up</a>.</p>
+</article>
+
+<article class="q" id="zip-builder" data-short="Zip maker (pictures for itch)">
+<h3>Tool: make my zip for itch (game + pictures)</h3>
+<p class="sit">Your game uses pictures (or sounds) saved on your computer. They work for you, but on itch they show as broken picture icons. Or you're just not sure how to zip everything the right way.</p>
+<p class="short">Give the tool your published game and all your pictures. It fixes the picture names inside your game, names the game <code>index.html</code>, and gives you a zip that's ready for itch.</p>
+<div class="tool" id="zipTool">
+  <ol class="steps">
+    <li>In Twine: <b>Build &rarr; Publish to File</b>. Save the .html file somewhere you can find it.</li>
+    <li>Pick that .html file:
+      <div class="tool-row"><input id="zpHtml" type="file" accept=".html,.htm"></div></li>
+    <li>Pick <b>all</b> your pictures and sounds. To pick several at once, hold <kbd>Ctrl</kbd> (Mac: <kbd>Cmd</kbd>) while you click them.
+      <div class="tool-row"><input id="zpFiles" type="file" multiple accept="image/*,audio/*,video/*,.png,.jpg,.jpeg,.gif,.webp,.svg,.mp3,.ogg,.wav,.m4a,.mp4,.webm"></div>
+      <ul id="zpList" class="tw-list"></ul></li>
+    <li><div class="tool-row"><button class="tool-btn" id="zpGo" type="button">Make my zip</button><button class="tool-btn ghost" id="zpClear" type="button">Start over</button></div>
+      <div id="zpOut" class="ic-out" aria-live="polite"></div></li>
+  </ol>
+</div>
+<p><b>What it fixes for you</b></p>
 <ul>
-  <li>Undo the last thing you pasted. The Stylesheet doesn't show errors: one missing <code>}</code> quietly breaks everything after it.</li>
-  <li>Every <code>{</code> needs a <code>}</code>. Every line inside ends with <code>;</code>. Quotes must be straight (<a href="#smart-quotes">why</a>).</li>
-  <li>Notes in the Stylesheet are written <code>/* like this */</code>, not <code>&lt;!-- like this --&gt;</code>.</li>
-  <li>The Stylesheet is CSS, not Harlowe. <code>$variables</code> and <code>(macros:)</code> don't work in it. To colour one bit of text, use <a href="#formatting">the toolbar</a> instead.</li>
-</ul></div>
+  <li>Paths to your own computer, like <code>C:\Users\you\Downloads\badge.png</code>. They become just <code>badge.png</code>.</li>
+  <li>Capital letters that don't match. Your game says <code>Badge.PNG</code> but the file is <code>badge.png</code>: that works on your computer and breaks on itch.</li>
+  <li>Spaces and accents in file names (<code>Pause Café.jpg</code> becomes <code>Pause-Cafe.jpg</code>, in the zip and in your game).</li>
+  <li>Folders: everything goes in the top of the zip, with <code>index.html</code>, the way itch wants it.</li>
+</ul>
+<p><b>What it can't fix</b></p>
+<ul>
+  <li>Pictures you forgot to add. It lists them: find the file and run it again.</li>
+  <li>Pictures from websites (<code>https://...</code>). Check those with the <a href="#image-check">image link checker</a>.</li>
+  <li>Picture names your code builds out of pieces, like <code>'ana-' + $mood + '.png'</code>. It puts those files in the zip with their names unchanged, so spell them exactly like your code does, in lowercase.</li>
+</ul>
+<p class="note">Everything happens in your browser: your game and pictures aren't uploaded anywhere. Keep submitting your normal .html on Lea; the zip is for itch.</p>
+</article>
+
+<article class="q" id="twee-combine" data-short="Twee combiner (group work)">
+<h3>Tool: combine everyone's parts into one game</h3>
+<p class="sit">Each person in your group built their part in their own Twine, and you need one game. Doing it by hand in Notepad (<a href="#collab-combine">the manual way</a>) is fiddly.</p>
+<p class="short">Everyone exports their part with <b>Build &rarr; Export As Twee</b>. Load all the files below, click <b>Combine</b>, and import the file it gives you.</p>
+<div class="call warn"><b class="k">A .twee file is not your game</b><p>It only opens inside Twine. To submit on Lea or upload to itch, always use <b>Build &rarr; Publish to File</b>, which makes the .html. <a href="#twee-vs-html">See the difference</a>.</p></div>
+<div class="tool" id="tweeTool">
+  <ol class="steps">
+    <li>Load everyone's <b>.twee</b> files (hold <kbd>Ctrl</kbd> to pick several, or add them one at a time). Put the person with the <b>start</b> of the game first.
+      <div class="tool-row"><input id="twFiles" type="file" accept=".twee,.tw,.txt" multiple><button class="tool-btn ghost" id="twClear" type="button">Start over</button></div>
+      <ul id="twList" class="tw-list"></ul></li>
+    <li>Name the combined game (a <b>new</b> name, so importing doesn't replace anything):
+      <div class="tool-row"><input id="twTitle" type="text" value="Our Game combined"></div></li>
+    <li><div class="tool-row"><button class="tool-btn" id="twGo" type="button">Combine</button></div>
+      <div id="twOut" class="ic-out" aria-live="polite"></div></li>
+    <li>In Twine: <b>Library &rarr; Import</b>, and pick the file you just downloaded. Then play every path from the start.</li>
+  </ol>
+</div>
+<p class="note">The tool runs only in your browser: nothing is uploaded anywhere. Before you export, make sure no two people used the same passage name, and that everyone spelled the variables the same way (<a href="#collab-combine">more</a>).</p>
+</article>
+
+<article class="q" id="layer-images" data-short="Tool: images on top of images">
+<h3>How do I put one image on top of another?</h3>
+<p class="sit">You want a character standing in a room, or a badge that appears on the desk once the player picks it up.</p>
+<p class="note">Just want one picture in a passage? Start with <a href="#images-online">an image already online</a> or <a href="#images-zip">images on your computer</a>.</p>
+<p class="short">Use the tool below. Fill in boxes 1 and 2, move the top picture in box 3, then copy the code in box 5 into your passage.</p>
+<div class="layer-tool" id="layerTool">
+  <div class="lt-step"><div class="lt-num">1</div><div class="lt-body"><b>The background picture</b> (the big one at the back)
+    <div class="lt-fields">
+      <label>File name or https:// address<input id="ltBottom" value="office.jpg"></label>
+      <label>How wide, in pixels<input id="ltBW" type="number" value="480" min="50" max="1200"></label>
+    </div></div></div>
+  <div class="lt-step"><div class="lt-num">2</div><div class="lt-body"><b>The picture that goes on top</b> (the small one in front)
+    <div class="lt-fields">
+      <label>File name or https:// address<input id="ltTop" value="badge.png"></label>
+      <label>How wide, in pixels<input id="ltTW" type="number" value="120" min="10" max="1200"></label>
+    </div></div></div>
+  <div class="lt-step"><div class="lt-num">3</div><div class="lt-body"><b>Move the top picture to where you want it</b>
+    <p class="lt-hint">The picture with the blue dashed outline and the <b>DRAG ME</b> tag is your top picture. <b>On a computer:</b> put your mouse on it, hold the left button down, move the mouse, and let go. <b>On a phone:</b> use the two number boxes under the preview instead.</p>
+    <div class="lt-stage-wrap"><div class="lt-stage" id="ltStage"><img id="ltBImg" alt="Background picture preview" src="images/sample-office.jpg"><img id="ltTImg" alt="Top picture preview: drag to move" src="images/sample-badge.png" tabindex="0"><span class="lt-tag" id="ltTag">&#10021; DRAG ME</span></div></div>
+    <p class="note" id="ltSample">Until you type full https:// addresses in boxes 1 and 2, the preview shows sample pictures. The code still uses your file names.</p>
+    <div class="lt-fields">
+      <label>Distance from the left edge (pixels)<input id="ltX" type="number" value="300" min="0"></label>
+      <label>Distance from the top edge (pixels)<input id="ltY" type="number" value="160" min="0"></label>
+    </div></div></div>
+  <div class="lt-step"><div class="lt-num">4</div><div class="lt-body"><b>Optional:</b> only show the top picture after something happens (like picking up the badge)
+    <div class="lt-fields">
+      <label class="lt-check"><input id="ltIf" type="checkbox"> Only show it when this variable is true:</label>
+      <label>Variable<input id="ltVar" value="$hasBadge"></label>
+    </div></div></div>
+  <div class="lt-step"><div class="lt-num">5</div><div class="lt-body"><b>Click Copy, and paste it into your passage.</b> Keep it all on one line.
+    <div class="codewrap"><div class="label">Your code</div><pre class="hl" id="ltCode"></pre></div></div></div>
+</div>
+<ul>
+  <li>The top image should be a <b>PNG with a transparent background</b>, or it'll sit there as a rectangle. (Piskel and Pixilart save transparent PNGs.)</li>
+  <li>Keep the code on <b>one line</b>, exactly as the tool gives it.</li>
+  <li>Using file names (not addresses)? Then this needs <a href="#images-zip">the zip method</a>, like any image on your computer.</li>
+</ul>
+<figure><img src="images/layered-badge.webp" alt="An office picture with a badge image layered on top" loading="lazy" style="max-width:min(100%,480px)"><figcaption>What it looks like in the game.</figcaption></figure>
+<p class="note">If you edit the code by hand: the <code>(if:)</code> has to go around the <em>whole</em> thing, like the tool does it. An <code>(if:)</code> placed inside the box makes the top image land below the picture instead of on it.</p>
 </article>
 
 <article class="q" id="look-builder" data-short="Tool: build your game's look">
@@ -1430,6 +1458,60 @@ tw-link:hover {
 </div>
 <div class="call"><b class="k">Changed your mind?</b><p>Paste a new version at the bottom of the Stylesheet: the lowest one wins. Or delete the old one first, from <code>/* My game's look</code> down to its last <code>}</code>. Using a <a href="#templates">template</a>? Paste this at the bottom of its Stylesheet to recolour it.</p></div>
 </article>
+</section>
+
+<section class="group" id="g-look" data-icon="🎨" data-title="Extra: make it look like a game">
+<h2>Make it look like a game</h2>
+<p class="note">All optional. The look is not your argument: your choices and variables are. Get the game working first, then come here.</p>
+
+<article class="q" id="stylesheet" data-short="The Stylesheet: change the whole look">
+<h3>How do I change the colours, font, and look of my whole game?</h3>
+<p class="sit">Your game still looks like plain Twine (black page, white text, blue links), and you want it to look like your world: an app, an office, a phone.</p>
+<p class="short">Open <b>Story &rarr; Stylesheet</b> and paste code there. Everything in the Stylesheet changes every passage at once.</p>
+<ol class="steps">
+  <li>Open your story. Click <b>Story</b> at the top, then <b>Stylesheet</b>.
+  <figure><img src="images/story-menu.webp" alt="Twine's Story menu with the Stylesheet button" loading="lazy"></figure></li>
+  <li>Paste this in. It changes the background colour, the text colour, the font, and the link colour:<div class="codewrap"><div class="label">Story &rarr; Stylesheet</div><pre>tw-story {
+  background-color: #1b1b2f;
+  color: #f5f5f5;
+  font-family: Georgia, serif;
+}
+tw-link, tw-link.visited {
+  color: #ffcc00;
+}
+tw-link:hover {
+  color: white;
+}</pre></div></li>
+  <li>Play your game (Build &rarr; Play) to see it. Change the colour codes to whatever you like. Google "colour picker" to get codes like <code>#ffcc00</code>.</li>
+</ol>
+<div class="call tip"><b class="k">Don't want to write it yourself?</b><p>Use the <a href="#look-builder">look builder</a>: pick colours and a font, and it writes this code for you.</p></div>
+<p><b>The names Twine uses</b> (this is what goes before the <code>{</code>):</p>
+<div class="tablewrap"><table>
+<tr><th>Write this</th><th>To change</th></tr>
+<tr><td><code>tw-story</code></td><td>The whole page: background, text colour, font</td></tr>
+<tr><td><code>tw-passage</code></td><td>The box your text sits in: its width, a see-through background (<a href="#background-image">example</a>)</td></tr>
+<tr><td><code>tw-link, tw-link.visited</code></td><td>Your choices. Write both, or links change colour after they've been clicked once.</td></tr>
+<tr><td><code>tw-sidebar</code></td><td>The undo arrow (<a href="#back-arrow">hide it</a>)</td></tr>
+<tr><td><code>tw-story[tags~="forest"]</code></td><td>Only passages with the tag <code>forest</code> (<a href="#background-image">example</a>)</td></tr>
+<tr><td><code>.warning</code> (starts with a dot)</td><td>Your own box, called whatever you want (see below)</td></tr>
+</table></div>
+<p><b>Making your own box.</b> This is how every recipe on this page works. Give the box a name in the Stylesheet (with a dot in front):</p>
+<div class="codewrap"><div class="label">Story &rarr; Stylesheet</div><pre>.warning {
+  background: #ffe3e3;
+  color: #222;
+  padding: 10px;
+  border-radius: 8px;
+}</pre></div>
+<p>Then use it in any passage (no dot here), all on one line:</p>
+<div class="codewrap"><div class="label">In a passage</div><pre class="hl">&lt;div class="warning"&gt;Your rating dropped.&lt;/div&gt;</pre></div>
+<div class="call warn"><b class="k">If everything suddenly looks wrong</b>
+<ul>
+  <li>Undo the last thing you pasted. The Stylesheet doesn't show errors: one missing <code>}</code> quietly breaks everything after it.</li>
+  <li>Every <code>{</code> needs a <code>}</code>. Every line inside ends with <code>;</code>. Quotes must be straight (<a href="#smart-quotes">why</a>).</li>
+  <li>Notes in the Stylesheet are written <code>/* like this */</code>, not <code>&lt;!-- like this --&gt;</code>.</li>
+  <li>The Stylesheet is CSS, not Harlowe. <code>$variables</code> and <code>(macros:)</code> don't work in it. To colour one bit of text, use <a href="#formatting">the toolbar</a> instead.</li>
+</ul></div>
+</article>
 
 <article class="q" id="meter" data-short="Recipe: a meter (energy bar)">
 <h3>Recipe: how do I make a meter, like a health or energy bar?</h3>
@@ -1455,6 +1537,7 @@ Energy: (if: $energy &lt; 30)[(text-colour: red)[(str-repeated: (round: $energy 
 <p>Download the recipe to try it first:</p>
 <div class="tool-row"><a class="tool-btn" href="recipes/recipe-meter.twee" download>Download recipe-meter.twee</a><button type="button" class="tool-btn ghost play-btn" data-play="play/recipe-meter.html" data-h="360">&#9654; Play it here</button></div><div class="play-box"></div>
 <p class="note">Try it right here first, or download it and open it in Twine: <b>Library &rarr; Import</b>, pick the file (<a href="#templates">pictures</a>).</p>
+<div class="call warn"><b class="k">A .twee file is not your game</b><p>It only opens inside Twine. To submit on Lea or upload to itch, always use <b>Build &rarr; Publish to File</b>, which makes the .html. <a href="#twee-vs-html">See the difference</a>.</p></div>
 <div class="two">
 <figure><img src="images/rc-meter-70.webp" alt="A passage with an energy bar 70 percent full, in green" loading="lazy"><figcaption>Energy at 70.</figcaption></figure>
 <figure><img src="images/rc-meter-low.webp" alt="The same bar almost empty, in red" loading="lazy"><figcaption>Below 30, it turns red.</figcaption></figure>
@@ -1611,6 +1694,7 @@ Ana: Wow. OK.</pre></div>
   <li>Change the words. Keep the <code>&lt;div class="..."&gt;</code> parts; change what's between <code>&gt;</code> and <code>&lt;/div&gt;</code>.</li>
   <li>Want different colours? Open <b>Story &rarr; Stylesheet</b>. The notes in <code>/* */</code> say what each part does.</li>
 </ol>
+<div class="call warn"><b class="k">A .twee file is not your game</b><p>It only opens inside Twine. To submit on Lea or upload to itch, always use <b>Build &rarr; Publish to File</b>, which makes the .html. <a href="#twee-vs-html">See the difference</a>.</p></div>
 <div class="call"><b class="k">Already started your game?</b><p>You can still borrow a look. Import the template, copy everything in its <b>Stylesheet</b> into your game's Stylesheet, and copy its <code>header</code> passage if it has one. Then use the same <code>&lt;div class="..."&gt;</code> lines in your passages.</p></div>
 <p>All templates already hide the <a href="#back-arrow">undo arrow</a> and use whole numbers for variables.</p>
 
@@ -1655,93 +1739,8 @@ Ana: Wow. OK.</pre></div>
 </article>
 </section>
 
-<section class="group" id="g-tools" data-icon="🛠️" data-title="Tools">
-<h2>Tools</h2>
-
-<article class="q" id="image-check" data-short="Image link checker">
-<h3>Tool: is my image link a good one?</h3>
-<p class="sit">You copied an image address, and you're not sure it's the right kind of link, or your picture shows up as a broken icon in your game.</p>
-<p class="short">Paste the address below and click <b>Check</b>. You'll see if it loads, what's wrong with it, and the code to put in your passage.</p>
-<div class="tool" id="imgTool">
-  <label class="tool-label" for="icUrl">Paste your image address here</label>
-  <div class="tool-row"><input id="icUrl" type="text" placeholder="https://i.imgur.com/Ab12Cd3.png" autocomplete="off" spellcheck="false"><button class="tool-btn" id="icBtn" type="button">Check</button></div>
-  <div id="icOut" class="ic-out" aria-live="polite"></div>
-</div>
-<p class="note">If it loads here, it will very likely load in your game too. Still test on itch, in an incognito window, once you upload. More help: <a href="#images-online">getting an image address</a>, <a href="#images-why">pictures don't show up</a>.</p>
-</article>
-
-<article class="q" id="twee-combine" data-short="Twee combiner (group work)">
-<h3>Tool: combine everyone's parts into one game</h3>
-<p class="sit">Each person in your group built their part in their own Twine, and you need one game. Doing it by hand in Notepad (<a href="#collab-combine">the manual way</a>) is fiddly.</p>
-<p class="short">Everyone exports their part with <b>Build &rarr; Export As Twee</b>. Load all the files below, click <b>Combine</b>, and import the file it gives you.</p>
-<div class="tool" id="tweeTool">
-  <ol class="steps">
-    <li>Load everyone's <b>.twee</b> files (hold <kbd>Ctrl</kbd> to pick several, or add them one at a time). Put the person with the <b>start</b> of the game first.
-      <div class="tool-row"><input id="twFiles" type="file" accept=".twee,.tw,.txt" multiple><button class="tool-btn ghost" id="twClear" type="button">Start over</button></div>
-      <ul id="twList" class="tw-list"></ul></li>
-    <li>Name the combined game (a <b>new</b> name, so importing doesn't replace anything):
-      <div class="tool-row"><input id="twTitle" type="text" value="Our Game combined"></div></li>
-    <li><div class="tool-row"><button class="tool-btn" id="twGo" type="button">Combine</button></div>
-      <div id="twOut" class="ic-out" aria-live="polite"></div></li>
-    <li>In Twine: <b>Library &rarr; Import</b>, and pick the file you just downloaded. Then play every path from the start.</li>
-  </ol>
-</div>
-<p class="note">The tool runs only in your browser: nothing is uploaded anywhere. Before you export, make sure no two people used the same passage name, and that everyone spelled the variables the same way (<a href="#collab-combine">more</a>).</p>
-</article>
-
-<article class="q" id="zip-builder" data-short="Zip maker (pictures for itch)">
-<h3>Tool: make my zip for itch (game + pictures)</h3>
-<p class="sit">Your game uses pictures (or sounds) saved on your computer. They work for you, but on itch they show as broken picture icons. Or you're just not sure how to zip everything the right way.</p>
-<p class="short">Give the tool your published game and all your pictures. It fixes the picture names inside your game, names the game <code>index.html</code>, and gives you a zip that's ready for itch.</p>
-<div class="tool" id="zipTool">
-  <ol class="steps">
-    <li>In Twine: <b>Build &rarr; Publish to File</b>. Save the .html file somewhere you can find it.</li>
-    <li>Pick that .html file:
-      <div class="tool-row"><input id="zpHtml" type="file" accept=".html,.htm"></div></li>
-    <li>Pick <b>all</b> your pictures and sounds. To pick several at once, hold <kbd>Ctrl</kbd> (Mac: <kbd>Cmd</kbd>) while you click them.
-      <div class="tool-row"><input id="zpFiles" type="file" multiple accept="image/*,audio/*,video/*,.png,.jpg,.jpeg,.gif,.webp,.svg,.mp3,.ogg,.wav,.m4a,.mp4,.webm"></div>
-      <ul id="zpList" class="tw-list"></ul></li>
-    <li><div class="tool-row"><button class="tool-btn" id="zpGo" type="button">Make my zip</button><button class="tool-btn ghost" id="zpClear" type="button">Start over</button></div>
-      <div id="zpOut" class="ic-out" aria-live="polite"></div></li>
-  </ol>
-</div>
-<p><b>What it fixes for you</b></p>
-<ul>
-  <li>Paths to your own computer, like <code>C:\Users\you\Downloads\badge.png</code>. They become just <code>badge.png</code>.</li>
-  <li>Capital letters that don't match. Your game says <code>Badge.PNG</code> but the file is <code>badge.png</code>: that works on your computer and breaks on itch.</li>
-  <li>Spaces and accents in file names (<code>Pause Café.jpg</code> becomes <code>Pause-Cafe.jpg</code>, in the zip and in your game).</li>
-  <li>Folders: everything goes in the top of the zip, with <code>index.html</code>, the way itch wants it.</li>
-</ul>
-<p><b>What it can't fix</b></p>
-<ul>
-  <li>Pictures you forgot to add. It lists them: find the file and run it again.</li>
-  <li>Pictures from websites (<code>https://...</code>). Check those with the <a href="#image-check">image link checker</a>.</li>
-  <li>Picture names your code builds out of pieces, like <code>'ana-' + $mood + '.png'</code>. It puts those files in the zip with their names unchanged, so spell them exactly like your code does, in lowercase.</li>
-</ul>
-<p class="note">Everything happens in your browser: your game and pictures aren't uploaded anywhere. Keep submitting your normal .html on Lea; the zip is for itch.</p>
-</article>
-
-</section>
 
 <!-- ============================ ADVANCED ============================ -->
-<section class="group" id="g-advanced" data-icon="⭐" data-title="Extra: advanced">
-<h2>Advanced</h2>
-
-<article class="q" id="history" data-short="Remember where the player has been">
-<h3>How can my game react to where the player has already been?</h3>
-<p class="sit">You want the game to remember what the player has seen, without making a variable for everything: a different message the second time they enter a room, a choice that only appears if they've already visited the break room.</p>
-<p class="short">Harlowe remembers every passage the player has visited. Ask it with <code>visits</code>, <code>(visited:)</code>, or <code>(history:)</code>.</p>
-<p><b>Has the player been to a passage before?</b> Use <code>(visited: "Name")</code>:</p>
-<div class="codewrap good"><pre class="hl">(if: (visited: "Break Room"))[You've already had your break today.](else:)[ [[Take your break-&gt;Break Room]] ]</pre></div>
-<p><b>Is this the first time in <em>this</em> passage?</b> <code>visits</code> counts how many times the player has been in the current passage (this visit included):</p>
-<div class="codewrap good"><pre class="hl">(if: visits is 1)[First day on the job.](else:)[Back again. Visit number (print: visits).]</pre></div>
-<p class="note">To <em>show</em> the number, use <code>(print: visits)</code>. Typing just "visits" in your text prints the word "visits".</p>
-<p><b>Another way to check:</b> <code>(history:)</code> is the list of every passage visited, in order. Check it with <code>contains</code>:</p>
-<div class="codewrap good"><pre class="hl">(if: (history:) contains "Break Room")[You've already had your break today.]</pre></div>
-<p>Good for arguments about memory, routine, or repetition: the game can notice that the player keeps coming back to the same place.</p>
-</article>
-
-</section>
 
 <!-- ============================ TROUBLESHOOTING ============================ -->
 <section class="group" id="g-trouble" data-icon="🔧" data-title="Troubleshooting">
@@ -1795,6 +1794,34 @@ Ana: Wow. OK.</pre></div>
 <div class="codewrap good"><div class="label">&#10003; Straight quotes</div><pre class="hl">(goto: "Floor")</pre></div>
 <p>Writing in Google Docs? Turn them off: <b>Tools &rarr; Preferences</b>, uncheck <b>Use smart quotes</b>.</p>
 <p>Copied it from a website or forum? It might also be <a href="#harlowe">code for a different story format</a>.</p>
+</article>
+
+<article class="q" id="twee-vs-html" data-short=".twee or .html? I'm not sure which file is my game.">
+<h3>.twee or .html? I'm not sure which file is my game.</h3>
+<p class="sit">You have a file ending in <b>.twee</b> and one ending in <b>.html</b>, and you're not sure which one to submit on Lea or upload to itch. Or you uploaded something and your game doesn't play.</p>
+<p class="short"><b>The .html is your game.</b> That's what you submit on Lea and upload to itch. A <b>.twee is not a game</b>: it's a plain text copy of your passages, and it only opens inside Twine.</p>
+<figure><img src="images/html-vs-twee-menu.webp" alt="Twine's Build menu: Publish to File circled in green and labelled Your GAME (.html); Export As Twee circled in red and labelled NOT a game (.twee)" loading="lazy" style="max-width:min(100%,760px)"><figcaption>Both buttons are in the <b>Build</b> menu, right next to each other. Only one makes your game.</figcaption></figure>
+<figure><img src="images/html-vs-twee-open.webp" alt="Left: the .html file opened in a browser, showing a playable game. Right: the .twee file opened, showing a wall of code text." loading="lazy"><figcaption>Same game, two files. Open the .html and you can play it. Open the .twee and you get a wall of text.</figcaption></figure>
+<div class="two">
+<div class="call tip"><b class="k">.html = your game</b><ul>
+  <li>Made with <b>Build &rarr; Publish to File</b></li>
+  <li>Opens in a browser and plays</li>
+  <li><b>Submit this on Lea</b></li>
+  <li><b>Upload this to itch</b> (renamed <code>index.html</code>, or inside a zip)</li>
+</ul></div>
+<div class="call warn"><b class="k">.twee = NOT a game</b><ul>
+  <li>Made with <b>Build &rarr; Export As Twee</b>, or downloaded from this FAQ (templates, recipes)</li>
+  <li>Just text. Nobody can play it.</li>
+  <li>Only for bringing passages <b>into</b> Twine: <b>Library &rarr; Import</b></li>
+  <li><b>Never</b> submit it on Lea or upload it to itch</li>
+</ul></div>
+</div>
+<p><b>Can't see the ".html" or ".twee" at the end of your file names?</b> Your computer is hiding them. Turn them on:</p>
+<ul>
+  <li><b>Windows:</b> open File Explorer, click <b>View</b> at the top, then <b>Show</b>, and tick <b>File name extensions</b>.</li>
+  <li><b>Mac:</b> in Finder, click <b>Finder</b> in the top menu, then <b>Settings</b>, then <b>Advanced</b>, and tick <b>Show all filename extensions</b>.</li>
+</ul>
+<p><b>Already submitted or uploaded the .twee?</b> Import it into Twine (<b>Library &rarr; Import</b>), open it, click <b>Build &rarr; Publish to File</b>, and submit or upload that .html instead.</p>
 </article>
 
 <article class="q" id="test-zero" data-short="My game acts weird when I test from the middle (stats say 0, choices forgotten).">
@@ -1857,6 +1884,34 @@ Ana: Wow. OK.</pre></div>
 <div class="codewrap good"><pre class="hl">(link: "Do squats")[(set: $strength to it + 1)(goto: "Gym Results")]</pre></div>
 </article>
 
+<article class="q" id="variable-mistakes" data-short="My variable code doesn't work. What did I get wrong?">
+<h3>My variable code doesn't work. What did I get wrong?</h3>
+<p class="sit">You wrote some variable code, and Twine shows an error, or it just doesn't do anything.</p>
+<p class="short">Check it against this list. These are the mistakes that break variables most often.</p>
+<ul>
+  <li>Use <code>to</code> when setting and <code>is</code> when checking. Not <code>=</code>.
+<div class="codewrap bad"><div class="label">&#10007; Doesn't work</div><pre class="hl">(set: $energy = 10)
+(if: $hasBadge = true)[...]</pre></div>
+<div class="codewrap good"><div class="label">&#10003; Works</div><pre class="hl">(set: $energy to 10)
+(if: $hasBadge is true)[...]</pre></div></li>
+  <li>Capitals matter: <code>$Energy</code> and <code>$energy</code> are two different boxes.
+<div class="codewrap bad"><div class="label">&#10007; Shows 0, because $Energy was never set</div><pre class="hl">(set: $energy to 10)
+You have $Energy energy left.</pre></div></li>
+  <li>The hook goes <b>right after</b> the <code>(if:)</code>, with no space.
+<div class="codewrap bad"><div class="label">&#10007; Doesn't work (space before the bracket)</div><pre class="hl">(if: $hasBadge is true) [The scanner beeps green.]</pre></div>
+<div class="codewrap good"><div class="label">&#10003; Works</div><pre class="hl">(if: $hasBadge is true)[The scanner beeps green.]</pre></div></li>
+  <li>For "not equal", use <code>is not</code>, not <code>!=</code>.
+<div class="codewrap bad"><div class="label">&#10007; Twine shows an error</div><pre class="hl">(if: $energy != 0)[You can still work.]</pre></div>
+<div class="codewrap good"><div class="label">&#10003; Works</div><pre class="hl">(if: $energy is not 0)[You can still work.]</pre></div></li>
+  <li>No quotes around <code>true</code>, <code>false</code>, or numbers. Quotes turn them into text.
+<div class="codewrap bad"><div class="label">&#10007; Never beeps green, and Twine doesn't warn you</div><pre class="hl">(set: $hasBadge to "true")
+(if: $hasBadge is true)[The scanner beeps green.]</pre></div>
+<div class="codewrap good"><div class="label">&#10003; Works</div><pre class="hl">(set: $hasBadge to true)</pre></div></li>
+  <li>Curly quotes from Google Docs or PDFs break everything (<a href="#smart-quotes">fix</a>). Code from other websites may be for a different format (<a href="#harlowe">why</a>).</li>
+  <li>Code running at the wrong moment? Read <a href="#how-code-runs">how Twine runs your code</a>. Variables showing 0 when you test? <a href="#test-zero">Fix</a>. Number on screen not changing after a click? <a href="#text-not-updating">Fix</a>.</li>
+</ul>
+</article>
+
 <article class="q" id="music-silent" data-short="My music doesn't play.">
 <h3>My music doesn't play.</h3>
 <p class="sit">You added music, and the game is silent.</p>
@@ -1898,26 +1953,6 @@ Ana: Wow. OK.</pre></div>
 </ol>
 <p>If none of these work, the game is gone, and I'm sorry. Start the <a href="#never-lose">save-a-dated-file habit</a> right now, so it can't happen twice.</p>
 </article>
-
-<article class="q" id="mistakes" data-short="Don't lose easy marks: what should I check before I submit?">
-<h3>Don't lose easy marks: what should I check before I submit?</h3>
-<p class="sit">These are the things that cost groups marks every semester: broken links, missing images, games nobody can open. Most take two minutes to check. Go down the list.</p>
-<ul class="check">
-  <li><label><input type="checkbox"><b>Is your itch page Public?</b> Open your link in incognito. <a href="#itch-broken">Fix</a></label></li>
-  <li><label><input type="checkbox"><b>Do all your images show on itch?</b> Not just in Twine. <a href="#images-why">Fix</a></label></li>
-  <li><label><input type="checkbox"><b>Any broken links?</b> Story &rarr; Details shows them. Fix the spelling and delete stray empty passages. <a href="#links">More</a></label></li>
-  <li><label><input type="checkbox"><b>Any dead ends?</b> Every passage should either link onward or clearly be an ending.</label></li>
-  <li><label><input type="checkbox"><b>Does your game start in the right place?</b> The green rocket should be on your first passage. <a href="#debugger">Why it moves</a></label></li>
-  <li><label><input type="checkbox"><b>Did you play every path, start to finish?</b> Better: watch a friend play it, and say nothing.</label></li>
-  <li><label><input type="checkbox"><b>Do your variables actually do something?</b> A variable that's set but never checked doesn't change the game, and doesn't make an argument. Say in your reflection what each one does.</label></li>
-  <li><label><input type="checkbox"><b>Do your stats start right?</b> Starting values in a startup passage, not one the player comes back to. <a href="#startup">Fix</a></label></li>
-  <li><label><input type="checkbox"><b>Are your tags lowercase?</b> <code>footer</code>, <code>startup</code>, not <code>Footer</code>.</label></li>
-  <li><label><input type="checkbox"><b>Did you submit the right file?</b> Lea gets the <b>.html</b> from Publish to File: not a .twee, a screenshot, or a Word doc.</label></li>
-  <li><label><input type="checkbox"><b>Is it the newest version?</b> Check you didn't import an old file over your new one. <a href="#reopen">Why</a></label></li>
-  <li><label><input type="checkbox"><b>Is all your code Harlowe?</b> Nothing copied from SugarCube tutorials. <a href="#harlowe">Why</a></label></li>
-</ul>
-</article>
-
 </section>
 
 <p class="noresults" id="noresults">Nothing matches that. Try a different word, or send me a Mio.</p>
@@ -1959,6 +1994,7 @@ Ana: Wow. OK.</pre></div>
     if(ix===steps.length) html+='<div class="sep"></div>';
     var list=sec.querySelectorAll('article.q');
     html+='<div class="grp" data-sec="'+sec.id+'"><button class="gh" type="button" aria-expanded="false" aria-controls="items-'+sec.id+'"><span class="chev">&#9654;</span><span class="ic">'+icon(sec)+'</span>'+sec.getAttribute('data-title')+'<span class="n">'+list.length+'</span></button><div class="items" id="items-'+sec.id+'">';
+    if(sec===trouble) html+='<a href="#g-trouble" data-for="g-trouble"><b>All problems, on one page</b></a>';
     [].forEach.call(list,function(a){
       html+='<a href="#'+a.id+'" data-for="'+a.id+'" title="'+esc(title(a))+'">'+shortOf(a)+'</a>';
     });
@@ -2000,6 +2036,18 @@ Ana: Wow. OK.</pre></div>
   function route(){
     var id=decodeURIComponent(location.hash.slice(1));
     var target=id?document.getElementById(id):null;
+    var th=document.getElementById('trouble-home');
+    if(id==='g-trouble'){
+      if(q.value){ q.value=''; resetSearch(); }
+      arts.forEach(function(a){a.classList.remove('show');});
+      home.style.display='none'; results.style.display='none'; none.style.display='none'; th.style.display='';
+      side.querySelectorAll('.items a').forEach(function(l){l.classList.toggle('active',l.getAttribute('data-for')==='g-trouble');});
+      crumb.innerHTML='<a href="#">Home</a> &rsaquo; Troubleshooting'; crumb.style.display='block';
+      openGroup(trouble); document.title='Troubleshooting | Twine Project FAQ';
+      setTimeout(function(){window.scrollTo({top:0,behavior:'auto'});},0);
+      return;
+    }
+    th.style.display='none';
     if(target && target.matches('section.group')){ var first=target.querySelector('article.q'); if(first){ history.replaceState(null,'','#'+first.id); target=first; id=first.id; } }
     var art=target?(target.matches('article.q')?target:target.closest('article.q')):null;
     if(q.value){ q.value=''; resetSearch(); }
@@ -2009,7 +2057,7 @@ Ana: Wow. OK.</pre></div>
     side.querySelectorAll('.items a').forEach(function(l){l.classList.toggle('active',!!art && l.getAttribute('data-for')===art.id);});
     if(art){
       var sec=secOf(art);
-      crumb.innerHTML='<a href="#">Home</a> &rsaquo; '+label(sec)+(sec===trouble?'':' &middot; '+(stepArts.indexOf(art)+1)+' of '+stepArts.length);
+      crumb.innerHTML='<a href="#">Home</a> &rsaquo; '+(sec===trouble?'<a href="#g-trouble">Troubleshooting</a>':label(sec))+(sec===trouble?'':' &middot; '+(stepArts.indexOf(art)+1)+' of '+stepArts.length);
       crumb.style.display='block';
       openGroup(sec);
       document.title=shortOf(art).replace(/&amp;/g,'&')+' | Twine Project FAQ';
@@ -2029,7 +2077,7 @@ Ana: Wow. OK.</pre></div>
   window.addEventListener('hashchange',route);
 
   // ---------- Search ----------
-  var SYN=[['image','picture','img','photo','pic','png','jpg'],['itch','itchio','itch.io'],['variable','varible','variabel'],['music','sound','audio','song','mp3'],['link','url','address'],['save','saved','lost','backup','gone','disappeared','deleted'],['zip','zipped','compress','zip maker','folder'],['background','backdrop','bg'],['undo','back arrow','back button','arrow','rewind'],['group','team','partner','together','google doc','docs'],['error','broken','not working','doesnt work',"doesn't work",'bug'],['startup','start up','starting values','setup'],['stats','stat bar','health','score','footer','header'],['quote','quotes','smart quotes'],['random','dice','chance'],['import','replace','overwrite'],['test from here','start story here','rocket','wrong passage','starts in the middle'],['meter','bar','health bar','progress','energy','hearts','lives','blocks'],['stylesheet','css','colour','color','font','look','style','design','theme','builder'],['template','phone','app','form','terminal','email','inbox','text message'],['dialogue','dialog','visual novel','vn','name box','speech','next','one at a time'],['character','face','expression','mood','emotion','portrait']];
+  var SYN=[['image','picture','img','photo','pic','png','jpg'],['itch','itchio','itch.io'],['variable','varible','variabel'],['music','sound','audio','song','mp3'],['link','url','address'],['save','saved','lost','backup','gone','disappeared','deleted'],['zip','zipped','compress','zip maker','folder'],['background','backdrop','bg'],['undo','back arrow','back button','arrow','rewind'],['group','team','partner','together','google doc','docs'],['error','broken','not working','doesnt work',"doesn't work",'bug'],['startup','start up','starting values','setup'],['stats','stat bar','health','score','footer','header'],['quote','quotes','smart quotes'],['random','dice','chance'],['import','replace','overwrite'],['twee','.twee','html','.html','which file','wrong file','export as twee','publish to file'],['test from here','start story here','rocket','wrong passage','starts in the middle'],['meter','bar','health bar','progress','energy','hearts','lives','blocks'],['stylesheet','css','colour','color','font','look','style','design','theme','builder'],['template','phone','app','form','terminal','email','inbox','text message'],['dialogue','dialog','visual novel','vn','name box','speech','next','one at a time'],['character','face','expression','mood','emotion','portrait']];
   function resetSearch(){
     side.querySelectorAll('.items a, .grp').forEach(function(x){x.classList.remove('hidden');});
   }
@@ -2045,7 +2093,7 @@ Ana: Wow. OK.</pre></div>
     }).filter(function(x){return x.sc>0;}).sort(function(x,y){return y.sc-x.sc;});
     var top=scored.filter(function(x){return x.sc>=50;});
     var hits=(top.length? top.concat(scored.filter(function(x){return x.sc<50;}).slice(0,Math.max(0,6-top.length))) : scored.slice(0,8)).map(function(x){return x.a;});
-    home.style.display='none'; crumb.style.display='none';
+    home.style.display='none'; crumb.style.display='none'; document.getElementById('trouble-home').style.display='none';
     arts.forEach(function(a){a.classList.remove('show');});
     var h='<p class="lede">'+hits.length+' question'+(hits.length===1?'':'s')+' mention "'+esc(q.value.trim())+'"</p>';
     hits.forEach(function(a){
