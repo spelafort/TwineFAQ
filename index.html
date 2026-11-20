@@ -307,7 +307,7 @@ th{background:var(--side)}
 <header class="top">
   <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
   <a class="brand" href="#">Twine Project FAQ <span>&middot; Views on Games and Play</span></a>
-  <span class="ver" title="Last updated">Updated Nov 20, 2026 &middot; v9</span>
+  <span class="ver" title="Last updated">Updated Nov 20, 2026 &middot; v10</span>
   <label class="search">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
     <input id="q" type="search" placeholder="Search: images, itch, variables, zip..." autocomplete="off">
@@ -321,7 +321,7 @@ th{background:var(--side)}
 <main id="main">
 <div id="home">
 <h1>Twine Project FAQ</h1>
-<p class="ver-home">Updated Nov 20, 2026 &middot; v9</p>
+<p class="ver-home">Updated Nov 20, 2026 &middot; v10</p>
 <p class="lede"><b>Something broken?</b> Click your problem below.<br><b>Learning Twine?</b> Go step by step: start at Step 1, then click <b>Next</b> at the bottom of each page.<br><b>Still stuck?</b> Send me a Mio.</p>
 <a class="banner" href="#never-lose"><span class="pi">💾</span><span><b>Before you start anything:</b> how to never lose your game. Two minutes now, or redo everything later.</span></a>
 <div class="pj-buttons"><span>Doing a play journal?</span><a href="#pj6" data-pj>PJ #6</a><a href="#pj8" data-pj>PJ #8</a><a href="#pj14" data-pj>PJ #14</a><a href="#pj15" data-pj>PJ #15</a><a href="#pjfinal" data-pj>Final project</a><a href="#pj16" data-pj>PJ #16</a></div>
@@ -330,7 +330,9 @@ th{background:var(--side)}
   <a href="#itch-broken"><span class="pi">🔗</span>My itch link doesn't work for other people</a>
   <a href="#images-why"><span class="pi">🖼️</span>My pictures don't show up</a>
   <a href="#smart-quotes"><span class="pi">📋</span>Code I copied doesn't work</a>
-  <a href="#test-zero"><span class="pi">0️⃣</span>My stats say 0 when I test</a>
+  <a href="#test-zero"><span class="pi">0️⃣</span>My game acts weird when I test from the middle (stats say 0)</a>
+  <a href="#wrong-start"><span class="pi">🚀</span>My game starts in the wrong passage</a>
+  <a href="#undo-trouble"><span class="pi">↩️</span>I clicked the back arrow and now my stats are wrong</a>
   <a href="#text-not-updating"><span class="pi">🔢</span>I clicked, but the number on screen didn't change</a>
   <a href="#music-silent"><span class="pi">🔇</span>My music doesn't play</a>
   <a href="#itch-cramped"><span class="pi">📐</span>My game looks squished on itch</a>
@@ -599,8 +601,8 @@ Your badge is in the locker.</pre></div>
 </section>
 
 <!-- ============================ LESSONS ============================ -->
-<section class="group" id="g-lessons" data-icon="📘" data-title="Learn Twine, step by step" data-step="4">
-<h2>Lessons</h2>
+<section class="group" id="g-basics" data-icon="📘" data-title="Learn the basics" data-step="4">
+<h2>Twine basics</h2>
 
 <article class="q" id="links" data-short="Your first choices (links)">
 <h3>How do I make passages and choices?</h3>
@@ -696,6 +698,9 @@ Your badge is in the locker.</pre></div>
 <p><b>Rule 5: coming back to a passage runs it all again.</b> Every visit starts from the top. A <code>(set: $energy to 10)</code> in a passage the player returns to resets energy every time. (<a href="#startup">Where starting values go</a>.)</p>
 <p><b>Special passages:</b> a passage tagged <code>startup</code> runs once, at the very start of the game. Passages tagged <code>header</code> or <code>footer</code> run every time any passage appears (<a href="#stats-bar">stats bar</a>).</p>
 </article>
+</section>
+<section class="group" id="g-vars" data-icon="🔢" data-title="Variables" data-step="5">
+<h2>Variables</h2>
 
 <article class="q" id="variables-basics" data-short="Variables: the 3 kinds">
 <h3>What's a variable? (and the 3 kinds you'll use)</h3>
@@ -870,8 +875,7 @@ You have $Energy energy left.</pre></div></li>
   <li>If your code has a mistake, Twine shows a <b>purple error box</b> where it happened, and the <b>Errors</b> tab counts them. Read the message: it usually names the problem.
   <figure><img src="images/debug-error.webp" alt="A purple error box: '!=' isn't valid Harlowe syntax for the inside of a macro call" loading="lazy" style="max-width:min(100%,640px)"></figure></li>
 </ol>
-<div class="call warn"><b class="k">Careful with Test From Here</b><p><b>Test From Here</b> starts the game in the middle, as if the player teleported there. Everything they would have done before (choices, points, the badge) <b>never happened</b>. Only your <code>startup</code> passage runs. So a passage can look broken in Test From Here when it's fine, or look fine when it isn't. Before you decide something is broken, test it again from the start with <b>Build &rarr; Test</b>.</p></div>
-<div class="call warn"><b class="k">Don't click "Start Story Here" by accident</b><p>It sits right next to Test From Here, and it's not a test: it moves the green rocket, so your game now <b>begins</b> at that passage, for everyone, on itch too. If your game starts in the wrong place, find your real first passage, click it, and click <b>Start Story Here</b> to move the rocket back.</p></div>
+<div class="call warn"><b class="k">Testing from the middle?</b><p><b>Test From Here</b> skips everything before that passage, so things can look broken when they aren't (<a href="#test-zero">read this</a>). And don't mix it up with <b>Start Story Here</b> (<a href="#wrong-start">why</a>).</p></div>
 <p><b>Using it to find problems:</b></p>
 <ul>
   <li>The number on screen didn't change? Check the panel. If the variable <em>did</em> change, your code works: it's a <a href="#text-not-updating">display issue</a>.</li>
@@ -879,30 +883,10 @@ You have $Energy energy left.</pre></div></li>
   <li>The panel says <code>the string "true"</code> (or <code>the string "18"</code>) when you wanted true/false or a number? You used quotes (<a href="#variable-mistakes">fix</a>).</li>
 </ul>
 </article>
-
 </section>
-
-<!-- ============================ HOW DO I...? ============================ -->
-<section class="group" id="g-howto" data-icon="🧩" data-title="Add more to your game" data-step="5">
-<h2>How do I...?</h2>
-
-<article class="q" id="stats-bar" data-short="Stats bar on every passage">
-<h3>How do I show the player's stats on every passage?</h3>
-<p class="sit">You want the player's energy (or money, or rating) to show at the bottom of every passage, like a health bar in a game. You don't want to paste it into 50 passages.</p>
-<p class="short">Make one passage with the tag <code>footer</code>. Twine adds it to the bottom of every passage for you.</p>
-<ol class="steps">
-  <li>Make a new passage. Call it anything (<b>StatusBar</b> is fine). It doesn't need any links.</li>
-  <li>Click <b>+ Tag</b>, type <code>footer</code>, and save. (Use <code>header</code> to put it at the top instead.) Type it exactly, all lowercase: <code>Footer</code> won't work, and Twine won't tell you.</li>
-  <li>Write what you want shown:<div class="codewrap"><div class="label">Passage: StatusBar (tag: footer)</div><pre class="hl">&lt;hr&gt;
-Energy: $energy | Rating: $rating</pre></div></li>
-</ol>
-<div class="two">
-<figure><img src="images/passage-footer-tag.webp" alt="StatusBar passage with the footer tag" loading="lazy"><figcaption>The tag shows up under the toolbar.</figcaption></figure>
-<figure><img src="images/play-stats-bar.webp" alt="Playing the game: passage text with the stats line at the bottom" loading="lazy"><figcaption>What the player sees, on every passage.</figcaption></figure>
-</div>
-<div class="call tip"><b class="k">Tip</b><p>You can use <code>(if:)</code> in a footer too, like a warning that only appears when <code>$energy</code> is low.</p></div>
-<p>Want a bar that fills and drains instead of a number? See the <a href="#meter">meter recipe</a>.</p>
-</article>
+<section class="group" id="g-images" data-icon="🖼️" data-title="Images" data-step="6">
+<h2>Images</h2>
+<p class="note">Your final project needs images (check the table in the project document). Pick the option that matches where your picture is. Broken picture? <a href="#images-why">Go here</a>. Pictures saved on your computer? The <a href="#zip-builder">zip maker</a> packs them for itch.</p>
 
 <article class="q" id="images-online" data-short="Option 1: an image already online">
 <h3>Step by step: how do I add an image I found online?</h3>
@@ -1028,6 +1012,70 @@ Energy: $energy | Rating: $rating</pre></div></li>
 <div class="call warn"><b class="k">Copy it exactly</b><p>CSS is fussy: every <code>{</code> needs a <code>}</code>, lines end with <code>;</code>, and quotes must be straight (<a href="#smart-quotes">why</a>).</p></div>
 </article>
 
+<article class="q" id="layer-images" data-short="Images on top of images">
+<h3>How do I put one image on top of another?</h3>
+<p class="sit">You want a character standing in a room, or a badge that appears on the desk once the player picks it up.</p>
+<p class="note">Just want one picture in a passage? Start with <a href="#images-online">an image already online</a> or <a href="#images-zip">images on your computer</a>.</p>
+<p class="short">Use the tool below. Fill in boxes 1 and 2, move the top picture in box 3, then copy the code in box 5 into your passage.</p>
+<div class="layer-tool" id="layerTool">
+  <div class="lt-step"><div class="lt-num">1</div><div class="lt-body"><b>The background picture</b> (the big one at the back)
+    <div class="lt-fields">
+      <label>File name or https:// address<input id="ltBottom" value="office.jpg"></label>
+      <label>How wide, in pixels<input id="ltBW" type="number" value="480" min="50" max="1200"></label>
+    </div></div></div>
+  <div class="lt-step"><div class="lt-num">2</div><div class="lt-body"><b>The picture that goes on top</b> (the small one in front)
+    <div class="lt-fields">
+      <label>File name or https:// address<input id="ltTop" value="badge.png"></label>
+      <label>How wide, in pixels<input id="ltTW" type="number" value="120" min="10" max="1200"></label>
+    </div></div></div>
+  <div class="lt-step"><div class="lt-num">3</div><div class="lt-body"><b>Move the top picture to where you want it</b>
+    <p class="lt-hint">The picture with the blue dashed outline and the <b>DRAG ME</b> tag is your top picture. <b>On a computer:</b> put your mouse on it, hold the left button down, move the mouse, and let go. <b>On a phone:</b> use the two number boxes under the preview instead.</p>
+    <div class="lt-stage-wrap"><div class="lt-stage" id="ltStage"><img id="ltBImg" alt="Background picture preview" src="images/sample-office.jpg"><img id="ltTImg" alt="Top picture preview: drag to move" src="images/sample-badge.png" tabindex="0"><span class="lt-tag" id="ltTag">&#10021; DRAG ME</span></div></div>
+    <p class="note" id="ltSample">Until you type full https:// addresses in boxes 1 and 2, the preview shows sample pictures. The code still uses your file names.</p>
+    <div class="lt-fields">
+      <label>Distance from the left edge (pixels)<input id="ltX" type="number" value="300" min="0"></label>
+      <label>Distance from the top edge (pixels)<input id="ltY" type="number" value="160" min="0"></label>
+    </div></div></div>
+  <div class="lt-step"><div class="lt-num">4</div><div class="lt-body"><b>Optional:</b> only show the top picture after something happens (like picking up the badge)
+    <div class="lt-fields">
+      <label class="lt-check"><input id="ltIf" type="checkbox"> Only show it when this variable is true:</label>
+      <label>Variable<input id="ltVar" value="$hasBadge"></label>
+    </div></div></div>
+  <div class="lt-step"><div class="lt-num">5</div><div class="lt-body"><b>Click Copy, and paste it into your passage.</b> Keep it all on one line.
+    <div class="codewrap"><div class="label">Your code</div><pre class="hl" id="ltCode"></pre></div></div></div>
+</div>
+<ul>
+  <li>The top image should be a <b>PNG with a transparent background</b>, or it'll sit there as a rectangle. (Piskel and Pixilart save transparent PNGs.)</li>
+  <li>Keep the code on <b>one line</b>, exactly as the tool gives it.</li>
+  <li>Using file names (not addresses)? Then this needs <a href="#images-zip">the zip method</a>, like any image on your computer.</li>
+</ul>
+<figure><img src="images/layered-badge.webp" alt="An office picture with a badge image layered on top" loading="lazy" style="max-width:min(100%,480px)"><figcaption>What it looks like in the game.</figcaption></figure>
+<p class="note">If you edit the code by hand: the <code>(if:)</code> has to go around the <em>whole</em> thing, like the tool does it. An <code>(if:)</code> placed inside the box makes the top image land below the picture instead of on it.</p>
+</article>
+</section>
+
+<!-- ============================ HOW DO I...? ============================ -->
+<section class="group" id="g-howto" data-icon="🧩" data-title="Add more to your game" data-step="7">
+<h2>How do I...?</h2>
+
+<article class="q" id="stats-bar" data-short="Stats bar on every passage">
+<h3>How do I show the player's stats on every passage?</h3>
+<p class="sit">You want the player's energy (or money, or rating) to show at the bottom of every passage, like a health bar in a game. You don't want to paste it into 50 passages.</p>
+<p class="short">Make one passage with the tag <code>footer</code>. Twine adds it to the bottom of every passage for you.</p>
+<ol class="steps">
+  <li>Make a new passage. Call it anything (<b>StatusBar</b> is fine). It doesn't need any links.</li>
+  <li>Click <b>+ Tag</b>, type <code>footer</code>, and save. (Use <code>header</code> to put it at the top instead.) Type it exactly, all lowercase: <code>Footer</code> won't work, and Twine won't tell you.</li>
+  <li>Write what you want shown:<div class="codewrap"><div class="label">Passage: StatusBar (tag: footer)</div><pre class="hl">&lt;hr&gt;
+Energy: $energy | Rating: $rating</pre></div></li>
+</ol>
+<div class="two">
+<figure><img src="images/passage-footer-tag.webp" alt="StatusBar passage with the footer tag" loading="lazy"><figcaption>The tag shows up under the toolbar.</figcaption></figure>
+<figure><img src="images/play-stats-bar.webp" alt="Playing the game: passage text with the stats line at the bottom" loading="lazy"><figcaption>What the player sees, on every passage.</figcaption></figure>
+</div>
+<div class="call tip"><b class="k">Tip</b><p>You can use <code>(if:)</code> in a footer too, like a warning that only appears when <code>$energy</code> is low.</p></div>
+<p>Want a bar that fills and drains instead of a number? See the <a href="#meter">meter recipe</a>.</p>
+</article>
+
 <article class="q" id="sound" data-short="Music &amp; sound">
 <h3>Can I add music or sound?</h3>
 <p class="sit">You want background music or sound effects, and Twine has no "add sound" button.</p>
@@ -1043,6 +1091,7 @@ Energy: $energy | Rating: $rating</pre></div></li>
 <figure><img src="images/play-stats-bar.webp" alt="A played passage with the curved undo arrow in the top left" loading="lazy"><figcaption>The curved arrow, top left.</figcaption></figure>
 <p class="short">Hide it. It undoes your variables along with the choice, so every consequence in your game can be taken back with one click.</p>
 <p>Lost money, a dropped rating, a door you locked: undo brings them all back. For a game that makes its argument through variables, that undoes the whole point. Don't use it while testing either, or you'll think your systems work differently than they do. Restart the test instead.</p>
+<p>Already clicked it and your stats look wrong? <a href="#undo-trouble">Go here</a>.</p>
 <ol class="steps">
   <li>Open your story, click <b>Story</b> at the top, then <b>Stylesheet</b>.
   <figure><img src="images/story-menu.webp" alt="Twine's Story menu with the Stylesheet button" loading="lazy"></figure></li>
@@ -1089,11 +1138,10 @@ Energy: $energy | Rating: $rating</pre></div></li>
 </ol>
 <p>Twine writes the code for you. Easy to overdo, so go light.</p>
 </article>
-
 </section>
 
 <!-- ============================ ITCH.IO ============================ -->
-<section class="group" id="g-itch" data-icon="🕹️" data-title="Put it on itch.io" data-step="6">
+<section class="group" id="g-itch" data-icon="🕹️" data-title="Put it on itch.io" data-step="8">
 <h2>itch.io</h2>
 
 <article class="q" id="itch-upload" data-short="Uploading, step by step">
@@ -1142,7 +1190,7 @@ Energy: $energy | Rating: $rating</pre></div></li>
 </section>
 
 <!-- ============================ SUBMITTING ============================ -->
-<section class="group" id="g-submit" data-icon="✅" data-title="Submit" data-step="7">
+<section class="group" id="g-submit" data-icon="✅" data-title="Submit" data-step="9">
 <h2>Submitting</h2>
 
 <article class="q" id="screenshots" data-short="Take a screenshot, make a PDF">
@@ -1657,47 +1705,6 @@ Ana: Wow. OK.</pre></div>
 <p class="note">Everything happens in your browser: your game and pictures aren't uploaded anywhere. Keep submitting your normal .html on Lea; the zip is for itch.</p>
 </article>
 
-<article class="q" id="layer-images" data-short="Images on top of images">
-<h3>How do I put one image on top of another?</h3>
-<p class="sit">You want a character standing in a room, or a badge that appears on the desk once the player picks it up.</p>
-<p class="note">Just want one picture in a passage? Start with <a href="#images-online">an image already online</a> or <a href="#images-zip">images on your computer</a>.</p>
-<p class="short">Use the tool below. Fill in boxes 1 and 2, move the top picture in box 3, then copy the code in box 5 into your passage.</p>
-<div class="layer-tool" id="layerTool">
-  <div class="lt-step"><div class="lt-num">1</div><div class="lt-body"><b>The background picture</b> (the big one at the back)
-    <div class="lt-fields">
-      <label>File name or https:// address<input id="ltBottom" value="office.jpg"></label>
-      <label>How wide, in pixels<input id="ltBW" type="number" value="480" min="50" max="1200"></label>
-    </div></div></div>
-  <div class="lt-step"><div class="lt-num">2</div><div class="lt-body"><b>The picture that goes on top</b> (the small one in front)
-    <div class="lt-fields">
-      <label>File name or https:// address<input id="ltTop" value="badge.png"></label>
-      <label>How wide, in pixels<input id="ltTW" type="number" value="120" min="10" max="1200"></label>
-    </div></div></div>
-  <div class="lt-step"><div class="lt-num">3</div><div class="lt-body"><b>Move the top picture to where you want it</b>
-    <p class="lt-hint">The picture with the blue dashed outline and the <b>DRAG ME</b> tag is your top picture. <b>On a computer:</b> put your mouse on it, hold the left button down, move the mouse, and let go. <b>On a phone:</b> use the two number boxes under the preview instead.</p>
-    <div class="lt-stage-wrap"><div class="lt-stage" id="ltStage"><img id="ltBImg" alt="Background picture preview" src="images/sample-office.jpg"><img id="ltTImg" alt="Top picture preview: drag to move" src="images/sample-badge.png" tabindex="0"><span class="lt-tag" id="ltTag">&#10021; DRAG ME</span></div></div>
-    <p class="note" id="ltSample">Until you type full https:// addresses in boxes 1 and 2, the preview shows sample pictures. The code still uses your file names.</p>
-    <div class="lt-fields">
-      <label>Distance from the left edge (pixels)<input id="ltX" type="number" value="300" min="0"></label>
-      <label>Distance from the top edge (pixels)<input id="ltY" type="number" value="160" min="0"></label>
-    </div></div></div>
-  <div class="lt-step"><div class="lt-num">4</div><div class="lt-body"><b>Optional:</b> only show the top picture after something happens (like picking up the badge)
-    <div class="lt-fields">
-      <label class="lt-check"><input id="ltIf" type="checkbox"> Only show it when this variable is true:</label>
-      <label>Variable<input id="ltVar" value="$hasBadge"></label>
-    </div></div></div>
-  <div class="lt-step"><div class="lt-num">5</div><div class="lt-body"><b>Click Copy, and paste it into your passage.</b> Keep it all on one line.
-    <div class="codewrap"><div class="label">Your code</div><pre class="hl" id="ltCode"></pre></div></div></div>
-</div>
-<ul>
-  <li>The top image should be a <b>PNG with a transparent background</b>, or it'll sit there as a rectangle. (Piskel and Pixilart save transparent PNGs.)</li>
-  <li>Keep the code on <b>one line</b>, exactly as the tool gives it.</li>
-  <li>Using file names (not addresses)? Then this needs <a href="#images-zip">the zip method</a>, like any image on your computer.</li>
-</ul>
-<figure><img src="images/layered-badge.webp" alt="An office picture with a badge image layered on top" loading="lazy" style="max-width:min(100%,480px)"><figcaption>What it looks like in the game.</figcaption></figure>
-<p class="note">If you edit the code by hand: the <code>(if:)</code> has to go around the <em>whole</em> thing, like the tool does it. An <code>(if:)</code> placed inside the box makes the top image land below the picture instead of on it.</p>
-</article>
-
 </section>
 
 <!-- ============================ ADVANCED ============================ -->
@@ -1774,13 +1781,45 @@ Ana: Wow. OK.</pre></div>
 <p>Copied it from a website or forum? It might also be <a href="#harlowe">code for a different story format</a>.</p>
 </article>
 
-<article class="q" id="test-zero" data-short="Stats say 0 when I test">
-<h3>My stats say 0 when I test, even though I set them.</h3>
-<p class="sit">You set <code>$energy</code> to 10 at the start of your game. Then you click <b>Test From Here</b> on a passage near the end, and your stats say <b>Energy: 0</b>.</p>
-<p class="short">Put your starting <code>(set:)</code> lines in a passage tagged <code>startup</code> (<a href="#startup">how</a>). Then testing from anywhere works.</p>
+<article class="q" id="test-zero" data-short="Testing from the middle acts weird">
+<h3>My game acts weird when I test from the middle (stats say 0, choices forgotten).</h3>
+<p class="sit">You clicked <b>Test From Here</b> on a passage near the end. Your stats say 0, the badge the player picked up earlier is gone, or a passage that should work looks broken.</p>
+<p class="short">Test From Here starts the game in the middle, as if the player teleported there. Nothing before that passage happened. Before you decide something is broken, test it again from the start with <b>Build &rarr; Test</b>.</p>
 <figure><img src="images/play-image-test.webp" alt="Test mode showing Energy: 0 | Rating: 0" loading="lazy"><figcaption>Tested from the middle: Energy 0, Rating 0.</figcaption></figure>
-<p><b>Why:</b> Test From Here starts the game right at that passage. It skips your first passage, so the lines that set your variables never ran. In Harlowe, a variable that was never set shows as <code>0</code>. A <code>startup</code> passage always runs first, wherever you start.</p>
-<p>Also remember: Test From Here skips everything the player would have done before that passage, not just your starting values (<a href="#debugger">more</a>).</p>
+<p><b>Why:</b> Test From Here skips every passage before the one you picked. The choices, the points, the badge: none of it happened. In Harlowe, a variable that was never set shows as <code>0</code>.</p>
+<ul>
+  <li><b>Stats say 0?</b> Put your starting <code>(set:)</code> lines in a passage tagged <code>startup</code> (<a href="#startup">how</a>). A startup passage always runs first, wherever you start, so your starting values are always there.</li>
+  <li><b>Something the player did earlier is missing?</b> That's normal in Test From Here. Play from the start (<b>Build &rarr; Test</b>) and make those choices.</li>
+  <li><b>A passage looks fine in Test From Here?</b> It can still break when played from the start. Always do a full test from the start before you submit.</li>
+</ul>
+<p>Next to Test From Here is <b>Start Story Here</b>, which is something else entirely: <a href="#wrong-start">don't click it by accident</a>.</p>
+</article>
+
+<article class="q" id="wrong-start" data-short="Game starts in the wrong passage">
+<h3>My game starts in the wrong passage.</h3>
+<p class="sit">You press Play (or open your game on itch), and it begins in the middle of the story, or on some random passage, instead of your first one.</p>
+<p class="short">Someone clicked <b>Start Story Here</b> by accident. It moves the green rocket, and the rocket marks where your game begins. Move it back.</p>
+<figure><img src="images/start-story-here.webp" alt="Twine's story map with the Start Story Here button and the green rocket next to the first passage, both circled in red" loading="lazy" style="max-width:min(100%,700px)"><figcaption>The green rocket sits next to the passage your game starts on. <b>Start Story Here</b> moves it.</figcaption></figure>
+<ol class="steps">
+  <li>In your story map, find your <b>real first passage</b>.</li>
+  <li>Click it <b>once</b>, so it's highlighted. (The buttons at the top stay grey until a passage is selected.)</li>
+  <li>Click <b>Start Story Here</b> at the top. The green rocket jumps next to that passage.</li>
+  <li>Play it from the start to check.</li>
+  <li>Already on itch? Publish again and re-upload (<a href="#itch-update">how</a>), or players still start in the wrong place.</li>
+</ol>
+<div class="call warn"><b class="k">Not a test button</b><p>Start Story Here sits right next to <b>Test From Here</b>, and it's easy to mix them up. Test From Here only tests. Start Story Here changes your game, for everyone.</p></div>
+</article>
+
+<article class="q" id="undo-trouble" data-short="Back arrow messed up my stats">
+<h3>I clicked the little back arrow, and now my stats or choices are wrong.</h3>
+<p class="sit">You (or a playtester) clicked the curved arrow in the top-left corner to go back a step. Now the money is back, a choice is undone, or the numbers don't add up the way your game says they should.</p>
+<p class="short">That arrow is Harlowe's <b>undo</b>. It rewinds everything, your variables included, as if the last choice never happened. Your code isn't broken.</p>
+<figure><img src="images/play-stats-bar.webp" alt="A played passage with the curved undo arrow in the top left" loading="lazy"><figcaption>The curved arrow, top left.</figcaption></figure>
+<ul>
+  <li><b>While you're testing:</b> don't use it. You'll think your systems work differently than they do. Start the test over instead.</li>
+  <li><b>In your finished game:</b> hide it, so players can't undo every consequence with one click. It's one line in your Stylesheet (<a href="#back-arrow">how</a>).</li>
+  <li><b>The browser's own back button</b> is different again: it doesn't go back one passage, it <b>leaves your game</b>. Warn your playtesters.</li>
+</ul>
 </article>
 
 <article class="q" id="text-not-updating" data-short="Number on screen didn't change">
@@ -1971,7 +2010,7 @@ Ana: Wow. OK.</pre></div>
   window.addEventListener('hashchange',route);
 
   // ---------- Search ----------
-  var SYN=[['image','picture','img','photo','pic','png','jpg'],['itch','itchio','itch.io'],['variable','varible','variabel'],['music','sound','audio','song','mp3'],['link','url','address'],['save','saved','lost','backup','gone','disappeared','deleted'],['zip','zipped','compress','zip maker','folder'],['background','backdrop','bg'],['undo','back arrow','back button','arrow'],['group','team','partner','together','google doc','docs'],['error','broken','not working','doesnt work',"doesn't work",'bug'],['startup','start up','starting values','setup'],['stats','stat bar','health','score','footer','header'],['quote','quotes','smart quotes'],['random','dice','chance'],['import','replace','overwrite'],['meter','bar','health bar','progress','energy','hearts','lives','blocks'],['stylesheet','css','colour','color','font','look','style','design','theme','builder'],['template','phone','app','form','terminal','email','inbox','text message'],['dialogue','dialog','visual novel','vn','name box','speech','next','one at a time'],['character','face','expression','mood','emotion','portrait']];
+  var SYN=[['image','picture','img','photo','pic','png','jpg'],['itch','itchio','itch.io'],['variable','varible','variabel'],['music','sound','audio','song','mp3'],['link','url','address'],['save','saved','lost','backup','gone','disappeared','deleted'],['zip','zipped','compress','zip maker','folder'],['background','backdrop','bg'],['undo','back arrow','back button','arrow','rewind'],['group','team','partner','together','google doc','docs'],['error','broken','not working','doesnt work',"doesn't work",'bug'],['startup','start up','starting values','setup'],['stats','stat bar','health','score','footer','header'],['quote','quotes','smart quotes'],['random','dice','chance'],['import','replace','overwrite'],['test from here','start story here','rocket','wrong passage','starts in the middle'],['meter','bar','health bar','progress','energy','hearts','lives','blocks'],['stylesheet','css','colour','color','font','look','style','design','theme','builder'],['template','phone','app','form','terminal','email','inbox','text message'],['dialogue','dialog','visual novel','vn','name box','speech','next','one at a time'],['character','face','expression','mood','emotion','portrait']];
   function resetSearch(){
     side.querySelectorAll('.items a, .grp').forEach(function(x){x.classList.remove('hidden');});
   }
