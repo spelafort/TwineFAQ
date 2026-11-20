@@ -171,6 +171,25 @@ h3[tabindex]:focus,h3[tabindex]:focus-visible{outline:none}
 #ltTImg{position:absolute;cursor:grab;touch-action:none;outline:2px dashed var(--accent);outline-offset:2px}
 #ltTImg:active{cursor:grabbing}
 @media (max-width:600px){.two-col,.lt-fields{grid-template-columns:1fr}}
+.anatomy{margin:14px 0;font-family:"JetBrains Mono",monospace;font-size:15px;overflow-x:auto}
+.an-code{display:inline-flex;flex-wrap:wrap;background:var(--code-bg);border:1px solid var(--line);border-radius:9px;padding:10px 12px}
+.an-m{color:var(--tok-macro);font-weight:700;border-bottom:3px solid var(--tok-macro)}
+.an-h{color:var(--tok-str);border-bottom:3px solid var(--tok-str)}
+.an-part{display:inline-flex;flex-direction:column}.an-part small{font:600 13px Inter,sans-serif;margin-top:4px}
+.an-ml{color:var(--tok-macro)} .an-hl{color:var(--tok-str)}
+.ctx-demo{margin:10px 0}
+.ctx-wrap{position:relative;display:inline-block;max-width:100%}
+.ctx-img{width:340px;max-width:100%;border-radius:8px;cursor:default!important}
+.ctx-menu{position:absolute;left:46%;top:22%;background:#fff;color:#222;border:1px solid #ccc;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,.25);padding:6px 0;font:13.5px system-ui,sans-serif;min-width:200px}
+.ctx-menu div{padding:5px 14px;white-space:nowrap}
+.ctx-hi{background:#e8f0fe;font-weight:700;outline:3px solid #e03131;outline-offset:-3px}
+@media (max-width:600px){.ctx-menu{left:20%;top:30%;min-width:170px;font-size:12.5px}}
+.urlcheck{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+.uc{border:1px solid var(--line);border-radius:9px;padding:10px 14px;font-size:14px}
+.uc > code{display:block;margin:6px 0;word-break:break-all;background:var(--code-bg);padding:3px 6px;border-radius:5px}
+.uc ul{margin:6px 0 0;padding-left:18px}
+@media (max-width:600px){.urlcheck{grid-template-columns:1fr}}
+h4.rh{margin:20px 0 4px;font-size:15px}
 /* callouts */
 .call{border-left:4px solid var(--info);background:var(--info-bg);border-radius:0 8px 8px 0;padding:10px 14px;margin:14px 0}
 .call.tip{border-color:var(--tip);background:var(--tip-bg)}
@@ -512,19 +531,167 @@ Your badge is in the locker.</pre></div>
 <div class="call warn"><b class="k">Watch your spelling</b><p>The passage name has to match exactly, capitals included. <code>[[get up]]</code> with a small "g" makes a <em>second</em>, empty passage called "get up", and players who click it hit a dead end. If you see a passage you didn't mean to make, fix the spelling in the link and delete the extra passage. <b>Story &rarr; Details</b> shows your broken links.</p></div>
 </article>
 
-<article class="q" id="variables-basics" data-short="Variables: what they are">
-<h3>How does my game remember things? (variables)</h3>
-<p class="sit">Your game needs to keep track of something: money, energy, a rating, whether the player picked up the key. That's a <b>variable</b>: a named box that remembers a value. In Harlowe, variable names start with <code>$</code>.</p>
-<p class="short">Use <code>(set:)</code> to put something in the box, and <code>(if:)</code> to check what's in it.</p>
-<div class="codewrap"><div class="label">Give it a starting value (in your <a href="#startup">startup passage</a>)</div><pre class="hl">(set: $energy to 10)
+<article class="q" id="macros-hooks" data-short="Macros and hooks: what they are">
+<h3>What are "macros" and "hooks"?</h3>
+<p class="sit">The project requirements ask for a minimum number of macros and hooks, and you're not sure what those words mean (or if you have any).</p>
+<p class="short">A macro is a command in round brackets with a colon, like <code>(set:)</code>. A hook is text in square brackets attached right after a macro, like <code>[You're in.]</code>.</p>
+<div class="anatomy">
+  <div class="an-code"><span class="an-part"><span class="an-m">(if: $hasBadge is true)</span><small class="an-ml">&uarr; macro</small></span><span class="an-part"><span class="an-h">[The scanner beeps green.]</span><small class="an-hl">&uarr; hook</small></span></div>
+</div>
+<ol class="steps">
+  <li><b>Spot a macro:</b> round brackets, a word, a colon. <code>(set:</code> &hellip; <code>)</code>, <code>(if:</code> &hellip; <code>)</code>, <code>(link:</code> &hellip; <code>)</code>. Macros <em>do</em> things: change a variable, check a variable, make a link, pick a random number, change a colour.</li>
+  <li><b>Spot a hook:</b> square brackets <code>[ ]</code> stuck right after a macro, with no space. The hook is the text (or code) the macro acts on: the text that shows if the <code>(if:)</code> is true, the text that turns red, the code that runs when a <code>(link:)</code> is clicked.</li>
+  <li><b>Don't confuse hooks with links.</b> <code>[[Get up]]</code> (double brackets) is a link, not a hook.</li>
+</ol>
+<p><b>The macros you'll use most</b> (each has its own page):</p>
+<div class="tablewrap"><table>
+<tr><th>Macro</th><th>What it does</th><th>Example</th></tr>
+<tr><td><code>(set:)</code></td><td>Puts a value in a variable</td><td><code>(set: $energy to 10)</code></td></tr>
+<tr><td><code>(if:)</code> / <code>(else:)</code> / <code>(else-if:)</code></td><td>Shows a hook only if something is true</td><td><code>(if: $energy &lt; 3)[You're exhausted.]</code></td></tr>
+<tr><td><code>(link:)</code></td><td>A link that runs code when clicked</td><td><code>(link: "Take it")[(set: $hasBadge to true)]</code></td></tr>
+<tr><td><code>(goto:)</code></td><td>Sends the player to a passage</td><td><code>(goto: "Floor")</code></td></tr>
+<tr><td><code>(random:)</code></td><td>Picks a random number</td><td><code>(random: 1, 6)</code></td></tr>
+<tr><td><code>(text-colour:)</code></td><td>Colours the text in its hook</td><td><code>(text-colour: red)[Warning]</code></td></tr>
+</table></div>
+<p>Not sure how something counts toward the requirements? Ask me before you submit. Full list of macros: the sidebar of the <a href="https://twine2.neocities.org/#markup_macro" target="_blank" rel="noopener">Harlowe manual</a>.</p>
+</article>
+
+<article class="q" id="variables-basics" data-short="Variables: the 3 kinds">
+<h3>What's a variable? (and the 3 kinds you'll use)</h3>
+<p class="sit">Your game needs to remember something: how much energy the player has, whether they picked up the badge, their name. That's what a <b>variable</b> is: a named box that remembers one thing.</p>
+<p class="short">A variable's name starts with <code>$</code>. It can hold a number, true/false, or text.</p>
+<div class="tablewrap"><table>
+<tr><th>Kind</th><th>Use it for</th><th>Example</th></tr>
+<tr><td><b>Number</b></td><td>Anything you count or add up: money, energy, a rating, days left</td><td><code>(set: $energy to 10)</code></td></tr>
+<tr><td><b>True / false</b></td><td>Yes-or-no things: has the badge, met the boss, got fired</td><td><code>(set: $hasBadge to false)</code></td></tr>
+<tr><td><b>Text</b></td><td>Words: a name, a job title, a choice they made</td><td><code>(set: $name to "Sam")</code></td></tr>
+</table></div>
+<ul>
+  <li>Numbers and <code>true</code>/<code>false</code> have <b>no quotes</b>. Text <b>has</b> quotes.</li>
+  <li>Names: no spaces, don't start with a number, and capitals matter. Use camelCase: <code>$hasBadge</code>, <code>$timesLate</code>. (It's also more like camels.)</li>
+</ul>
+<p>The lessons below build one small game, step by step, using all three kinds. Click <b>Next</b> to start.</p>
+</article>
+
+<article class="q" id="startup" data-short="Lesson: give variables starting values">
+<h3>Step by step: how do I create my variables and give them starting values?</h3>
+<p class="sit">You know what variables your game needs (energy, a rating, a badge, a name), and you need to create them with starting values. Where does that code go? If you put it in your first passage, testing from the middle of your game shows everything as 0, and if the player ever comes back to that passage, everything resets.</p>
+<p class="short">Put all of it in one passage with the tag <code>startup</code>. Twine runs it first, every time.</p>
+<ol class="steps">
+  <li>In your story, click <b>+ New</b> (top left) to make a new passage.</li>
+  <li>Click <b>Rename</b> and call it <b>Setup</b>. It doesn't need any links, and players never see it.</li>
+  <li>Click <b>+ Tag</b>, type <code>startup</code> (all lowercase, one word), and press Enter.</li>
+  <li>Type one <code>(set:)</code> line for each variable:<div class="codewrap"><div class="label">Passage: Setup (tag: startup)</div><pre class="hl">(set: $energy to 10)
+(set: $rating to 4.6)
 (set: $hasBadge to false)
-(set: $name to "Sam")</pre></div>
-<div class="codewrap"><div class="label">Change it</div><pre class="hl">(set: $energy to it - 2)</pre></div>
-<div class="codewrap"><div class="label">Show it to the player</div><pre class="hl">You have $energy energy left.</pre></div>
-<div class="codewrap"><div class="label">Check it, and show different text</div><pre class="hl">(if: $hasBadge is true)[The scanner beeps green.](else:)[The scanner beeps red.]
-(if: $energy &lt; 3)[You can barely keep your eyes open.]</pre></div>
-<figure><img src="images/passage-if-else.webp" alt="Passage with set, an image, and an if/else hook" loading="lazy"><figcaption>A passage that changes a variable, shows an image, and checks a variable.</figcaption></figure>
-<p><b>The mistakes that break variables</b> (each one with a fix):</p>
+(set: $name to "Sam")</pre></div></li>
+</ol>
+<figure><img src="images/v-setup.webp" alt="The Setup passage with the startup tag circled in red and four set lines" loading="lazy" style="max-width:min(100%,600px)"><figcaption>Your Setup passage: the <code>startup</code> tag (circled), and one line per variable.</figcaption></figure>
+<p>That's it: your variables now exist from the very start of the game. Next, let's show them to the player.</p>
+</article>
+
+<article class="q" id="show-variable" data-short="Lesson: show a variable">
+<h3>Step by step: how do I show a variable to the player?</h3>
+<p class="sit">You've made your variables, and you want the player to see them: "Energy: 10", or their name in a sentence.</p>
+<p class="short">Just type the variable's name (with the <code>$</code>) in your passage text. Twine swaps in the value.</p>
+<ol class="steps">
+  <li>Open your first passage (the one with the green rocket).</li>
+  <li>Type your text, and put the variable wherever you want its value to appear:<div class="codewrap"><pre class="hl">Good morning, $name.
+Energy: $energy
+Rating: $rating
+
+[[Go to the locker room-&gt;Locker Room]]</pre></div>
+  <figure><img src="images/v-start.webp" alt="The Start passage in Twine with $name, $energy and $rating in the text" loading="lazy" style="max-width:min(100%,600px)"></figure></li>
+  <li>Click <b>Build &rarr; Play</b>. The player sees the values, not the names:
+  <figure><img src="images/v-start-play.webp" alt="The played game: Good morning, Sam. Energy: 10. Rating: 4.6" loading="lazy" style="max-width:min(100%,520px)"></figure></li>
+</ol>
+<p>Seeing a <b>0</b> where your value should be? Check the spelling and capitals of the variable, and that your Setup passage has the <code>startup</code> tag.</p>
+</article>
+
+<article class="q" id="set-on-choice" data-short="Lesson: change a variable on a choice">
+<h3>Step by step: how do I change a variable when the player picks something?</h3>
+<p class="sit">The player can take the badge or leave it, and you want the game to remember which. You may have tried putting <code>(set: $hasBadge to true)</code> next to the "Take the badge" link... and now the player gets the badge no matter what they click.</p>
+<div class="codewrap bad"><div class="label">&#10007; What people usually try first</div><pre class="hl">(set: $hasBadge to true)
+[[Take the badge-&gt;Scanner]]
+[[Leave it-&gt;Scanner]]</pre></div>
+<p>A <code>(set:)</code> doesn't wait for a click. It runs the moment the passage appears, so the player has the badge before choosing anything.</p>
+<p class="short">Put the <code>(set:)</code> inside a <code>(link:)</code>, so it only runs when that choice is clicked.</p>
+<ol class="steps">
+  <li>Instead of <code>[[Take the badge]]</code>, type <code>(link: "Take the badge")</code>. The words in quotes are what the player clicks.</li>
+  <li>Right after it, with no space, open square brackets <code>[ ]</code>. Everything inside runs <b>only when the player clicks</b>.</li>
+  <li>Inside the brackets: first the change, <code>(set: $hasBadge to true)</code>, then where to go next, <code>(goto: "Scanner")</code>.</li>
+  <li>The other choice stays a normal link:<div class="codewrap good"><div class="label">&#10003; Passage: Locker Room</div><pre class="hl">Your badge is hanging in the locker.
+
+(link: "Take the badge")[(set: $hasBadge to true)(goto: "Scanner")]
+[[Leave it-&gt;Scanner]]</pre></div>
+  <figure><img src="images/v-locker.webp" alt="The Locker Room passage in Twine with a link macro containing set and goto" loading="lazy" style="max-width:min(100%,600px)"></figure></li>
+</ol>
+<p><b>Changing other kinds of variables</b> works the same way. Some examples to put inside the brackets:</p>
+<div class="codewrap"><pre class="hl">(set: $energy to it - 2)        &lt;!-- number: subtract 2 --&gt;
+(set: $money to it + 50)        &lt;!-- number: add 50 --&gt;
+(set: $hasBadge to true)        &lt;!-- true/false: switch it --&gt;
+(set: $job to "manager")        &lt;!-- text: replace it --&gt;</pre></div>
+<p><code>it</code> means "the variable's current value", so <code>it - 2</code> means "2 less than now".</p>
+<p class="note">Simpler alternative: give each choice its own passage (<code>[[Take the badge-&gt;Badge Taken]]</code>), and put the <code>(set:)</code> at the very top of that passage. It works because that passage only appears if the player chose it. Note: links made with <code>(link:)</code> don't draw an arrow on the story map, so the map can look disconnected even when the game works.</p>
+</article>
+
+<article class="q" id="if-else" data-short="Lesson: if / else">
+<h3>Step by step: how do I show different text depending on a variable? (if / else)</h3>
+<p class="sit">The player took the badge, or didn't. Now you want the next passage to react: the scanner beeps green if they have it, red if they don't.</p>
+<p class="short">Use <code>(if:)</code> with a hook for the "yes" text, then <code>(else:)</code> with a hook for the "no" text.</p>
+<ol class="steps">
+  <li>Type <code>(if:</code>, then the thing to check, then <code>)</code>: <code>(if: $hasBadge is true)</code>.</li>
+  <li>Right after it, no space, put the text to show when it's true in square brackets: <code>[The scanner beeps green. You're in.]</code></li>
+  <li>Right after that, type <code>(else:)</code> and, in brackets, the text to show otherwise: <code>[The scanner beeps red.]</code></li>
+  <li>You can put code inside the hooks too. Here, the rating drops only in the "red" version:<div class="codewrap good"><div class="label">Passage: Scanner</div><pre class="hl">(if: $hasBadge is true)[The scanner beeps green. You're in.](else:)[The scanner beeps red. (set: $rating to it - 0.3)Your rating drops.]
+Rating: $rating
+
+[[Start your shift-&gt;Shift]]</pre></div>
+  <figure><img src="images/v-scanner.webp" alt="The Scanner passage in Twine with an if/else" loading="lazy" style="max-width:min(100%,600px)"></figure></li>
+  <li>Play it twice, once taking the badge and once leaving it:
+  <div class="two">
+  <figure><img src="images/v-scanner-green.webp" alt="Played: The scanner beeps green. You're in. Rating: 4.6" loading="lazy"><figcaption>Took the badge.</figcaption></figure>
+  <figure><img src="images/v-scanner-red.webp" alt="Played: The scanner beeps red. Your rating drops. Rating: 4.3" loading="lazy"><figcaption>Left it: red, and the rating dropped.</figcaption></figure>
+  </div></li>
+</ol>
+<p><b>Ways to check</b> (put these inside the <code>(if:)</code>):</p>
+<div class="tablewrap"><table>
+<tr><th>You want to check...</th><th>Write</th></tr>
+<tr><td>is equal to</td><td><code>$hasBadge is true</code> &nbsp; <code>$name is "Sam"</code></td></tr>
+<tr><td>is not equal to</td><td><code>$energy is not 0</code></td></tr>
+<tr><td>more than / less than</td><td><code>$money &gt; 100</code> &nbsp; <code>$energy &lt; 3</code></td></tr>
+<tr><td>at least / at most</td><td><code>$money &gt;= 100</code> &nbsp; <code>$energy &lt;= 3</code></td></tr>
+<tr><td>two things at once</td><td><code>$hasBadge is true and $energy &gt; 5</code></td></tr>
+<tr><td>either one</td><td><code>$rating &lt; 3 or $timesLate &gt; 2</code></td></tr>
+</table></div>
+<p><b>More than two options? Use <code>(else-if:)</code>.</b> Twine checks them in order and shows the first one that's true:</p>
+<div class="codewrap good"><pre class="hl">(if: $energy &gt; 5)[You feel fine.](else-if: $energy &gt; 2)[You're getting tired.](else:)[You can barely stand.]</pre></div>
+</article>
+
+<article class="q" id="show-hide-choices" data-short="Lesson: show or hide a choice">
+<h3>Step by step: how do I show or hide a choice depending on a variable?</h3>
+<p class="sit">Some choices should only be available sometimes: only players with a badge can go to the break room, only players with enough money can buy coffee. Or you want the player to <em>see</em> a choice they can't take.</p>
+<p class="short">Put the link inside an <code>(if:)</code> hook. Add spaces between the brackets to keep it readable.</p>
+<ol class="steps">
+  <li>Write the link like normal: <code>[[Go to the break room-&gt;Break Room]]</code>.</li>
+  <li>Wrap it in an <code>(if:)</code> hook, with a space on each side so the brackets don't blur together:<div class="codewrap good"><pre class="hl">(if: $hasBadge is true)[ [[Go to the break room-&gt;Break Room]] ]</pre></div>
+  Now players without the badge don't see the choice at all.</li>
+  <li><b>Want them to see what they're missing?</b> Add an <code>(else:)</code> with the choice crossed out (<code>~~</code> on each side) and a reason:<div class="codewrap good"><div class="label">Passage: Shift</div><pre class="hl">(if: $hasBadge is true)[ [[Go to the break room-&gt;Break Room]] ](else:)[~~Go to the break room~~ (you need a badge)]
+[[Keep working-&gt;End]]</pre></div>
+  <figure><img src="images/v-shift.webp" alt="The Shift passage in Twine with an if/else-if and a hidden choice" loading="lazy" style="max-width:min(100%,600px)"></figure></li>
+  <li>Play it both ways:
+  <div class="two">
+  <figure><img src="images/v-shift-badge.webp" alt="Played with badge: Go to the break room is a clickable link" loading="lazy"><figcaption>With the badge: the choice is a link.</figcaption></figure>
+  <figure><img src="images/v-shift-nobadge.webp" alt="Played without badge: Go to the break room is crossed out, with 'you need a badge'" loading="lazy"><figcaption>Without it: crossed out, not clickable.</figcaption></figure>
+  </div></li>
+</ol>
+<p>A crossed-out choice can make an argument all by itself: it shows the player what's available to <em>someone else</em>.</p>
+</article>
+
+<article class="q" id="variable-mistakes" data-short="Variable code that breaks">
+<h3>My variable code doesn't work. What did I get wrong?</h3>
+<p class="sit">You wrote some variable code, and Twine shows an error, or it just doesn't do anything.</p>
+<p class="short">Check it against this list. These are the mistakes that break variables most often.</p>
 <ul>
   <li>Use <code>to</code> when setting and <code>is</code> when checking. Not <code>=</code>.
 <div class="codewrap bad"><div class="label">&#10007; Doesn't work</div><pre class="hl">(set: $energy = 10)
@@ -534,8 +701,7 @@ Your badge is in the locker.</pre></div>
   <li>Capitals matter: <code>$Energy</code> and <code>$energy</code> are two different boxes.
 <div class="codewrap bad"><div class="label">&#10007; Shows 0, because $Energy was never set</div><pre class="hl">(set: $energy to 10)
 You have $Energy energy left.</pre></div></li>
-  <li>No spaces in names, and don't start with a number. Use camelCase: <code>$hasBadge</code>, <code>$timesLate</code>. (It's also more like camels.)</li>
-  <li>The text that shows or hides goes in <b>square brackets right after</b> the <code>(if:)</code>, with no space.
+  <li>The hook goes <b>right after</b> the <code>(if:)</code>, with no space.
 <div class="codewrap bad"><div class="label">&#10007; Doesn't work (space before the bracket)</div><pre class="hl">(if: $hasBadge is true) [The scanner beeps green.]</pre></div>
 <div class="codewrap good"><div class="label">&#10003; Works</div><pre class="hl">(if: $hasBadge is true)[The scanner beeps green.]</pre></div></li>
   <li>For "not equal", use <code>is not</code>, not <code>!=</code>.
@@ -544,47 +710,14 @@ You have $Energy energy left.</pre></div></li>
   <li>No quotes around <code>true</code>, <code>false</code>, or numbers. Quotes turn them into text.
 <div class="codewrap bad"><div class="label">&#10007; Never beeps green, and Twine doesn't warn you</div><pre class="hl">(set: $hasBadge to "true")
 (if: $hasBadge is true)[The scanner beeps green.]</pre></div>
-<div class="codewrap good"><div class="label">&#10003; Works</div><pre class="hl">(set: $hasBadge to true)
-(set: $age to 18)</pre></div>
-<p>Quotes are only for words: <code>(set: $name to "Sam")</code>.</p></li>
+<div class="codewrap good"><div class="label">&#10003; Works</div><pre class="hl">(set: $hasBadge to true)</pre></div></li>
+  <li>Curly quotes from Google Docs or PDFs break everything (<a href="#smart-quotes">fix</a>). Code from other websites may be for a different format (<a href="#harlowe">why</a>).</li>
+  <li>Variables showing 0 when you test? <a href="#test-zero">Fix</a>. Number on screen not changing after a click? <a href="#text-not-updating">Fix</a>.</li>
 </ul>
-<p>Next: <a href="#startup">where to put your starting values</a>, and <a href="#set-on-choice">changing a variable when the player picks something</a>.</p>
 </article>
 
-<article class="q" id="startup" data-short="Where starting values go">
-<h3>Where do I put my starting variables?</h3>
-<p class="sit">Your game has variables, and they need starting values: 10 energy, a 4.6 rating, no badge. You're wondering where that code goes. If you put it in your first passage, two things go wrong: testing from the middle of your game shows everything as 0, and if the player ever comes back to that passage, everything resets.</p>
-<p class="short">Put them in one passage with the tag <code>startup</code>. Twine runs it first, every time, even when you test from the middle.</p>
-<ol class="steps">
-  <li>Make a new passage (<b>+ New</b> at the top). Call it <b>Setup</b>. It doesn't need any links, and players never see it.</li>
-  <li>Click <b>+ Tag</b> and type <code>startup</code>: all lowercase, one word.</li>
-  <li>Put all your starting values in it:<div class="codewrap"><div class="label">Passage: Setup (tag: startup)</div><pre class="hl">(set: $energy to 10)
-(set: $rating to 4.6)
-(set: $hasBadge to false)</pre></div></li>
-  <li>Delete those same <code>(set:)</code> lines from anywhere else, so they're only in one place.</li>
-</ol>
-<figure><img src="images/startup-tag.webp" alt="A passage named Setup with the startup tag circled in red" loading="lazy"><figcaption>The <code>startup</code> tag, circled.</figcaption></figure>
-</article>
 
-<article class="q" id="set-on-choice" data-short="Change a variable on a choice">
-<h3>How do I change a variable when the player picks something?</h3>
-<p class="sit">The player can take the badge or leave it, and you want the game to remember which. So you put <code>(set: $hasBadge to true)</code> next to the "Take the badge" link... and now the player gets the badge no matter what they click.</p>
-<div class="codewrap bad"><div class="label">&#10007; What you probably tried</div><pre class="hl">(set: $hasBadge to true)
-[[Take the badge-&gt;Floor]]
-[[Leave it-&gt;Floor]]</pre></div>
-<p>A <code>(set:)</code> doesn't wait for a click. It runs the moment the passage appears. So the player already has the badge before they choose anything.</p>
-<p class="short">Fix it one of two ways:</p>
-<p><b>Option A (easiest): give each choice its own passage, and put the <code>(set:)</code> at the top of that passage.</b></p>
-<div class="codewrap good"><div class="label">Passage: Locker Room</div><pre class="hl">[[Take the badge-&gt;Badge Taken]]
-[[Leave it-&gt;Floor]]</pre></div>
-<div class="codewrap good"><div class="label">Passage: Badge Taken</div><pre class="hl">(set: $hasBadge to true)
-You clip the badge to your shirt. It's warm, somehow.
-[[Go to the floor-&gt;Floor]]</pre></div>
-<p><b>Option B: put the <code>(set:)</code> inside the link.</b> Use <code>(link:)</code> instead of <code>[[ ]]</code>. Everything in the square brackets after it runs only when the player clicks: first the <code>(set:)</code>, then <code>(goto:)</code> sends them to the next passage.</p>
-<div class="codewrap good"><div class="label">Passage: Locker Room</div><pre class="hl">(link: "Take the badge")[(set: $hasBadge to true)(goto: "Floor")]
-[[Leave it-&gt;Floor]]</pre></div>
-<figure><img src="images/passage-link-set.webp" alt="Twine passage editor showing a link macro containing set and goto" loading="lazy"><figcaption>Option B in Twine. Links made this way don't draw an arrow on the story map, so the map can look disconnected even when the game works.</figcaption></figure>
-</article>
+
 
 <article class="q" id="stats-bar" data-short="Stats bar on every passage">
 <h3>How do I show the player's stats on every passage?</h3>
@@ -648,17 +781,41 @@ Energy: $energy | Rating: $rating</pre></div></li>
 <h2>Images &amp; sound</h2>
 
 <article class="q" id="images-online" data-short="Option 1: an image already online">
-<h3>How do I add an image that's already online?</h3>
-<p class="sit">You found an image online that you want in your game, or you uploaded one to a site like <a href="https://imgur.com/" target="_blank" rel="noopener">Imgur</a>.</p>
-<p class="short">Copy the image's own address, and paste it into one line of code. Then test it on itch.</p>
+<h3>Step by step: how do I add an image I found online?</h3>
+<p class="sit">You found a picture online that you want in your game, or you uploaded one to a site like <a href="https://imgur.com/" target="_blank" rel="noopener">Imgur</a>. You need to get it into Twine.</p>
+<p class="short">Copy the image's own address (its URL), and paste it into one line of code. Then test it on itch.</p>
 <ol class="steps">
-  <li>Open the image. <b>Right-click on the image itself</b> and choose <b>Copy image address</b> (Chrome). Not "Copy link", and not the address bar.</li>
-  <li>Paste it between the quotes:<div class="codewrap"><pre class="hl">&lt;img src="PASTE THE ADDRESS HERE" width="400"&gt;</pre></div></li>
-  <li>Check: a good address usually ends in <code>.png</code>, <code>.jpg</code>, <code>.gif</code>, or <code>.webp</code>, and starts with <code>https://</code>.</li>
-  <li><b>Test it for real:</b> upload your game to itch and open it in an incognito window. Some sites block their images from appearing on other sites, so an image can work in Twine and then break on itch.</li>
+  <li><b>Use a computer, in Chrome.</b> This is hard to do on a phone.</li>
+  <li><b>Click on the image</b> so it opens big, by itself. (In Google Images, click the image, then click it again or click "Visit" to get to the actual picture.)</li>
+  <li><b>Right-click on the picture itself</b> (on a Mac trackpad: click with two fingers). A menu pops up.</li>
+  <li>Click <b>Copy image address</b>. Not "Copy link address", not "Copy image", and not the address bar at the top.
+  <figure class="ctx-demo" aria-label="Illustration of the right-click menu over an image, with Copy image address highlighted">
+    <div class="ctx-wrap"><img src="images/sample-office.jpg" alt="" class="ctx-img"><div class="ctx-menu">
+      <div>Open image in new tab</div><div>Save image as...</div><div>Copy image</div><div class="ctx-hi">Copy image address</div><div>Search with Google Lens</div>
+    </div></div>
+    <figcaption>Illustration of Chrome's right-click menu. Firefox calls it <b>Copy Image Link</b>; Safari: <b>Copy Image Address</b>.</figcaption>
+  </figure></li>
+  <li><b>Check what you copied.</b> Paste it into a new browser tab and press Enter. You should see <b>only the picture</b>, on a plain background. If you see a whole website (menus, comments, other pictures), you copied the wrong thing: go back to step 2.</li>
+  <li><b>Check the address itself.</b> Paste it somewhere you can read it and compare with this:
+  <div class="urlcheck">
+    <div class="uc good-box"><b>&#10003; Good image address</b>
+      <code>https://i.imgur.com/Ab12Cd3.png</code>
+      <code>https://upload.wikimedia.org/.../Office.jpg</code>
+      <ul><li>Starts with <code>https://</code></li><li>Ends with <code>.png</code> <code>.jpg</code> <code>.jpeg</code> <code>.gif</code> or <code>.webp</code> (sometimes followed by <code>?</code> and more letters, which is fine)</li></ul></div>
+    <div class="uc bad-box"><b>&#10007; Not an image address</b>
+      <code>https://www.google.com/imgres?imgurl=...</code>
+      <code>https://drive.google.com/file/d/.../view</code>
+      <code>https://www.pinterest.com/pin/12345/</code>
+      <code>C:\Users\you\Downloads\office.jpg</code>
+      <ul><li>A search result, a Drive or Pinterest page, or a file on your computer</li></ul></div>
+  </div></li>
+  <li><b>Put it in your passage.</b> Copy this line, and replace the capital letters with your address. Keep the quotes:<div class="codewrap"><pre class="hl">&lt;img src="PASTE THE ADDRESS HERE" width="400"&gt;</pre></div>
+  It should end up looking like this:<div class="codewrap good"><pre class="hl">&lt;img src="https://i.imgur.com/Ab12Cd3.png" width="400"&gt;</pre></div></li>
+  <li><b>Play it</b> (Build &rarr; Play). See the picture? Good. See a little broken-picture icon? <a href="#images-why">Go here</a>.</li>
+  <li><b>Test it for real</b> once it's on itch, in an incognito window. Some websites block their pictures from showing on other sites, so an image can work in Twine and then break on itch.</li>
 </ol>
 <p>Using images you found online is fine for this project: just list where you got them in your reflection's works cited.</p>
-<p>Image not showing? <a href="#images-why">Go here</a>. Images on your own computer? Use <a href="#images-zip">Option 2</a>.</p>
+<p>Your picture is a file on your computer (not online)? Use <a href="#images-zip">Option 2</a>.</p>
 </article>
 
 <article class="q" id="images-zip" data-short="Option 2: images on your computer (zip)">
@@ -846,19 +1003,67 @@ Energy: $energy | Rating: $rating</pre></div></li>
 </ul>
 </article>
 
-<article class="q" id="resources" data-short="Official docs &amp; links">
-<h3>Where's the official documentation?</h3>
-<p class="sit">You want to go further than this page does.</p>
-<p class="short">Check that anything you use says "Harlowe" (<a href="#harlowe">why</a>).</p>
+<article class="q" id="resources" data-short="All the links (tutorials, docs, tools)">
+<h3>Where can I find tutorials, documentation, and tools?</h3>
+<p class="sit">You want to go further than this page does: a video, the full manual, a tool for making art or adding sound.</p>
+<p class="short">Everything is below. Before you use any tutorial, check that it says "Harlowe" (<a href="#harlowe">why</a>).</p>
+
+<h4 class="rh">Start here</h4>
 <div class="tablewrap"><table>
-<tr><th>Resource</th><th>Use it for</th></tr>
+<tr><th>Link</th><th>What it's for</th></tr>
 <tr><td><a href="https://twinery.org/" target="_blank" rel="noopener">Twine</a></td><td>Download it, or use it in your browser (Chrome works best).</td></tr>
-<tr><td><a href="https://twinery.org/cookbook/" target="_blank" rel="noopener">The Twine Cookbook</a></td><td>Friendly explanations of almost everything you need.</td></tr>
-<tr><td><a href="https://twine2.neocities.org/" target="_blank" rel="noopener">The Harlowe Docs</a></td><td>The full reference. Looks intimidating; the sidebar is your friend.</td></tr>
-<tr><td><a href="https://www.youtube.com/playlist?list=PLlXuD3kyVEr5jWoG0oDygKWOgFC3qrKN-" target="_blank" rel="noopener">Dan Cox's Twine playlist</a></td><td>Intermediate topics. Watch at least through conditional statements. Check each video says Harlowe.</td></tr>
-<tr><td><a href="https://www.jezner.com/twine-2-tutorial-coding-with-variables/" target="_blank" rel="noopener">Coding with variables</a></td><td>A gentle intro to variables.</td></tr>
-<tr><td><a href="https://gersande.com/blog/designing-inventories-in-twine-2-with-the-built-in-harlowe-macros/" target="_blank" rel="noopener">Inventories in Harlowe</a></td><td>If you want to go wild. I wouldn't recommend it, but here you go.</td></tr>
+<tr><td><a href="https://twinery.org/cookbook/starting/twine2/firststory.html" target="_blank" rel="noopener">Your First Story</a></td><td>A great place to start.</td></tr>
+<tr><td><a href="https://www.youtube.com/watch?v=1jukyU4EK2M" target="_blank" rel="noopener">20-minute video intro</a> (<a href="https://www.youtube.com/playlist?list=PLFgjYYTq6xyjBtXJTvEaBTVUWxirY6q24" target="_blank" rel="noopener">whole playlist</a>)</td><td>A video starting guide. Careful: a lot of the later videos use a different story format. Check each one says Harlowe.</td></tr>
+<tr><td><a href="https://docs.wixstatic.com/ugd/d1fd96_4cea140f718a483689aa26a67981671c.pdf" target="_blank" rel="noopener">Twine Intro Manual (PDF)</a></td><td>A good guide, but harder to skim by topic.</td></tr>
+<tr><td><a href="https://blogs.stockton.edu/textscape/files/2015/04/A-Twine-Cheat-Sheet.pdf" target="_blank" rel="noopener">A Twine cheat sheet (PDF)</a></td><td>A quick reference for the essentials.</td></tr>
+</table></div>
+
+<h4 class="rh">The official references</h4>
+<div class="tablewrap"><table>
+<tr><th>Link</th><th>What it's for</th></tr>
+<tr><td><a href="https://twinery.org/cookbook/" target="_blank" rel="noopener">The Twine Cookbook</a></td><td>Friendly explanations of almost everything you need for the project.</td></tr>
+<tr><td><a href="https://twine2.neocities.org/" target="_blank" rel="noopener">The Harlowe manual</a></td><td>More in-depth than the Cookbook. Looks intimidating; the sidebar is your friend.</td></tr>
+<tr><td><a href="https://twine2.neocities.org/#introduction_example-stories" target="_blank" rel="noopener">Example games</a></td><td>Games from the Harlowe manual. Download them, import them into Twine, and see how they're made.</td></tr>
+<tr><td><a href="https://www.youtube.com/playlist?list=PLlXuD3kyVEr5jWoG0oDygKWOgFC3qrKN-" target="_blank" rel="noopener">Dan Cox's Twine playlist</a></td><td>Intermediate to advanced topics. Watch at least through the video on conditional statements. Check each one says Harlowe.</td></tr>
 <tr><td><a href="https://itch.io/docs/creators/html5" target="_blank" rel="noopener">itch.io HTML5 docs</a></td><td>itch's own rules for uploading browser games.</td></tr>
+</table></div>
+
+<h4 class="rh">Macros, hooks, and if/else</h4>
+<div class="tablewrap"><table>
+<tr><th>Link</th><th>What it's for</th></tr>
+<tr><td><a href="https://twinery.org/cookbook/terms/terms_macros.html" target="_blank" rel="noopener">What a macro is</a></td><td>The basic unit of code in Harlowe. Full list: the <a href="https://twine2.neocities.org/#markup_macro" target="_blank" rel="noopener">Harlowe manual</a> sidebar.</td></tr>
+<tr><td><a href="https://twine2.neocities.org/#markup_hook" target="_blank" rel="noopener">What a hook is</a></td><td>Text in square brackets that a macro acts on. The backbone of if/else.</td></tr>
+<tr><td><a href="https://twinery.org/cookbook/conditionalstatements/harlowe/harlowe_conditionalstatements.html" target="_blank" rel="noopener">Conditionals (Cookbook)</a> and <a href="https://twine2.neocities.org/#macro_if" target="_blank" rel="noopener">(if:) in the manual</a></td><td>Good examples of if/else.</td></tr>
+<tr><td><a href="https://twine2.neocities.org/#type_boolean" target="_blank" rel="noopener">Boolean data</a></td><td>The list of ways to compare things (greater than, less than, and so on).</td></tr>
+</table></div>
+
+<h4 class="rh">Variables and math</h4>
+<div class="tablewrap"><table>
+<tr><th>Link</th><th>What it's for</th></tr>
+<tr><td><a href="https://www.jezner.com/twine-2-tutorial-coding-with-variables/" target="_blank" rel="noopener">How to code variables</a> and <a href="https://damonwakes.wordpress.com/2018/01/24/twine-for-beginners-using-variables/" target="_blank" rel="noopener">Twine variables for beginners</a></td><td>Two articles explaining what variables are and how they work.</td></tr>
+<tr><td><a href="https://twine2.neocities.org/#macro_set" target="_blank" rel="noopener">The (set:) macro</a></td><td>How you create and change variables. Read the part about changing an existing variable (<code>(set: $a to $a + 1)</code>).</td></tr>
+<tr><td><a href="https://en.wikipedia.org/wiki/Camel_case" target="_blank" rel="noopener">camelCase</a></td><td>How to name variables without spaces.</td></tr>
+<tr><td><a href="https://twinery.org/cookbook/dicerolling/harlowe/harlowe_dicerolling.html" target="_blank" rel="noopener">Dice rolling</a></td><td>Using <code>(random:)</code> to add chance.</td></tr>
+</table></div>
+
+<h4 class="rh">Images, art, and sound</h4>
+<div class="tablewrap"><table>
+<tr><th>Link</th><th>What it's for</th></tr>
+<tr><td><a href="https://twinery.org/cookbook/images/harlowe/harlowe_images.html" target="_blank" rel="noopener">Images (Cookbook)</a></td><td>The official image recipe. The steps on this page go further.</td></tr>
+<tr><td><a href="https://imgur.com/" target="_blank" rel="noopener">Imgur</a></td><td>Free image hosting, to get an online address for your picture. (Google Drive won't work.)</td></tr>
+<tr><td><a href="https://www.piskelapp.com/" target="_blank" rel="noopener">Piskel</a></td><td>A great tool for pixel art. It even makes animated gifs.</td></tr>
+<tr><td><a href="https://www.pixilart.com/" target="_blank" rel="noopener">Pixilart</a></td><td>Another pixel art tool, more advanced and Photoshop-like.</td></tr>
+<tr><td><a href="https://candle.itch.io/bitsy-audio" target="_blank" rel="noopener">Bitsy Audio</a></td><td>The easiest way to add background music. (Yes, it's a Bitsy tool. No, that's not a typo.)</td></tr>
+<tr><td><a href="https://twinelab.net/harlowe-audio/#/" target="_blank" rel="noopener">Harlowe Audio Library</a></td><td>If you want more control over sound.</td></tr>
+</table></div>
+
+<h4 class="rh">Style and fancy stuff</h4>
+<div class="tablewrap"><table>
+<tr><th>Link</th><th>What it's for</th></tr>
+<tr><td><a href="https://twine2.neocities.org/#markup_link" target="_blank" rel="noopener">Link markup</a></td><td>Using <code>-&gt;</code> in links so you don't reveal the passage name.</td></tr>
+<tr><td><a href="https://twine2.neocities.org/#markup_style" target="_blank" rel="noopener">Text formatting</a></td><td>Bold, italics, and more. It gets overwhelming in a hurry.</td></tr>
+<tr><td><a href="https://www.youtube.com/playlist?list=PLklITFhXtPCCKadv-0Gcbqoj3OCev695D" target="_blank" rel="noopener">Twine Details and Aesthetics</a></td><td>A playlist on changing how your game looks (mostly CSS).</td></tr>
+<tr><td><a href="https://gersande.com/blog/designing-inventories-in-twine-2-with-the-built-in-harlowe-macros/" target="_blank" rel="noopener">Inventories in Harlowe</a></td><td>Want to build a complicated inventory? I wouldn't recommend it, but here you go.</td></tr>
 </table></div>
 </article>
 </section>
