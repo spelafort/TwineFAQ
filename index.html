@@ -306,10 +306,6 @@ section.group:has(article.q.show) > p.note{display:block}
 .play-box .note{margin:6px 0 14px}
 .tpl-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
 .tpl-card .tpl-btns .tool-btn{margin-top:0}
-.more-problems{margin:10px 0 6px;border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:10px 14px}
-.more-problems summary{cursor:pointer;font-weight:600}
-.more-problems ul{margin:8px 0 2px}
-.more-problems li{margin:4px 0}
 .all-problems{display:inline-block;margin:10px 0 4px;font-weight:600}
 </style>
 </head>
@@ -318,7 +314,7 @@ section.group:has(article.q.show) > p.note{display:block}
 <header class="top">
   <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
   <a class="brand" href="#">Twine Project FAQ <span>&middot; Views on Games and Play</span></a>
-  <span class="ver" title="Last updated">Updated Nov 20, 2026 &middot; v15</span>
+  <span class="ver" title="Last updated">Updated Nov 20, 2026 &middot; v17</span>
   <label class="search">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
     <input id="q" type="search" placeholder="Search: images, itch, variables, zip..." autocomplete="off">
@@ -332,7 +328,7 @@ section.group:has(article.q.show) > p.note{display:block}
 <main id="main">
 <div id="home">
 <h1>Twine Project FAQ</h1>
-<p class="ver-home">Updated Nov 20, 2026 &middot; v15</p>
+<p class="ver-home">Updated Nov 20, 2026 &middot; v17</p>
 <p class="lede"><b>Something broken?</b> Click your problem below.<br><b>Learning Twine?</b> Go step by step: start at Step 1, then click <b>Next</b> at the bottom of each page.<br><b>Still stuck?</b> Send me a Mio.</p>
 <a class="banner" href="#never-lose"><span class="pi">💾</span><span><b>Before you start anything:</b> how to never lose your game. Two minutes now, or redo everything later.</span></a>
 <div class="pj-buttons"><span>Doing a play journal?</span><a href="#pj6" data-pj>PJ #6</a><a href="#pj8" data-pj>PJ #8</a><a href="#pj14" data-pj>PJ #14</a><a href="#pj15" data-pj>PJ #15</a><a href="#pjfinal" data-pj>Final project</a><a href="#pj16" data-pj>PJ #16</a></div>
@@ -376,7 +372,7 @@ section.group:has(article.q.show) > p.note{display:block}
   <a href="#music-silent"><span class="pi">🔇</span>My music doesn't play.</a>
   <a href="#itch-cramped"><span class="pi">📐</span>My game looks squished or cut off on itch.</a>
 </div>
-<p class="note">Not on the list? Try the search bar at the top. Still stuck? Click <b>Copy link to this question</b> on the closest one and send it to me in a Mio, with a screenshot.</p>
+<p class="note">Not on the list? Try the search bar at the top. Still stuck? Send me a Mio with a screenshot.</p>
 </div>
 <div id="results" class="results"></div>
 <div id="live" class="sr" aria-live="polite"></div>
@@ -2002,7 +1998,9 @@ You have $Energy energy left.</pre></div></li>
   });
   side.innerHTML=html;
   side.querySelectorAll('.gh').forEach(function(b){
-    b.addEventListener('click',function(){ var o=b.parentNode.classList.toggle('open'); b.setAttribute('aria-expanded',o?'true':'false'); });
+    b.addEventListener('click',function(){
+      if(b.parentNode.getAttribute('data-sec')==='g-trouble'){ b.parentNode.classList.add('open'); b.setAttribute('aria-expanded','true'); location.hash='g-trouble'; return; }
+      var o=b.parentNode.classList.toggle('open'); b.setAttribute('aria-expanded',o?'true':'false'); });
   });
   var links={}; side.querySelectorAll('.items a').forEach(function(a){links[a.getAttribute('data-for')]=a;});
 
@@ -2020,7 +2018,7 @@ You have $Energy energy left.</pre></div></li>
   var stepArts=arts.filter(function(a){return secOf(a)!==trouble;}), trArts=arts.filter(function(a){return secOf(a)===trouble;});
   arts.forEach(function(a){
     var seq=secOf(a)===trouble?trArts:stepArts, i=seq.indexOf(a);
-    var prev=seq[i-1], next=seq[i+1], h='<p class="stuck">Still stuck? Click <b>Copy link to this question</b> at the top, and send it to me in a Mio with a screenshot of your problem.</p><div class="pager">';
+    var prev=seq[i-1], next=seq[i+1], h='<p class="stuck">Still stuck? Send me a Mio with a screenshot. An actual screenshot, not a photo of your screen.</p><div class="pager">';
     h+= prev ? '<a href="#'+prev.id+'"><small>&larr; Previous</small>'+shortOf(prev)+'</a>' : '<span></span>';
     h+= next ? '<a class="next" href="#'+next.id+'"><small>Next &rarr;</small>'+shortOf(next)+'</a>' : '<span></span>';
     a.insertAdjacentHTML('beforeend',h+'</div>');
@@ -2102,7 +2100,7 @@ You have $Energy energy left.</pre></div></li>
     });
     results.innerHTML=h; results.style.display=hits.length?'block':'none';
     none.style.display=hits.length?'none':'block';
-    if(!hits.length) none.innerHTML='Nothing matches that. Try a shorter word, or one of these: <a href="#images-why">pictures not showing</a>, <a href="#itch-broken">itch link broken</a>, <a href="#test-zero">variables say 0</a>, <a href="#saving">lost my work</a>. Still stuck? Send me a Mio.';
+    if(!hits.length) none.innerHTML='Nothing matches that. Try a shorter word, or one of these: <a href="#images-why">pictures not showing</a>, <a href="#itch-broken">itch link broken</a>, <a href="#test-zero">variables say 0</a>, <a href="#lost-work">lost my work</a>. Still stuck? Send me a Mio.';
     side.querySelectorAll('.items a').forEach(function(l){ l.classList.toggle('hidden', hits.indexOf(document.getElementById(l.getAttribute('data-for')))<0); });
     side.querySelectorAll('.grp').forEach(function(g){
       var vis=g.querySelectorAll('.items a:not(.hidden)').length>0;
