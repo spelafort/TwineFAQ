@@ -309,6 +309,9 @@ section.group:has(article.q.show) > p.note{display:block}
 .hub-cards a{align-items:flex-start}
 .hub-cards a b{display:block}
 .hub-cards a small{display:block;font-weight:400;color:var(--muted);font-size:13.5px;margin-top:3px}
+.video-box{margin:18px 0 6px;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:15px}
+.video-box ul{margin:6px 0 0;padding-left:20px}
+.video-box li{margin:3px 0}
 </style>
 </head>
 <body>
@@ -316,7 +319,7 @@ section.group:has(article.q.show) > p.note{display:block}
 <header class="top">
   <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
   <a class="brand" href="#">Twine Project FAQ <span>&middot; Views on Games and Play</span></a>
-  <span class="ver" title="Last updated">Updated Nov 20, 2026 &middot; v18</span>
+  <span class="ver" title="Last updated">Updated Nov 24, 2026 &middot; v19</span>
   <label class="search">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
     <input id="q" type="search" placeholder="Search: images, itch, variables, zip..." autocomplete="off">
@@ -330,7 +333,7 @@ section.group:has(article.q.show) > p.note{display:block}
 <main id="main">
 <div id="home">
 <h1>Twine Project FAQ</h1>
-<p class="ver-home">Updated Nov 20, 2026 &middot; v18</p>
+<p class="ver-home">Updated Nov 24, 2026 &middot; v19</p>
 <p class="lede"><b>Something broken?</b> Go to <a href="#g-trouble">Troubleshooting</a>.<br><b>Learning Twine?</b> Go step by step: start at Step 1, then click <b>Next</b> at the bottom of each page.<br><b>Still stuck?</b> Send me a Mio.</p>
 <a class="banner" href="#never-lose"><span class="pi">💾</span><span><b>Before you start anything:</b> how to never lose your game. Two minutes now, or redo everything later.</span></a>
 <div class="pj-buttons"><span>Doing a play journal?</span><a href="#pj6" data-pj>PJ #6</a><a href="#pj8" data-pj>PJ #8</a><a href="#pj14" data-pj>PJ #14</a><a href="#pj15" data-pj>PJ #15</a><a href="#pjfinal" data-pj>Final project</a><a href="#pj16" data-pj>PJ #16</a></div>
@@ -733,6 +736,7 @@ Your badge is in the locker.</pre></div>
 <div class="codewrap bad"><div class="label">&#10007; The player sees "Fired ending": the twist is spoiled before they click</div><pre class="hl">[[Fired ending]]</pre></div>
 <div class="codewrap good"><div class="label">&#10003; The player sees "Ask for a raise"</div><pre class="hl">[[Ask for a raise-&gt;Fired ending]]</pre></div>
 <div class="call warn"><b class="k">Watch your spelling</b><p>The passage name has to match exactly, capitals included. <code>[[get up]]</code> with a small "g" makes a <em>second</em>, empty passage called "get up", and players who click it hit a dead end. If you see a passage you didn't mean to make, fix the spelling in the link and delete the extra passage. <b>Story &rarr; Details</b> shows your broken links.</p></div>
+<div class="video-box"><b>&#9654; Prefer video?</b><ul><li><a href="https://www.youtube.com/watch?v=1jukyU4EK2M" target="_blank" rel="noopener">Intro to Twine 2.0</a> <span class="muted">(Dan Cox, YouTube)</span></li></ul></div>
 </article>
 
 <article class="q" id="macros-hooks" data-short="Macros and hooks: what they are">
@@ -781,6 +785,7 @@ Your badge is in the locker.</pre></div>
 <tr><td><code>(text-colour:)</code></td><td>Colours its hook</td><td><code>(text-colour: red)[Warning]</code></td></tr>
 </table></div>
 <p>Not sure how something counts toward the requirements? Ask me before you submit. Full list of macros: the sidebar of the <a href="https://twine2.neocities.org/#markup_macro" target="_blank" rel="noopener">Harlowe manual</a>.</p>
+<div class="video-box"><b>&#9654; Prefer video?</b><ul><li><a href="https://www.youtube.com/watch?v=ElkBntnqtDM" target="_blank" rel="noopener">Harlowe 3: Hooks</a> <span class="muted">(Dan Cox, YouTube)</span></li></ul></div>
 </article>
 
 <article class="q" id="how-code-runs" data-short="How Twine runs your code">
@@ -819,6 +824,7 @@ Your badge is in the locker.</pre></div>
   <li>Names: no spaces, don't start with a number, and capitals matter. Use camelCase: <code>$hasBadge</code>, <code>$timesLate</code>. (It's also more like camels.)</li>
 </ul>
 <p>The lessons below build one small game, step by step, using all three kinds. Click <b>Next</b> to start.</p>
+<div class="video-box"><b>&#9654; Prefer video?</b><ul><li><a href="https://www.youtube.com/watch?v=l3zGvR4S27c" target="_blank" rel="noopener">Harlowe 3: Variables</a> <span class="muted">(Dan Cox, YouTube)</span></li></ul></div>
 </article>
 
 <article class="q" id="startup" data-short="Lesson: give variables starting values">
@@ -836,6 +842,7 @@ Your badge is in the locker.</pre></div>
 </ol>
 <figure><img src="images/v-setup.webp" alt="The Setup passage with the startup tag circled in red and four set lines" loading="lazy" style="max-width:min(100%,600px)"><figcaption>Your Setup passage: the <code>startup</code> tag (circled), and one line per variable.</figcaption></figure>
 <p>Now your variables exist from the very start of the game. Next, let's show them to the player.</p>
+<div class="video-box"><b>&#9654; Prefer video?</b><ul><li><a href="https://www.youtube.com/watch?v=L92nVFpzyAI" target="_blank" rel="noopener">Harlowe 3: Passage Tags</a> <span class="muted">(Dan Cox, YouTube)</span></li><li><a href="https://www.youtube.com/watch?v=jIhBon_8aM8" target="_blank" rel="noopener">Harlowe 3.3: Setup, Header, and Footer Tags</a> <span class="muted">(Dan Cox, YouTube)</span></li></ul></div>
 </article>
 
 <article class="q" id="show-variable" data-short="Lesson: show a variable">
@@ -854,6 +861,7 @@ Rating: $rating
   <figure><img src="images/v-start-play.webp" alt="The played game: Good morning, Sam. Energy: 10. Rating: 4.6" loading="lazy" style="max-width:min(100%,520px)"></figure></li>
 </ol>
 <p>Seeing a <b>0</b> where your value should be? Check the spelling and capitals of the variable, and that your Setup passage has the <code>startup</code> tag.</p>
+<div class="video-box"><b>&#9654; Prefer video?</b><ul><li><a href="https://www.youtube.com/watch?v=lN0ykUjpMJk" target="_blank" rel="noopener">Harlowe 3: Setting and Putting Variables</a> <span class="muted">(Dan Cox, YouTube)</span></li></ul></div>
 </article>
 
 <article class="q" id="set-on-choice" data-short="Lesson: change a variable on a choice">
@@ -881,6 +889,7 @@ Rating: $rating
 (set: $job to "manager")        &lt;!-- text: replace it --&gt;</pre></div>
 <p><code>it</code> means "the variable's current value", so <code>it - 2</code> means "2 less than now".</p>
 <p class="note">Simpler alternative: give each choice its own passage (<code>[[Take the badge-&gt;Badge Taken]]</code>), and put the <code>(set:)</code> at the very top of that passage. It works because that passage only appears if the player chose it. Note: links made with <code>(link:)</code> don't draw an arrow on the story map, so the map can look disconnected even when the game works.</p>
+<div class="video-box"><b>&#9654; Prefer video?</b><ul><li><a href="https://www.youtube.com/watch?v=lN0ykUjpMJk" target="_blank" rel="noopener">Harlowe 3: Setting and Putting Variables</a> <span class="muted">(Dan Cox, YouTube)</span></li></ul></div>
 </article>
 
 <article class="q" id="if-else" data-short="Lesson: if / else">
@@ -914,6 +923,7 @@ Rating: $rating
 </table></div>
 <p><b>More than two options? Use <code>(else-if:)</code>.</b> Twine checks them in order and shows the first one that's true:</p>
 <div class="codewrap good"><pre class="hl">(if: $energy &gt; 5)[You feel fine.](else-if: $energy &gt; 2)[You're getting tired.](else:)[You can barely stand.]</pre></div>
+<div class="video-box"><b>&#9654; Prefer video?</b><ul><li><a href="https://www.youtube.com/watch?v=qw5ESb0QXUY" target="_blank" rel="noopener">Harlowe 3: Conditional Statements</a> <span class="muted">(Dan Cox, YouTube)</span></li></ul></div>
 </article>
 
 <article class="q" id="show-hide-choices" data-short="Lesson: show or hide a choice">
@@ -934,6 +944,7 @@ Rating: $rating
   </div></li>
 </ol>
 <p>A crossed-out choice can make an argument all by itself: it shows the player what's available to <em>someone else</em>.</p>
+<div class="video-box"><b>&#9654; Prefer video?</b><ul><li><a href="https://www.youtube.com/watch?v=qw5ESb0QXUY" target="_blank" rel="noopener">Harlowe 3: Conditional Statements</a> <span class="muted">(Dan Cox, YouTube)</span></li></ul></div>
 </article>
 
 <article class="q" id="debugger" data-short="The debugger (test mode)">
@@ -1108,6 +1119,7 @@ Energy: $energy | Rating: $rating</pre></div></li>
 </div>
 <div class="call tip"><b class="k">Tip</b><p>You can use <code>(if:)</code> in a footer too, like a warning that only appears when <code>$energy</code> is low.</p></div>
 <p>Want a bar that fills and drains instead of a number? See the <a href="#meter">meter recipe</a>.</p>
+<div class="video-box"><b>&#9654; Prefer video?</b><ul><li><a href="https://www.youtube.com/watch?v=jIhBon_8aM8" target="_blank" rel="noopener">Harlowe 3.3: Setup, Header, and Footer Tags</a> <span class="muted">(Dan Cox, YouTube)</span></li></ul></div>
 </article>
 
 <article class="q" id="sound" data-short="Music &amp; sound">
@@ -1142,6 +1154,7 @@ Energy: $energy | Rating: $rating</pre></div></li>
 <div class="codewrap"><pre class="hl">(set: $roll to (random: 1, 6))
 (if: $roll is 6)[You find a twenty on the ground.](else:)[Nothing. Just pavement.]</pre></div>
 <p>More in the <a href="https://twinery.org/cookbook/dicerolling/harlowe/harlowe_dicerolling.html" target="_blank" rel="noopener">dice rolling recipe</a>.</p>
+<div class="video-box"><b>&#9654; Prefer video?</b><ul><li><a href="https://www.youtube.com/watch?v=W5A-wFho7ZU" target="_blank" rel="noopener">Harlowe 3: Dice Rolling</a> <span class="muted">(Dan Cox, YouTube)</span></li></ul></div>
 </article>
 
 <article class="q" id="comments" data-short="Notes to yourself or your group">
@@ -1185,6 +1198,7 @@ Energy: $energy | Rating: $rating</pre></div></li>
 <p><b>Another way to check:</b> <code>(history:)</code> is the list of every passage visited, in order. Check it with <code>contains</code>:</p>
 <div class="codewrap good"><pre class="hl">(if: (history:) contains "Break Room")[You've already had your break today.]</pre></div>
 <p>Good for arguments about memory, routine, or repetition: the game can notice that the player keeps coming back to the same place.</p>
+<div class="video-box"><b>&#9654; Prefer video?</b><ul><li><a href="https://www.youtube.com/watch?v=JDUgAjcrES4" target="_blank" rel="noopener">Harlowe 3: History and Passage</a> <span class="muted">(Dan Cox, YouTube)</span></li></ul></div>
 </article>
 </section>
 
@@ -1524,6 +1538,7 @@ tw-link:hover {
   <li>Notes in the Stylesheet are written <code>/* like this */</code>, not <code>&lt;!-- like this --&gt;</code>.</li>
   <li>The Stylesheet is CSS, not Harlowe. <code>$variables</code> and <code>(macros:)</code> don't work in it. To colour one bit of text, use <a href="#formatting">the toolbar</a> instead.</li>
 </ul></div>
+<div class="video-box"><b>&#9654; Prefer video?</b><ul><li><a href="https://www.youtube.com/watch?v=4qH7HRmkv1M" target="_blank" rel="noopener">Harlowe 3.3: Restyling a Story</a> <span class="muted">(Dan Cox, YouTube)</span> This one changes the look with macros instead of the Stylesheet.</li></ul></div>
 </article>
 
 <article class="q" id="meter" data-short="Recipe: a meter (energy bar)">
@@ -1580,6 +1595,7 @@ Energy: (if: $energy &lt; 30)[(text-colour: red)[(str-repeated: (round: $energy 
   Why: if <code>$energy</code> goes below 0, the bar shows as <b>completely full</b>. <code>(max: 0, ...)</code> stops it at 0, and <code>(min: 100, ...)</code> stops it at 100.</li>
 </ol>
 <div class="call tip"><b class="k">Two meters?</b><p>Copy the footer lines again, and change <code>$energy</code> to your other variable in all four spots. The number still has to be 0 to 100. Money that goes up to 5000 doesn't fit a bar; just show it as a number.</p></div>
+<div class="video-box"><b>&#9654; Prefer video?</b><ul><li><a href="https://www.youtube.com/watch?v=rAQD3IJ2M4I" target="_blank" rel="noopener">Harlowe 3.3: Meters</a> <span class="muted">(Dan Cox, YouTube)</span> This one uses Harlowe's own (meter:) macro: a third way to do it.</li></ul></div>
 </article>
 
 <article class="q" id="char-mood" data-short="Recipe: a character whose face changes">
@@ -1749,6 +1765,7 @@ Ana: Wow. OK.</pre></div>
 </div>
 </div>
 <div class="call tip"><b class="k">The form template uses three new macros</b><p><code>(input-box: bind $name, "X", 1)</code> makes a box the player types in, and puts what they typed into <code>$name</code>. <code>(dropdown: bind $reason, "Housing", "Food")</code> and <code>(checkbox: bind $agree, "I agree")</code> work the same way. To show a checkbox's value, use <code>(print: $agree)</code>; just writing <code>$agree</code> shows nothing.</p></div>
+<div class="video-box"><b>&#9654; Prefer video?</b><ul><li><a href="https://www.youtube.com/watch?v=A4cj6U4iwBs" target="_blank" rel="noopener">Harlowe 3.3: Dropdown and Checkbox</a> <span class="muted">(Dan Cox, YouTube)</span> For the form template.</li></ul></div>
 </article>
 </section>
 
@@ -1849,6 +1866,7 @@ Ana: Wow. OK.</pre></div>
   <li><b>A passage looks fine in Test From Here?</b> It can still break when played from the start. Always do a full test from the start before you submit.</li>
 </ul>
 <p>Next to Test From Here is <b>Start Story Here</b>, which is something else entirely: <a href="#wrong-start">don't click it by accident</a>.</p>
+<div class="video-box"><b>&#9654; Prefer video?</b><ul><li><a href="https://www.youtube.com/watch?v=wI5joYOQK_M" target="_blank" rel="noopener">Harlowe 3.3: Debugging: Test from Here</a> <span class="muted">(Dan Cox, YouTube)</span></li></ul></div>
 </article>
 
 <article class="q" id="wrong-start" data-short="My game starts in the wrong passage.">
@@ -1923,6 +1941,7 @@ You have $Energy energy left.</pre></div></li>
   <li>Curly quotes from Google Docs or PDFs break everything (<a href="#smart-quotes">fix</a>). Code from other websites may be for a different format (<a href="#harlowe">why</a>).</li>
   <li>Code running at the wrong moment? Read <a href="#how-code-runs">how Twine runs your code</a>. Variables showing 0 when you test? <a href="#test-zero">Fix</a>. Number on screen not changing after a click? <a href="#text-not-updating">Fix</a>.</li>
 </ul>
+<div class="video-box"><b>&#9654; Prefer video?</b><ul><li><a href="https://www.youtube.com/watch?v=RR9ZR8wLN_0" target="_blank" rel="noopener">Harlowe 3.3: Debugging: Common Issues</a> <span class="muted">(Dan Cox, YouTube)</span></li></ul></div>
 </article>
 
 <article class="q" id="music-silent" data-short="My music doesn't play.">
@@ -2093,7 +2112,7 @@ You have $Energy energy left.</pre></div></li>
   window.addEventListener('hashchange',route);
 
   // ---------- Search ----------
-  var SYN=[['image','picture','img','photo','pic','png','jpg'],['itch','itchio','itch.io'],['variable','varible','variabel'],['music','sound','audio','song','mp3'],['link','url','address'],['save','saved','lost','backup','gone','disappeared','deleted'],['zip','zipped','compress','zip maker','folder'],['background','backdrop','bg'],['undo','back arrow','back button','arrow','rewind'],['group','team','partner','together','google doc','docs'],['error','broken','not working','doesnt work',"doesn't work",'bug'],['startup','start up','starting values','setup'],['stats','stat bar','health','score','footer','header'],['quote','quotes','smart quotes'],['random','dice','chance'],['import','replace','overwrite'],['twee','.twee','html','.html','which file','wrong file','export as twee','publish to file'],['test from here','start story here','rocket','wrong passage','starts in the middle'],['meter','bar','health bar','progress','energy','hearts','lives','blocks'],['stylesheet','css','colour','color','font','look','style','design','theme','builder'],['template','phone','app','form','terminal','email','inbox','text message'],['dialogue','dialog','visual novel','vn','name box','speech','next','one at a time'],['character','face','expression','mood','emotion','portrait']];
+  var SYN=[['image','picture','img','photo','pic','png','jpg'],['itch','itchio','itch.io'],['variable','varible','variabel'],['music','sound','audio','song','mp3'],['link','url','address'],['save','saved','lost','backup','gone','disappeared','deleted'],['zip','zipped','compress','zip maker','folder'],['background','backdrop','bg'],['undo','back arrow','back button','arrow','rewind'],['group','team','partner','together','google doc','docs'],['error','broken','not working','doesnt work',"doesn't work",'bug'],['startup','start up','starting values','setup'],['stats','stat bar','health','score','footer','header'],['quote','quotes','smart quotes'],['random','dice','chance'],['import','replace','overwrite'],['video','videos','youtube','tutorial','watch'],['twee','.twee','html','.html','which file','wrong file','export as twee','publish to file'],['test from here','start story here','rocket','wrong passage','starts in the middle'],['meter','bar','health bar','progress','energy','hearts','lives','blocks'],['stylesheet','css','colour','color','font','look','style','design','theme','builder'],['template','phone','app','form','terminal','email','inbox','text message'],['dialogue','dialog','visual novel','vn','name box','speech','next','one at a time'],['character','face','expression','mood','emotion','portrait']];
   function resetSearch(){
     side.querySelectorAll('.items a, .grp').forEach(function(x){x.classList.remove('hidden');});
   }
